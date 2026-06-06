@@ -100,6 +100,20 @@ def build_factions():
                 if fid in by_id and opt is not None:
                     by_id[fid].setdefault('unitOptions', []).append(opt)
 
+        # Optional per-legion shallow patch of an existing formation by id
+        # (e.g. Dark Angels override Superheavy Squadron to a fixed 3-pack @ 700pts).
+        # Top-level keys provided in the patch fully replace the baseline value.
+        # A value of None on a key removes that key from the baseline formation.
+        if 'formationOverrides' in override and isinstance(faction.get('formations'), list):
+            by_id = {fm['id']: fm for fm in faction['formations']}
+            for fid, patch in override['formationOverrides'].items():
+                if fid in by_id and isinstance(patch, dict):
+                    for k, v in patch.items():
+                        if v is None:
+                            by_id[fid].pop(k, None)
+                        else:
+                            by_id[fid][k] = v
+
         merged.append(faction)
 
     # Include any baseline factions that aren't overridden by legions.json

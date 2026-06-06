@@ -98,7 +98,20 @@
       "compositionRulesAppend": [
         "Interremptors and Deathwing Companions: 1 per 2,000 pts each.",
         "Primarch Lion El'Jonson may only be taken once and counts as your Supreme Commander."
-      ]
+      ],
+      "formationOverrides": {
+        "superheavy-squadron": {
+          "composition": "3 Fellblade OR Glaive",
+          "baseCost": 700,
+          "unitOptions": [
+            { "label": "3 Fellblades", "units": [ { "unit": "fellblade", "count": 3 } ] },
+            { "label": "3 Glaives", "units": [ { "unit": "glaive", "count": 3 } ] },
+            { "label": "Mixed: 2 Fellblades + 1 Glaive", "units": [ { "unit": "fellblade", "count": 2 }, { "unit": "glaive", "count": 1 } ] },
+            { "label": "Mixed: 1 Fellblade + 2 Glaives", "units": [ { "unit": "fellblade", "count": 1 }, { "unit": "glaive", "count": 2 } ] }
+          ],
+          "extraUnit": null
+        }
+      }
     },
     {
       "id": "emperors-children",
@@ -257,9 +270,184 @@
       "color": "#8C8079",
       "lore": "Perturabo's grim engineers excel at the brutal arithmetic of siegecraft. Where they march, walls fall and warriors are broken upon the anvil of their guns. They take no joy in war — only the cold satisfaction of a problem solved.",
       "legionTrait": {
-        "name": "Siege Masters",
-        "description": "Iron Warriors units count all terrain as one category less dense when claiming cover against them, and add +1 to the strength of attacks against Fortifications and War Engines."
-      }
+        "name": "Brick by Brick",
+        "description": "While taking a Shooting action, Iron Warriors impart a -1 modifier to enemy cover saves. Furthermore, Iron Warrior Infantry Character units gain the Siege trait."
+      },
+      "extraFormations": [
+        {
+          "id": "iron-havoc-detachment",
+          "name": "Iron Havoc Detachment",
+          "category": "Line",
+          "baseCost": 250,
+          "composition": "4 Iron Havoc units",
+          "unitOptions": [
+            { "label": "4 Iron Havoc units", "units": [ { "unit": "iron-havoc", "count": 4 } ] }
+          ],
+          "allowedUpgrades": ["standard-transport", "drop-assault", "heavy-transport", "consul", "armoury-asset", "hyperios"]
+        },
+        {
+          "id": "land-raider-squadron",
+          "name": "Land Raider Squadron",
+          "category": "Line",
+          "baseCost": 320,
+          "composition": "4-6 Land Raider Phobos OR Proteus (Phobos +75 / Proteus +65 per extra)",
+          "unitOptions": [
+            { "label": "4 Land Raider Phobos", "units": [ { "unit": "land-raider-phobos", "count": 4 } ] },
+            { "label": "5 Land Raider Phobos (+75)", "units": [ { "unit": "land-raider-phobos", "count": 5 } ], "extraCost": 75 },
+            { "label": "6 Land Raider Phobos (+150)", "units": [ { "unit": "land-raider-phobos", "count": 6 } ], "extraCost": 150 },
+            { "label": "4 Land Raider Proteus", "units": [ { "unit": "land-raider-proteus", "count": 4 } ] },
+            { "label": "5 Land Raider Proteus (+65)", "units": [ { "unit": "land-raider-proteus", "count": 5 } ], "extraCost": 65 },
+            { "label": "6 Land Raider Proteus (+130)", "units": [ { "unit": "land-raider-proteus", "count": 6 } ], "extraCost": 130 }
+          ],
+          "allowedUpgrades": ["consul", "armoury-asset", "hyperios"]
+        },
+        {
+          "id": "tyrant-siege-terminator-detachment",
+          "name": "Tyrant Siege Terminator Detachment",
+          "category": "Line",
+          "baseCost": 340,
+          "composition": "4-6 Siege Tyrant Terminator units (+85 per extra unit)",
+          "unitOptions": [
+            { "label": "4 Siege Tyrant Terminators", "units": [ { "unit": "tyrant-siege-terminator", "count": 4 } ] },
+            { "label": "5 Siege Tyrant Terminators (+85)", "units": [ { "unit": "tyrant-siege-terminator", "count": 5 } ], "extraCost": 85 },
+            { "label": "6 Siege Tyrant Terminators (+170)", "units": [ { "unit": "tyrant-siege-terminator", "count": 6 } ], "extraCost": 170 }
+          ],
+          "allowedUpgrades": ["drop-assault", "assault-claw", "heavy-transport", "teleport", "consul", "armoury-asset", "tank", "dreadnought", "hyperios"]
+        },
+        {
+          "id": "artillery-battery",
+          "name": "Artillery Battery",
+          "category": "Support",
+          "baseCost": 325,
+          "composition": "6 Basilisk (500) OR Medusa (325) OR Whirlwind (400) OR Arquitor (400)",
+          "unitOptions": [
+            { "label": "6 Medusa (325)", "units": [ { "unit": "medusa", "count": 6 } ] },
+            { "label": "6 Whirlwind (400, +75)", "units": [ { "unit": "whirlwind", "count": 6 } ], "extraCost": 75 },
+            { "label": "6 Arquitor (400, +75)", "units": [ { "unit": "arquitor", "count": 6 } ], "extraCost": 75 },
+            { "label": "6 Basilisk (500, +175)", "units": [ { "unit": "basilisk", "count": 6 } ], "extraCost": 175 }
+          ],
+          "maxPerPoints": 1000,
+          "allowedUpgrades": ["hyperios"]
+        },
+        {
+          "id": "perturabo",
+          "name": "Perturabo",
+          "category": "Primarch",
+          "baseCost": 450,
+          "composition": "Perturabo and 3 terminator units OR 1 Tormentor OR 3 Iron Circle units",
+          "unitOptions": [
+            {
+              "label": "Perturabo + 3 Siege Tyrant Terminators",
+              "units": [
+                { "unit": "perturabo", "count": 1 },
+                { "unit": "tyrant-siege-terminator", "count": 3 }
+              ]
+            },
+            {
+              "label": "Perturabo + 1 Tormentor",
+              "units": [
+                { "unit": "perturabo", "count": 1 },
+                { "unit": "tormentor", "count": 1 }
+              ]
+            },
+            {
+              "label": "Perturabo + 3 Iron Circle",
+              "units": [
+                { "unit": "perturabo", "count": 1 },
+                { "unit": "iron-circle", "count": 3 }
+              ]
+            }
+          ],
+          "maxCount": 1,
+          "allowedUpgrades": ["heavy-transport", "teleport"]
+        }
+      ],
+      "extraUnits": {
+        "iron-havoc": {
+          "name": "Iron Havocs",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "5+",
+          "ff": "3+",
+          "weapons": [
+            { "name": "Havoc Autocannons", "range": "30cm", "firepower": "3x AP5+/AT6+, Ignore cover" }
+          ],
+          "notes": ["Counts as Tactical for transport."]
+        },
+        "tyrant-siege-terminator": {
+          "name": "Siege Tyrant Terminators",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "5+",
+          "weapons": [
+            { "name": "Power Fist", "range": "(base)", "firepower": "(assault) MW, EA (+1)" },
+            { "name": "Cyclone Missiles", "range": "45cm", "firepower": "AP5+/AT6+, Ignore cover" },
+            { "name": "Reaper Autocannon", "range": "45cm", "firepower": "2x AP4+/AT6+" }
+          ],
+          "notes": ["Reinforced armour.", "Thick rear armour."]
+        },
+        "iron-circle": {
+          "name": "Iron Circle Automata",
+          "type": "AV",
+          "speed": "15cm",
+          "armour": "3+",
+          "cc": "4+",
+          "ff": "4+",
+          "weapons": [
+            { "name": "Olympia Bolt Cannon", "range": "15cm", "firepower": "AP3+/AT6+" },
+            { "name": "Graviton Maul", "range": "(base)", "firepower": "(assault) MW, EA (+1)" }
+          ],
+          "notes": ["Invulnerable save.", "Fearless.", "Walker.", "Counts as Dreadnought for transport."]
+        },
+        "tormentor": {
+          "name": "Tormentor",
+          "type": "WE",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "5+",
+          "weapons": [
+            { "name": "Volcano Cannon", "range": "90cm", "firepower": "AP2+/AT2+, TK (D3)" },
+            { "name": "Heavy Bolter", "range": "30cm", "firepower": "AP5+" },
+            { "name": "2x TL Heavy Bolter", "range": "30cm", "firepower": "AP4+" }
+          ],
+          "notes": ["DC3.", "1 Void shield.", "Reinforced armour.", "Transport (May carry Perturabo)."]
+        },
+        "perturabo": {
+          "name": "Perturabo",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "3+",
+          "cc": "4+",
+          "ff": "3+",
+          "weapons": [
+            { "name": "The Logos", "range": "(base)", "firepower": "(assault) MW, EA (+2)" },
+            { "name": "Wrist Cannons", "range": "15cm", "firepower": "2x AP4+/AT4+" },
+            { "name": "Wrist Cannons (small arms)", "range": "(15cm)", "firepower": "(small arms) MW, EA (+1)" }
+          ],
+          "notes": ["Demi-God.", "Invulnerable save.", "Reinforced armour.", "Thick rear armour.", "Cortex controller."]
+        }
+      },
+      "formationOverrides": {
+        "superheavy-squadron": {
+          "composition": "3 Fellblade OR Glaive",
+          "baseCost": 700,
+          "unitOptions": [
+            { "label": "3 Fellblades", "units": [ { "unit": "fellblade", "count": 3 } ] },
+            { "label": "3 Glaives", "units": [ { "unit": "glaive", "count": 3 } ] },
+            { "label": "Mixed: 2 Fellblades + 1 Glaive", "units": [ { "unit": "fellblade", "count": 2 }, { "unit": "glaive", "count": 1 } ] },
+            { "label": "Mixed: 1 Fellblade + 2 Glaives", "units": [ { "unit": "fellblade", "count": 1 }, { "unit": "glaive", "count": 2 } ] }
+          ],
+          "extraUnit": null
+        }
+      },
+      "compositionRulesAppend": [
+        "Artillery Battery: 1 per 1,000 pts.",
+        "Primarch Perturabo may only be taken once and counts as your Supreme Commander."
+      ]
     },
     {
       "id": "white-scars",
@@ -268,9 +456,183 @@
       "color": "#E6E2D3",
       "lore": "Hailing from the steppes of Chogoris, the V Legion ride to war with the speed of the open sky. Jaghatai's sons strike like a hurricane and are gone before retribution can land, the thunder of their guns the only mark left in their wake.",
       "legionTrait": {
-        "name": "Lightning Attack",
-        "description": "White Scars detachments may make a Marching move and still fire as if they had taken an Advance action. Mounted and Skimmer units add +5cm to their speed when Advancing."
-      }
+        "name": "Wind Born",
+        "description": "Legion Light Vehicles and Armoured Vehicles ignore the -1 penalty to shooting attacks when taking a Double action. In addition, all Aircraft, Light Vehicles, Armoured Vehicles, and units with the Mounted trait may re-roll all failed dangerous terrain checks."
+      },
+      "extraFormations": [
+        {
+          "id": "chogorian-brotherhood",
+          "name": "Chogorian Brotherhood",
+          "category": "Line",
+          "baseCost": 300,
+          "composition": "8 Outrider units (1-4 Outriders may be Scimitar Jetbikes)",
+          "unitOptions": [
+            { "label": "8 Outriders", "units": [ { "unit": "outrider", "count": 8 } ] },
+            { "label": "7 Outriders + 1 Scimitar Jetbike", "units": [ { "unit": "outrider", "count": 7 }, { "unit": "scimitar-jetbike", "count": 1 } ] },
+            { "label": "6 Outriders + 2 Scimitar Jetbikes", "units": [ { "unit": "outrider", "count": 6 }, { "unit": "scimitar-jetbike", "count": 2 } ] },
+            { "label": "5 Outriders + 3 Scimitar Jetbikes", "units": [ { "unit": "outrider", "count": 5 }, { "unit": "scimitar-jetbike", "count": 3 } ] },
+            { "label": "4 Outriders + 4 Scimitar Jetbikes", "units": [ { "unit": "outrider", "count": 4 }, { "unit": "scimitar-jetbike", "count": 4 } ] }
+          ],
+          "allowedUpgrades": ["consul", "armoury-asset"]
+        },
+        {
+          "id": "chogorian-skyhunters",
+          "name": "Chogorian Skyhunters",
+          "category": "Line",
+          "baseCost": 225,
+          "composition": "6 Scimitar Jetbike (Consul, Any Jetbike may be upgraded)",
+          "unitOptions": [
+            { "label": "6 Scimitar Jetbikes", "units": [ { "unit": "scimitar-jetbike", "count": 6 } ] }
+          ],
+          "allowedUpgrades": ["consul", "armoury-asset"]
+        },
+        {
+          "id": "kyzgan-attack-speeder-squadron",
+          "name": "Kyzgan Attack Speeder Squadron",
+          "category": "Support",
+          "baseCost": 275,
+          "composition": "5 Kyzgan Attack Speeders",
+          "unitOptions": [
+            { "label": "5 Kyzgan Attack Speeders", "units": [ { "unit": "kyzgan", "count": 5 } ] }
+          ],
+          "maxPerPoints": 1000,
+          "allowedUpgrades": ["consul"]
+        },
+        {
+          "id": "ebon-keshig",
+          "name": "Ebon Keshig",
+          "category": "Lords of War",
+          "baseCost": 300,
+          "composition": "4 Ebon Keshig units, may add up to 2 Golden Keshig (+75 each)",
+          "unitOptions": [
+            { "label": "4 Ebon Keshig", "units": [ { "unit": "ebon-keshig", "count": 4 } ] },
+            { "label": "4 Ebon Keshig + 1 Golden Keshig (+75)", "units": [ { "unit": "ebon-keshig", "count": 4 }, { "unit": "golden-keshig", "count": 1 } ], "extraCost": 75 },
+            { "label": "4 Ebon Keshig + 2 Golden Keshig (+150)", "units": [ { "unit": "ebon-keshig", "count": 4 }, { "unit": "golden-keshig", "count": 2 } ], "extraCost": 150 }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": ["assault-claw", "heavy-transport", "teleport"]
+        },
+        {
+          "id": "jaghatai-khan",
+          "name": "Jaghatai Khan",
+          "category": "Primarch",
+          "baseCost": 450,
+          "composition": "Jaghatai Khan (Foot or Mounted) + 3 Ebon Keshig units",
+          "unitOptions": [
+            {
+              "label": "Jaghatai Khan (Foot) + 3 Ebon Keshig",
+              "units": [
+                { "unit": "jaghatai-khan-foot", "count": 1 },
+                { "unit": "ebon-keshig", "count": 3 }
+              ]
+            },
+            {
+              "label": "Jaghatai Khan (Mounted) + 3 Ebon Keshig",
+              "units": [
+                { "unit": "jaghatai-khan-mounted", "count": 1 },
+                { "unit": "ebon-keshig", "count": 3 }
+              ]
+            }
+          ],
+          "maxCount": 1,
+          "allowedUpgrades": ["assault-claw", "heavy-transport", "teleport", "armoury-asset"]
+        }
+      ],
+      "extraUnits": {
+        "outrider": {
+          "name": "Outrider",
+          "type": "LV (Mounted)",
+          "speed": "35cm",
+          "armour": "5+",
+          "cc": "5+",
+          "ff": "4+",
+          "weapons": [
+            { "name": "TL Bolters", "range": "15cm", "firepower": "(small arms) AP4+" }
+          ],
+          "notes": ["Counts as Bike/Mounted."]
+        },
+        "scimitar-jetbike": {
+          "name": "Scimitar Jetbike",
+          "type": "LV (Skimmer, Mounted)",
+          "speed": "35cm",
+          "armour": "5+",
+          "cc": "5+",
+          "ff": "4+",
+          "weapons": [
+            { "name": "Heavy Bolter", "range": "30cm", "firepower": "AP5+" }
+          ],
+          "notes": ["Skimmer.", "Mounted."]
+        },
+        "kyzgan": {
+          "name": "Kyzgan Attack Speeder",
+          "type": "LV (Skimmer)",
+          "speed": "35cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "4+",
+          "weapons": [
+            { "name": "Conversion Beamer", "range": "60cm", "firepower": "AP4+/AT4+, MW" }
+          ],
+          "notes": ["Skimmer."]
+        },
+        "ebon-keshig": {
+          "name": "Ebon Keshig",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
+          "weapons": [
+            { "name": "Glaive & Stormshield", "range": "(base)", "firepower": "(assault) MW, EA (+1)" },
+            { "name": "Bolt Pistol", "range": "(15cm)", "firepower": "(small arms) AP6+" }
+          ],
+          "notes": ["Reinforced armour.", "Thick rear armour.", "Invulnerable save."]
+        },
+        "golden-keshig": {
+          "name": "Golden Keshig",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
+          "weapons": [
+            { "name": "Power Lance", "range": "(base)", "firepower": "(assault) MW, EA (+1)" },
+            { "name": "Heavy Bolter", "range": "30cm", "firepower": "AP5+" }
+          ],
+          "notes": ["Reinforced armour.", "Thick rear armour.", "Leader."]
+        },
+        "jaghatai-khan-foot": {
+          "name": "Jaghatai Khan (Foot)",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "3+",
+          "cc": "3+",
+          "ff": "3+",
+          "weapons": [
+            { "name": "White Tiger Claw", "range": "(base)", "firepower": "(assault) MW, EA (+2)" },
+            { "name": "Plasma Pistol", "range": "(15cm)", "firepower": "(small arms) AP4+/AT5+, MW" }
+          ],
+          "notes": ["Demi-God.", "Invulnerable save.", "Reinforced armour.", "Thick rear armour."]
+        },
+        "jaghatai-khan-mounted": {
+          "name": "Jaghatai Khan (Mounted)",
+          "type": "LV (Skimmer, Mounted)",
+          "speed": "35cm",
+          "armour": "3+",
+          "cc": "3+",
+          "ff": "3+",
+          "weapons": [
+            { "name": "White Tiger Claw", "range": "(base)", "firepower": "(assault) MW, EA (+2)" },
+            { "name": "Plasma Pistol", "range": "(15cm)", "firepower": "(small arms) AP4+/AT5+, MW" }
+          ],
+          "notes": ["Demi-God.", "Invulnerable save.", "Reinforced armour.", "Thick rear armour.", "Skimmer."]
+        }
+      },
+      "compositionRulesAppend": [
+        "Kyzgan Attack Speeder Squadron: 1 per 1,000 pts.",
+        "Ebon Keshig: 1 per 2,000 pts.",
+        "Primarch Jaghatai Khan may only be taken once and counts as your Supreme Commander."
+      ]
     },
     {
       "id": "space-wolves",
@@ -279,9 +641,144 @@
       "color": "#324C5E",
       "lore": "Leman Russ's wolf-pack from frozen Fenris. Half warriors, half wild, the VI are the Emperor's executioners — loosed when diplomacy ends and only slaughter remains.",
       "legionTrait": {
-        "name": "Sons of Russ",
-        "description": "Space Wolves Infantry units add +1 to their Assault value (to a maximum of 2+) and may re-roll a single failed to-hit roll in close combat each turn."
-      }
+        "name": "Loping Advance",
+        "description": "Space Wolf Character units gain the Brutal trait. In addition, Infantry units in this Legion gain +5cm to their countercharge and consolidation moves."
+      },
+      "extraFormations": [
+        {
+          "id": "grey-slayer-warband",
+          "name": "Grey Slayer Warband",
+          "category": "Line",
+          "baseCost": 300,
+          "composition": "8 Grey Slayer units, Consul",
+          "unitOptions": [
+            { "label": "8 Grey Slayer units", "units": [ { "unit": "grey-slayer", "count": 8 } ] }
+          ],
+          "allowedUpgrades": ["standard-transport", "drop-assault", "consul", "armoury-asset"]
+        },
+        {
+          "id": "deathsworn-warband",
+          "name": "Deathsworn Warband",
+          "category": "Support",
+          "baseCost": 250,
+          "composition": "4 Deathsworn Pack units",
+          "unitOptions": [
+            { "label": "4 Deathsworn Pack units", "units": [ { "unit": "deathsworn-pack", "count": 4 } ] }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": ["standard-transport", "drop-assault", "assault-claw", "consul"]
+        },
+        {
+          "id": "wolf-guard-detachment",
+          "name": "Wolf Guard Detachment",
+          "category": "Support",
+          "baseCost": 340,
+          "composition": "4 Varagyr Wolf Guard Terminator units",
+          "unitOptions": [
+            { "label": "4 Varagyr Wolf Guard Terminators", "units": [ { "unit": "varagyr-terminator", "count": 4 } ] }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": ["drop-assault", "assault-claw", "heavy-transport", "teleport", "consul", "armoury-asset"]
+        },
+        {
+          "id": "fenrisian-wolf-pack",
+          "name": "Fenrisian Wolf Pack",
+          "category": "Support",
+          "baseCost": 275,
+          "composition": "8 Fenrisian Wolf Pack units",
+          "unitOptions": [
+            { "label": "8 Fenrisian Wolf Packs", "units": [ { "unit": "fenrisian-wolves", "count": 8 } ] }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": ["consul"]
+        },
+        {
+          "id": "leman-russ",
+          "name": "Leman Russ",
+          "category": "Primarch",
+          "baseCost": 450,
+          "composition": "Leman Russ + 3 Varagyr Wolf Guard Terminator units",
+          "unitOptions": [
+            {
+              "label": "Leman Russ + 3 Varagyr Terminators",
+              "units": [
+                { "unit": "leman-russ", "count": 1 },
+                { "unit": "varagyr-terminator", "count": 3 }
+              ]
+            }
+          ],
+          "maxCount": 1,
+          "allowedUpgrades": ["drop-assault", "assault-claw", "heavy-transport", "teleport", "armoury-asset"]
+        }
+      ],
+      "extraUnits": {
+        "grey-slayer": {
+          "name": "Grey Slayer",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "4+",
+          "ff": "4+",
+          "weapons": [
+            { "name": "Bolter & Chainsword", "range": "30cm", "firepower": "AP5+; (assault) EA (+1)" }
+          ],
+          "notes": ["Brutal."]
+        },
+        "deathsworn-pack": {
+          "name": "Deathsworn Pack",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
+          "weapons": [
+            { "name": "Frost Weapons", "range": "(base)", "firepower": "(assault) MW, EA (+1)" }
+          ],
+          "notes": ["Brutal.", "Fearless."]
+        },
+        "varagyr-terminator": {
+          "name": "Varagyr Wolf Guard Terminators",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
+          "weapons": [
+            { "name": "Combi-Bolter", "range": "15cm", "firepower": "(small arms) AP5+" },
+            { "name": "Frost Weapon / Power Fist", "range": "(base)", "firepower": "(assault) MW, EA (+1)" }
+          ],
+          "notes": ["Reinforced armour.", "Thick rear armour.", "Brutal."]
+        },
+        "fenrisian-wolves": {
+          "name": "Fenrisian Wolf Pack",
+          "type": "INF",
+          "speed": "20cm",
+          "armour": "6+",
+          "cc": "4+",
+          "ff": "0",
+          "weapons": [
+            { "name": "Fangs and Claws", "range": "(base)", "firepower": "(assault) EA (+1)" }
+          ],
+          "notes": ["Infiltrator.", "Scout.", "Mounted (move)."]
+        },
+        "leman-russ": {
+          "name": "Leman Russ",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "3+",
+          "cc": "3+",
+          "ff": "4+",
+          "weapons": [
+            { "name": "Frost Sword (Mjalnar)", "range": "(base)", "firepower": "(assault) MW, EA (+2)" },
+            { "name": "Wolf Claws", "range": "(base)", "firepower": "(assault) MW, EA (+1)" }
+          ],
+          "notes": ["Demi-God.", "Invulnerable save.", "Reinforced armour.", "Thick rear armour.", "Brutal.", "Fearless."]
+        }
+      },
+      "compositionRulesAppend": [
+        "Deathsworn Warband, Wolf Guard Detachment, and Fenrisian Wolf Pack: 1 per 2,000 pts each.",
+        "Primarch Leman Russ may only be taken once and counts as your Supreme Commander."
+      ]
     },
     {
       "id": "imperial-fists",
