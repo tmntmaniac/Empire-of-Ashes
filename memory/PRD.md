@@ -48,6 +48,12 @@ Build a force builder web application (similar to legionbuilder.app) for the "Em
   - `FormationEditor.jsx` merges selected upgrade variants into `displayUnits` passed to `UnitStatTable` so Rhino/Damocles/Predator/Sicaran/Dreadnought variants/Consuls/Armoury assets all render their stats in the roster.
   - **Backend hot-reload fix**: `server.py` now reads `factions.json` fresh per request (removed import-time cache that silently served stale data until manual `supervisorctl restart`).
   - **Testing**: iteration_3 — 18/18 critical regression assertions pass post-fix. Backend pytest 6/6 pass. No console errors.
+- **Feb 2026** — In-app Confirm dialogs for destructive actions (delete army & remove formation).
+  - New reusable component `/app/frontend/src/components/ConfirmDialog.jsx` — grimdark `corner-frame` panel, red eyebrow + AlertTriangle for destructive variant, configurable testIds.
+  - `Builder.jsx` `removeFormation` → opens `remove-formation-dialog` (KEEP / DISBAND); shows the formation's display name in the body.
+  - `ArmyManager.jsx` `handleDelete` → opens `delete-army-dialog` (KEEP / DISBAND); shows the army name; removes browser `window.confirm()` (was being blocked/ugly in some iframes).
+  - testIds: `remove-formation-dialog{,-cancel,-confirm}`, `delete-army-dialog{,-cancel,-confirm}`.
+  - **Testing**: Self-tested via Playwright — seed army → click trash → dialog appears → cancel preserves → confirm deletes; same flow verified in ArmyManager. Toast confirmations fire on success.
 - **Feb 2026** — Sons of Horus codex full expansion (Support + Lords of War).
   - `factions.json` grown from 8 → **46 formations** (5 Line, 33 Support, 7 Lords of War, 1 Primarch) and 43 → **71 units**.
   - Reclassified `reaver-detachment` from "Support" → "Line" per source PDF.

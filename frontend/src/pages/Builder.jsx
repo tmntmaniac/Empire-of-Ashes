@@ -4,6 +4,7 @@ import { getArmy, upsertArmy } from "@/lib/storage";
 import { fetchFaction } from "@/lib/api";
 import { armyTotal, formationCost } from "@/lib/points";
 import FormationEditor from "@/components/FormationEditor";
+import ConfirmDialog from "@/components/ConfirmDialog";
 import { ArrowLeft, Plus, Printer, Save } from "lucide-react";
 import { toast } from "sonner";
 
@@ -14,6 +15,7 @@ export default function Builder() {
     const [faction, setFaction] = useState(null);
     const [error, setError] = useState(null);
     const [addOpen, setAddOpen] = useState(false);
+    const [removeIdx, setRemoveIdx] = useState(null);
 
     useEffect(() => {
         const a = getArmy(id);
@@ -81,8 +83,14 @@ export default function Builder() {
         setArmy({ ...army, formations: next });
     };
     const removeFormation = (idx) => {
-        if (!window.confirm("Remove this formation?")) return;
-        setArmy({ ...army, formations: army.formations.filter((_, i) => i !== idx) });
+        setRemoveIdx(idx);
+    };
+    const confirmRemoveFormation = () => {
+        if (removeIdx == null) return;
+        const def = formDefMap[army.formations[removeIdx]?.formationId];
+        setArmy({ ...army, formations: army.formations.filter((_, i) => i !== removeIdx) });
+        setRemoveIdx(null);
+        toast.success(`${def?.name || "Formation"} disbanded.`);
     };
 
     return (
@@ -175,6 +183,23 @@ export default function Builder() {
                     onAdd={addFormation}
                 />
             )}
+
+            <ConfirmDialog
+                open={removeIdx != null}
+                eyebrow="// Disband Formation"
+                title="Remove Formation?"
+                message={
+                    removeIdx != null
+                        ? `${formDefMap[army.formations[removeIdx]?.formationId]?.name || "This formation"} will be removed from the roster. Upgrades and unit selections will be lost.`
+                        : ""
+                }
+                confirmLabel="Disband"
+                cancelLabel="Keep"
+                destructive
+                onConfirm={confirmRemoveFormation}
+                onCancel={() => setRemoveIdx(null)}
+                testId="remove-formation-dialog"
+            />
         </div>
     );
 }

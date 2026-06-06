@@ -5,6 +5,7 @@ import { fetchFactions, fetchFaction } from "@/lib/api";
 import { armyTotal } from "@/lib/points";
 import { Plus, Copy, Trash2, Printer, Pencil } from "lucide-react";
 import { toast } from "sonner";
+import ConfirmDialog from "@/components/ConfirmDialog";
 
 const POINT_PRESETS = [1000, 1500, 2000, 3000, 4000];
 
@@ -14,6 +15,7 @@ export default function ArmyManager() {
     const [factions, setFactions] = useState([]);
     const [factionCache, setFactionCache] = useState({});
     const [showDialog, setShowDialog] = useState(false);
+    const [pendingDelete, setPendingDelete] = useState(null);
 
     const refresh = () => setArmies(listArmies());
 
@@ -27,8 +29,13 @@ export default function ArmyManager() {
     }, []);
 
     const handleDelete = (id, name) => {
-        if (!window.confirm(`Disband army "${name}"? This cannot be undone.`)) return;
-        deleteArmy(id);
+        setPendingDelete({ id, name });
+    };
+
+    const confirmDelete = () => {
+        if (!pendingDelete) return;
+        deleteArmy(pendingDelete.id);
+        setPendingDelete(null);
         refresh();
         toast.success("Army disbanded.");
     };
@@ -111,6 +118,19 @@ export default function ArmyManager() {
                     }}
                 />
             )}
+
+            <ConfirmDialog
+                open={pendingDelete != null}
+                eyebrow="// Disband Army"
+                title="Disband Army?"
+                message={pendingDelete ? `"${pendingDelete.name}" will be permanently removed from this browser. This action cannot be undone.` : ""}
+                confirmLabel="Disband"
+                cancelLabel="Keep"
+                destructive
+                onConfirm={confirmDelete}
+                onCancel={() => setPendingDelete(null)}
+                testId="delete-army-dialog"
+            />
         </div>
     );
 }
