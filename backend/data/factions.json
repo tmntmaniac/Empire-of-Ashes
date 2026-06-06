@@ -339,6 +339,341 @@
             { "name": "Talons of Horus", "range": "(base) & (15cm)", "firepower": "(assault) MW, EA (+2) / (small arms) EA (+2)" }
           ],
           "notes": ["Demi-God.", "Invulnerable save.", "Reinforced armour.", "Thick rear armour.", "Supreme Commander."]
+        },
+        "champion": {
+          "name": "Champion",
+          "type": "CH",
+          "speed": "-", "armour": "4+", "cc": "3+", "ff": "4+",
+          "weapons": [
+            { "name": "Charnabal Sabre", "range": "(base)", "firepower": "(assault) MW, Lance, EA (+1)" }
+          ],
+          "notes": ["Invulnerable save.", "Leader.", "May be upgraded to Commander (1 per force)."]
+        },
+        "librarian": {
+          "name": "Librarian",
+          "type": "CH",
+          "speed": "-", "armour": "4+", "cc": "3+", "ff": "4+",
+          "weapons": [
+            { "name": "Force Weapon", "range": "(base)", "firepower": "(assault) MW, EA (+1)" },
+            { "name": "Smite", "range": "(15cm)", "firepower": "(small arms) MW, EA (+1)" }
+          ],
+          "notes": ["Invulnerable save.", "Leader."]
+        },
+        "chaplain": {
+          "name": "Chaplain",
+          "type": "CH",
+          "speed": "-", "armour": "4+", "cc": "3+", "ff": "4+",
+          "weapons": [
+            { "name": "Crozius Arcanum", "range": "(base)", "firepower": "(assault) Fleshbane, EA (+1)" }
+          ],
+          "notes": ["Invulnerable save.", "Inspiring.", "Leader."]
+        },
+        "commander": {
+          "name": "Commander",
+          "type": "CH",
+          "speed": "-", "armour": "4+", "cc": "3+", "ff": "4+",
+          "weapons": [
+            { "name": "Paragon Blade", "range": "(base)", "firepower": "(assault) Fleshbane, EA (+1)" }
+          ],
+          "notes": ["Invulnerable save.", "Supreme Commander."]
+        },
+        "rhino": {
+          "name": "Rhino",
+          "type": "AV",
+          "speed": "30cm", "armour": "5+", "cc": "6+", "ff": "5+",
+          "weapons": [
+            { "name": "Combi-bolters", "range": "(15cm)", "firepower": "small arms" }
+          ],
+          "notes": ["Transport (may carry 2 Tactical)."]
+        },
+        "damocles": {
+          "name": "Damocles Command Rhino",
+          "type": "AV",
+          "speed": "30cm", "armour": "5+", "cc": "6+", "ff": "5+",
+          "weapons": [
+            { "name": "Combi-bolters", "range": "(15cm)", "firepower": "small arms" }
+          ],
+          "notes": ["Leader.", "Transport (may carry 2 Tactical)."]
+        },
+        "land-raider-phobos": {
+          "name": "Land Raider Phobos",
+          "type": "WE",
+          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "4+",
+          "weapons": [
+            { "name": "2× TL Lascannon", "range": "45cm", "firepower": "AT4+" },
+            { "name": "TL Heavy Bolter", "range": "30cm", "firepower": "AP4+" }
+          ],
+          "notes": ["DC1.", "Invulnerable save.", "Reinforced armour.", "Thick rear armour.", "Transport (1 Tactical/Breacher/Terminator)."]
+        },
+        "land-raider-proteus": {
+          "name": "Land Raider Proteus",
+          "type": "WE",
+          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "weapons": [
+            { "name": "2× TL Lascannon", "range": "45cm", "firepower": "AT4+" },
+            { "name": "TL Heavy Bolter", "range": "30cm", "firepower": "AP4+" }
+          ],
+          "notes": ["DC1.", "Invulnerable save.", "Reinforced armour.", "Thick rear armour.", "Transport (2 Tactical/Breacher OR 1 Terminator)."]
+        },
+        "spartan": {
+          "name": "Spartan Assault Tank",
+          "type": "WE",
+          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "weapons": [
+            { "name": "2× Quad Lascannons", "range": "45cm", "firepower": "AT3+" },
+            { "name": "TL Heavy Bolter", "range": "30cm", "firepower": "AP4+" }
+          ],
+          "notes": ["DC2.", "Reinforced armour.", "Thick rear armour.", "Transport (4 Tactical/Breacher OR 2 Terminator)."]
+        },
+        "termite": {
+          "name": "Termite Assault Drill",
+          "type": "AV",
+          "speed": "10cm", "armour": "5+", "cc": "4+", "ff": "5+",
+          "weapons": [
+            { "name": "Heavy Melta Cutter", "range": "(base)", "firepower": "(assault) MW" },
+            { "name": "TL Volkite Caliver", "range": "15cm", "firepower": "AP4+, Disrupt" }
+          ],
+          "notes": ["Self planetfall (turn 2+).", "Reinforced armour.", "Thick rear armour.", "Walker.", "Transport (2 INF)."]
+        },
+        "mastodon": {
+          "name": "Mastodon",
+          "type": "WE",
+          "speed": "20cm", "armour": "4+", "cc": "5+", "ff": "4+",
+          "weapons": [
+            { "name": "Siege Melta Array", "range": "(base)", "firepower": "(assault) MW, Siege, EA (+2)" },
+            { "name": "2× Heavy Flamer", "range": "15cm & (15cm)", "firepower": "AP4+, Ignore cover / (small arms) Ignore cover" }
+          ],
+          "notes": ["DC4.", "2 Void shields.", "Reinforced armour.", "Transport (10 Tactical/Breacher/Terminator/Dread; Terminators & Dreads count as 2)."]
+        },
+        "kharybdys": {
+          "name": "Kharybdis Assault Claw",
+          "type": "AV",
+          "speed": "35cm", "armour": "4+", "cc": "5+", "ff": "5+",
+          "weapons": [
+            { "name": "Storm Launcher", "range": "30cm", "firepower": "3× AP5+/AT6+, Single shot" },
+            { "name": "Melta Ram", "range": "(base)", "firepower": "(assault) MW, EA (+1), Siege" },
+            { "name": "Heat Blast", "range": "15cm & (15cm)", "firepower": "2× AP4+/AT4+, Disrupt / (small arms) MW, EA (+1)" }
+          ],
+          "notes": ["Planetfall.", "Skimmer.", "Transport (4 Assault/Breacher/Rapier/Tactical OR 2 Terminator OR 1 Castraferrum/Contemptor)."]
+        },
+        "cestus": {
+          "name": "Cestus Assault Ram",
+          "type": "AV",
+          "speed": "35cm", "armour": "5+", "cc": "6+", "ff": "4+",
+          "weapons": [
+            { "name": "Firefury Missiles", "range": "30cm", "firepower": "AP3+/AT3+, MW" },
+            { "name": "Magna Melta", "range": "15cm & (15cm)", "firepower": "AP4+/AT4+, MW / (small arms) MW" }
+          ],
+          "notes": ["Planetfall.", "Reinforced armour.", "Skimmer.", "Transport (2 Breacher OR 2 Terminator)."]
+        },
+        "castraferrum": {
+          "name": "Castraferrum Dreadnought",
+          "type": "AV",
+          "speed": "15cm", "armour": "3+", "cc": "5+", "ff": "4+",
+          "weapons": [
+            { "name": "TL Lascannon & TL Missile Launcher", "range": "45cm", "firepower": "AT4+" },
+            { "name": "Autocannon", "range": "45cm", "firepower": "AP4+/AT5+" },
+            { "name": "Powerfist", "range": "(base)", "firepower": "(assault) MW, EA (+1)" }
+          ],
+          "notes": ["Walker.", "Invulnerable save."]
+        },
+        "contemptor": {
+          "name": "Contemptor Dreadnought",
+          "type": "AV",
+          "speed": "15cm", "armour": "3+", "cc": "5+", "ff": "3+",
+          "weapons": [
+            { "name": "Arm options (select 2)", "range": "—", "firepower": "TL Heavy Bolter 30cm AP4+ · Multimelta 15cm & (15cm) AP5+/AT5+ MW · Kheres Assault Cannon 15cm & (15cm) AP4+/AT5+ EA(+1) · Plasma Cannon 30cm AP5+/AT5+ Fleshbane · Powerfist (base) (assault) MW EA(+1)" }
+          ],
+          "notes": ["Invulnerable save.", "Walker.", "May replace 1 arm with Conversion Beamer (+20).", "May add carapace Havoc Launcher (+5).", "1–2 per formation may take Conversion Beamer."]
+        },
+        "leviathan": {
+          "name": "Leviathan Siege Dreadnought",
+          "type": "AV",
+          "speed": "15cm", "armour": "4+", "cc": "4+", "ff": "4+",
+          "weapons": [
+            { "name": "Arm options (select 2)", "range": "—", "firepower": "Siege Claw/Drill (base) (assault) MW EA(+1) Siege · Gravflux Bombard 15cm 2× AP4+/AT4+ Disrupt · Cyclonic Melta Lance 15cm & (15cm) AP5+/AT3+ MW · Stormcannon 15cm & (15cm) 2× AP4+/AT6+ EA(+1)" }
+          ],
+          "notes": ["Invulnerable save.", "Reinforced armour.", "Walker."]
+        },
+        "deredeo": {
+          "name": "Deredeo Dreadnought",
+          "type": "AV",
+          "speed": "15cm", "armour": "3+", "cc": "5+", "ff": "3+",
+          "weapons": [
+            { "name": "TL Heavy Bolters", "range": "30cm", "firepower": "AP4+/AT4+, MW, Indirect, Ignore cover" },
+            { "name": "Anvillus Battery OR Helical Array", "range": "45cm", "firepower": "2× AP5+/AT5+" },
+            { "name": "Hellfire Plasma Cannon", "range": "30cm", "firepower": "AP4+/AT4+, Fleshbane" }
+          ],
+          "notes": ["Invulnerable save.", "Walker."]
+        },
+        "predator": {
+          "name": "Predator",
+          "type": "AV",
+          "speed": "30cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "weapons": [
+            { "name": "Lascannon", "range": "45cm", "firepower": "AT5+" },
+            { "name": "2× Heavy Bolters", "range": "30cm", "firepower": "AP5+" }
+          ],
+          "notes": ["Reinforced armour."]
+        },
+        "sicaran": {
+          "name": "Sicaran",
+          "type": "AV",
+          "speed": "35cm", "armour": "5+", "cc": "6+", "ff": "4+",
+          "weapons": [
+            { "name": "Accelerator OR Punisher Cannon", "range": "45cm", "firepower": "2× AP4+/AT5+" },
+            { "name": "Heavy Bolter", "range": "30cm", "firepower": "AP5+" }
+          ],
+          "notes": ["Reinforced armour."]
+        },
+        "vindicator": {
+          "name": "Vindicator",
+          "type": "AV",
+          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "weapons": [
+            { "name": "Demolisher Cannon", "range": "15cm & (15cm)", "firepower": "AP4+/AT4+, MW, Ignore cover / (small arms) MW, Ignore cover" },
+            { "name": "2× Heavy Bolters", "range": "30cm", "firepower": "AP4+" }
+          ],
+          "notes": ["Thick rear armour.", "Walker."]
+        },
+        "cerberus": {
+          "name": "Cerberus Heavy Destroyer Tank",
+          "type": "WE",
+          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "weapons": [
+            { "name": "Neutron Laser Battery", "range": "60cm", "firepower": "2× AT3+, Armourbane, Feedback, Disrupt, FxF" },
+            { "name": "2× Lascannon", "range": "45cm", "firepower": "AT5+" }
+          ],
+          "notes": ["DC2.", "Reinforced armour.", "Invulnerable save."]
+        },
+        "typhon": {
+          "name": "Typhon Heavy Siege Tank",
+          "type": "WE",
+          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "3+",
+          "weapons": [
+            { "name": "Dreadhammer Cannon", "range": "45cm & (15cm)", "firepower": "3 BP, Ignore cover, FxF" },
+            { "name": "2× Heavy Bolters", "range": "30cm", "firepower": "AP5+" }
+          ],
+          "notes": ["DC2.", "Reinforced armour.", "Thick rear armour."]
+        },
+        "kratos": {
+          "name": "Kratos Heavy Assault Tank",
+          "type": "WE",
+          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "weapons": [
+            { "name": "Kratos Battlecannon", "range": "30cm", "firepower": "AP4+/AT3+, Armourbane" },
+            { "name": "Autocannon", "range": "45cm", "firepower": "AP5+/AT6+" },
+            { "name": "Sponson 2× TL Lascannon OR (4+) 2× TL Heavy Bolters", "range": "45cm", "firepower": "AT4+ Fwd / AP4+" },
+            { "name": "Hull 2× Lascannon OR (3+) 2× Heavy Bolters", "range": "45cm", "firepower": "AT5+ / AP5+" }
+          ],
+          "notes": ["DC2.", "Reinforced armour."]
+        },
+        "hyperios": {
+          "name": "Whirlwind Hyperios",
+          "type": "AV",
+          "speed": "30cm", "armour": "5+", "cc": "6+", "ff": "5+",
+          "weapons": [
+            { "name": "Multi-launch Rockets", "range": "45cm", "firepower": "1 BP, Ignore cover, Indirect fire" },
+            { "name": "Hyperios SAM Launcher", "range": "45cm & 60cm", "firepower": "AT4+ / AA4+" }
+          ],
+          "notes": []
+        },
+        "rapier": {
+          "name": "Rapier Weapons Platform",
+          "type": "AV",
+          "speed": "30cm", "armour": "5+", "cc": "6+", "ff": "6+",
+          "weapons": [
+            { "name": "Rapier Battery", "range": "45cm", "firepower": "2× AP5+/AT5+, Indirect fire" }
+          ],
+          "notes": []
+        },
+        "tactical-support": {
+          "name": "Tactical Support Squad",
+          "type": "INF",
+          "speed": "15cm", "armour": "4+", "cc": "4+", "ff": "4+",
+          "weapons": [
+            { "name": "Support Weapons", "range": "15cm & (15cm)", "firepower": "2× AP4+, Ignore cover / (assault) Ignore cover, EA (+1)" }
+          ],
+          "notes": ["Counts as Tactical for transport."]
+        },
+        "heavy-support": {
+          "name": "Heavy Support Squad",
+          "type": "INF",
+          "speed": "15cm", "armour": "4+", "cc": "5+", "ff": "3+",
+          "weapons": [
+            { "name": "Heavy Weapons", "range": "45cm & 30cm", "firepower": "2× AP5+/AT6+ / AA6+" }
+          ],
+          "notes": ["Counts as Tactical for transport."]
+        },
+        "infernus": {
+          "name": "Infernus Predator",
+          "type": "AV",
+          "speed": "30cm", "armour": "4+", "cc": "6+", "ff": "3+",
+          "weapons": [
+            { "name": "Magma Melta", "range": "15cm & (15cm)", "firepower": "AP3+/AT3+, MW / (small arms)" },
+            { "name": "2× Heavy Bolters", "range": "30cm", "firepower": "AP5+" }
+          ],
+          "notes": ["Reinforced armour.", "Thick rear armour."]
+        },
+        "executioner": {
+          "name": "Executioner Predator",
+          "type": "AV",
+          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "weapons": [
+            { "name": "Plasma Cannon", "range": "45cm", "firepower": "AP4+/AT4+, MW" },
+            { "name": "Lascannon", "range": "45cm", "firepower": "AT5+" }
+          ],
+          "notes": ["Reinforced armour.", "Thick rear armour."]
+        },
+        "scorpius": {
+          "name": "Scorpius Predator",
+          "type": "AV",
+          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "4+",
+          "weapons": [
+            { "name": "TL Volkite Demiculverin", "range": "45cm", "firepower": "2× AP3+/AT5+, Disrupt" },
+            { "name": "Lascannon", "range": "45cm", "firepower": "AT5+" }
+          ],
+          "notes": ["Reinforced armour.", "Thick rear armour."]
+        },
+        "omega": {
+          "name": "Sicaran Omega",
+          "type": "AV",
+          "speed": "35cm", "armour": "5+", "cc": "6+", "ff": "5+",
+          "weapons": [
+            { "name": "Omega Plasma Array", "range": "30cm", "firepower": "2× AP5+/AT4+, Fleshbane" },
+            { "name": "Heavy Bolter", "range": "30cm", "firepower": "AP5+" },
+            { "name": "2× Lascannon OR (3+) 2× Heavy Bolters", "range": "45cm / 30cm", "firepower": "AT5+ / AP5+" }
+          ],
+          "notes": ["Reinforced armour."]
+        },
+        "venator": {
+          "name": "Sicaran Venator",
+          "type": "AV",
+          "speed": "35cm", "armour": "5+", "cc": "6+", "ff": "5+",
+          "weapons": [
+            { "name": "Neutron Beamer", "range": "30cm", "firepower": "2× AT3+, Armourbane, Disrupt, Feedback, FxF" },
+            { "name": "Sponson Lascannons", "range": "45cm", "firepower": "2× AT5+" }
+          ],
+          "notes": ["Reinforced armour."]
+        },
+        "achilles": {
+          "name": "Achilles Land Raider",
+          "type": "AV",
+          "speed": "25cm", "armour": "3+", "cc": "6+", "ff": "4+",
+          "weapons": [
+            { "name": "Achilles Dreadspear", "range": "(base)", "firepower": "(assault) MW, EA (+2)" },
+            { "name": "2× TL Lascannon OR 2× TL Heavy Bolters", "range": "45cm / 30cm", "firepower": "AT4+ / AP4+" }
+          ],
+          "notes": ["Invulnerable save.", "Walker."]
+        },
+        "vindicator-destroyer": {
+          "name": "Vindicator Destroyer",
+          "type": "AV",
+          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "weapons": [
+            { "name": "Laser Destroyer Array", "range": "60cm", "firepower": "AT4+, Armourbane" }
+          ],
+          "notes": ["Thick rear armour.", "Walker."]
         }
       }
     }
