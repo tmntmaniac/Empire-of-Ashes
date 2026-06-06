@@ -1,0 +1,96 @@
+{
+  "theme": "dark",
+  "archetype": "Tactical Brutalist (Performance Pro adaptation for Grimdark)",
+  "design_philosophy": {
+    "core_principles": [
+      "Grimdark and military aesthetic tailored for Sons of Horus (Sea-Green/Jade, Black, Bronze/Gold).",
+      "Tactical command interface feeling like a field codex.",
+      "Industrial, gothic, and militant vibes. Avoid all modern gradients and soft shadows.",
+      "Focus on dense, highly legible tabular data with cinematic flair in hero sections."
+    ],
+    "forbidden_patterns": [
+      "AI-slop purple or teal blue gradients",
+      "Soft shadows or rounded glassmorphism",
+      "Center-aligned data tables"
+    ]
+  },
+  "typography": {
+    "heading_font": "Bebas Neue",
+    "body_font": "Chivo",
+    "technical_font": "IBM Plex Mono",
+    "rules": {
+      "headings": "Uppercase, tight tracking (tracking-tighter), sharp and imposing.",
+      "body": "Clean, highly legible sans-serif.",
+      "data_tables": "Monospace for all stats, points, and unit properties to mimic a terminal or codex."
+    },
+    "scale": {
+      "h1": "text-5xl sm:text-6xl tracking-tighter uppercase font-heading",
+      "h2": "text-3xl sm:text-4xl tracking-tight uppercase font-heading",
+      "h3": "text-xl sm:text-2xl tracking-tight uppercase font-heading",
+      "body": "text-sm sm:text-base leading-relaxed font-sans",
+      "technical": "text-xs sm:text-sm tracking-wide font-mono"
+    }
+  },
+  "colors": {
+    "background": {
+      "void_black": "#050505",
+      "surface_dark": "#111111",
+      "panel_green_tint": "#121A16"
+    },
+    "brand": {
+      "sons_of_horus_green": "#2D937D",
+      "sons_of_horus_green_hover": "#3FB098",
+      "bronze_gold": "#C2A165",
+      "danger_red": "#7F1D1D",
+      "warning_orange": "#D97736"
+    },
+    "text": {
+      "primary": "#E0E0E0",
+      "muted": "#888888",
+      "accent_green": "#2D937D",
+      "accent_gold": "#C2A165"
+    },
+    "borders": {
+      "subtle": "#333333",
+      "active": "#2D937D"
+    }
+  },
+  "layout_and_spacing": {
+    "containers": "Sharp edges (rounded-none or max rounded-sm). Use padding generously (p-4 to p-8) but keep data tables dense.",
+    "borders": "Expose the skeleton. Heavy use of 1px solid borders (border-collapse) to create a 'Technical Grid' look.",
+    "alignment": "Left-align data. Right-align points/costs. Never center-align tabular data."
+  },
+  "components": {
+    "buttons": "Blocky, uppercase, tracking-wide. Primary buttons use Sons of Horus Green background with Void Black text. Hover states must increase brightness.",
+    "cards": "Flat background (surface_dark), 1px subtle border, NO drop shadows. Optional 2px accent top-border in Green or Gold.",
+    "tables": "Crucial for this app. Use border-collapse. Striped rows with extremely subtle background shifts (e.g., transparent to #111111). Monospace fonts for all numbers.",
+    "forms": "Minimalist. Solid dark backgrounds for inputs with 1px borders. Focus states change border color to Sons of Horus Green."
+  },
+  "media": {
+    "image_urls": [
+      {
+        "category": "hero_background",
+        "url": "https://images.pexels.com/photos/7185968/pexels-photo-7185968.jpeg",
+        "description": "Dense, dark green textured background with grunge patterns for hero sections"
+      },
+      {
+        "category": "texture_overlay",
+        "url": "https://images.pexels.com/photos/6485438/pexels-photo-6485438.jpeg",
+        "description": "Weathered metallic surface showcasing rugged texture for panels or footer"
+      },
+      {
+        "category": "tactical_display",
+        "url": "https://images.unsplash.com/photo-1720962158919-6c5f5f99630d",
+        "description": "Tactical radar display for dashboard or loading states"
+      }
+    ],
+    "instructions_to_main_agent": "Use these images exactly as provided. Do not use placeholder images. Blend textures using opacity (e.g., opacity-20) over solid backgrounds."
+  },
+  "icons": {
+    "library": "lucide-react",
+    "style": "Sharp, 1.5px stroke width. Use danger stripes (CSS repeating-linear-gradient) for decorative military elements."
+  },
+  "testing": {
+    "requirements": "All interactive and key informational elements MUST include a 'data-testid' attribute (kebab-case)."
+  }
+}
