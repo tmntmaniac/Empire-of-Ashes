@@ -27,7 +27,10 @@ Build a force builder web application (similar to legionbuilder.app) for the "Em
 - `/app/design_guidelines.json`
 
 ## Sons of Horus Formation IDs (kebab-case)
-`tactical-detachment`, `assault-detachment`, `breacher-detachment`, `terminator-detachment`, `reaver-detachment`, `luperci-pack`, `justaerian-detachment`, `horus` (primarch — unique, max 1).
+**Line (5)**: `tactical-detachment`, `assault-detachment`, `breacher-detachment`, `terminator-detachment`, `reaver-detachment`.
+**Support (33)**: `luperci-pack`, `justaerian-detachment`, `destroyer-squad`, `inductii-squad`, `recon-squad`, `scout-detachment`, `veteran-squad`, `outrider-squad`, `jetbike-squad`, `land-speeder-squadron`, `javelin-squadron`, `castraferrum-talon`, `contemptor-talon`, `leviathan-talon`, `air-defence-battery`, `artillery-battery-arquitor`, `artillery-battery-basilisk`, `artillery-battery-medusa`, `artillery-battery-whirlwind`, `kratos-heavy-squadron`, `land-raider-squadron`, `predator-squadron`, `sabre-squadron`, `sicaran-squadron`, `vindicator-squadron`, `storm-eagle-flight`, `thunderhawk-gunship`, `thunderhawk-transporter-flight`, `legion-spacecraft-strike-cruiser`, `legion-spacecraft-battleship`, `assault-squad-support`, `breacher-squad-support`, `rapier-battery`.
+**Lords of War (7)**: `plutona-assault-drill`, `heavy-tank-battery`, `superheavy-squadron`, `superheavy-tank-destroyer`, `gunship-flight`, `interceptor-flight`, `stormbird-lander`.
+**Primarch (1)**: `horus` (unique, max 1).
 
 ## Completed (CHANGELOG)
 - **Feb 2026** — MVP Force Builder complete & verified.
@@ -45,6 +48,21 @@ Build a force builder web application (similar to legionbuilder.app) for the "Em
   - `FormationEditor.jsx` merges selected upgrade variants into `displayUnits` passed to `UnitStatTable` so Rhino/Damocles/Predator/Sicaran/Dreadnought variants/Consuls/Armoury assets all render their stats in the roster.
   - **Backend hot-reload fix**: `server.py` now reads `factions.json` fresh per request (removed import-time cache that silently served stale data until manual `supervisorctl restart`).
   - **Testing**: iteration_3 — 18/18 critical regression assertions pass post-fix. Backend pytest 6/6 pass. No console errors.
+- **Feb 2026** — Sons of Horus codex full expansion (Support + Lords of War).
+  - `factions.json` grown from 8 → **46 formations** (5 Line, 33 Support, 7 Lords of War, 1 Primarch) and 43 → **71 units**.
+  - Reclassified `reaver-detachment` from "Support" → "Line" per source PDF.
+  - **New Line**: (reaver moved in).
+  - **New Support (31)**: destroyer-squad, inductii-squad, recon-squad, scout-detachment, veteran-squad, outrider-squad, jetbike-squad, land-speeder-squadron, javelin-squadron, castraferrum-talon, contemptor-talon, leviathan-talon, air-defence-battery (Skyreaper), artillery-batteries (Arquitor / Basilisk / Medusa / Whirlwind), kratos-heavy-squadron, land-raider-squadron, predator-squadron, sabre-squadron, sicaran-squadron, vindicator-squadron, storm-eagle-flight, thunderhawk-gunship, thunderhawk-transporter-flight, legion-spacecraft-{strike-cruiser,battleship}, assault-squad-support, breacher-squad-support, rapier-battery.
+  - **New Lords of War (7)**: plutona-assault-drill, heavy-tank-battery (Falchion), superheavy-squadron (Fellblade), superheavy-tank-destroyer (Glaive), gunship-flight (Fire Raptor), interceptor-flight (Xiphon), stormbird-lander.
+  - `Builder.jsx` AddFormationDialog now renders 4 ordered category sections: `Line | Support | Lords of War | Primarch`.
+  - **Testing**: iteration_4 — Backend pytest **50/50** pass (6 base + 44 new expansion assertions in `test_expansion.py`); frontend E2E 100% (category order, LoW formations add, Reaver shows under LINE, extra-unit +60 increments, multi-formation localStorage persistence). No console errors.
+
+## Testid Reference (for future testing agents)
+- Builder Save button: `data-testid="builder-save-btn"` (NOT `save-army-btn`).
+- Builder Print button: `data-testid="builder-print-btn"`.
+- PrintView print trigger: `data-testid="print-trigger"`.
+- AddFormationDialog category headers render as `// LINE`, `// SUPPORT`, `// LORDS OF WAR`, `// PRIMARCH` (use `innerText`).
+- Extra-unit increment buttons: `extra-plus-{formation-index}` (e.g., `extra-plus-1`).
 
 ## Roadmap
 
