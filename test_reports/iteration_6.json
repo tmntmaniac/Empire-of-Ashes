@@ -1,0 +1,41 @@
+{
+  "summary": "Frontend-only testing of the new force-composition validation feature (rules R1–R5) on Empire of Ashes. 12/12 scenarios verified PASS via Playwright against the public REACT_APP_BACKEND_URL, seeding deterministic state into localStorage (eoa.armies.v1).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "tests_executed": [
+    {"name": "Empty army hides validation panel", "result": "PASS", "evidence": "validation-panel not present when formations[]"},
+    {"name": "1 Line => // List Legal + counters Line=1, Support=0/max 3, LoW=0 pts/max 660 pts (33%), Primarch=0/max 1", "result": "PASS"},
+    {"name": "1 Line + 4 Support => illegal badge + validation-issue-support-over-limit + comp-support cell turns red (border-[#C2392E])", "result": "PASS"},
+    {"name": "Only Support (no Line) => both validation-issue-no-line AND validation-issue-support-over-limit issues shown", "result": "PASS"},
+    {"name": "Stormbird 450 pts @ 1000 cap => validation-issue-low-over-limit, comp-low red, message mentions 33% and 330 pts", "result": "PASS", "evidence": "'Lords of War exceed 33% of cap — 450 pts taken, max 330 pts allowed.'"},
+    {"name": "Per-Line upgrade cap of 4: counter reads N / 4 taken; 5th checkbox disabled; count stays at 4", "result": "PASS"},
+    {"name": "Upgrade-counter color states: 0/4 -> text-[#666] muted, 4/4 -> text-[#C2A165] amber", "result": "PASS"},
+    {"name": "Cap edit 2000 -> 1000 re-derives LoW limit (max 660 -> max 330 pts)", "result": "PASS"},
+    {"name": "Primarch (Horus) + Line => legal, comp-primarch = 1/max 1, no composition violation", "result": "PASS"},
+    {"name": "LocalStorage persistence: reload reproduces Line=1, Support=1 counters", "result": "PASS"},
+    {"name": "PrintView /print/:id renders without crashing (body length ~4.8k chars)", "result": "PASS"},
+    {"name": "Armies list (/armies) shows seeded 'Test Force' with point total", "result": "PASS"}
+  ],
+  "smoke_check_points_cap_bar": "Edit-cap flow via [data-testid=edit-cap-btn] -> [data-testid=cap-input] -> [data-testid=cap-save] works alongside the new validation panel.",
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "validation.js correctly uses Math.floor(cap * 0.33) for LoW limit — note this yields 660 for cap=2000 (exact 660) and 330 for 1000; integer-floor behavior is consistent and matches UI sub-text.",
+    "Upgrade-cap enforcement is implemented both in FormationEditor.toggleUpgrade() (early-return) and via input[disabled] — defense-in-depth is good. No way to exceed via UI confirmed.",
+    "ArmyValidationPanel.jsx correctly hides itself for empty armies (hasFormations=false), aligning with desired first-run UX.",
+    "Minor: comp-low CounterCell uses `stats.lowLimit > 0` guard for danger styling — correct, prevents false red at cap=0.",
+    "Builder.jsx passes upgradeMax=MAX_UPGRADES_PER_LINE only to Line formations; Support/LoW/Primarch correctly receive null and don't render the upgrade counter.",
+    "No regressions observed in PointsCapBar, formation add/remove, save flow, print route, or armies list."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (skipped per request)", "frontend": "100% (12/12)"},
+  "test_credentials": "n/a (localStorage-only app, no auth)",
+  "seed_data_creation": "Seeded localStorage key 'eoa.armies.v1' with single army id='test-army-1', factionId='sons-of-horus', varying pointsCap and formations per scenario. Removed at end of run is not necessary since it's only client-side preview state.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Use REACT_APP_BACKEND_URL from /app/frontend/.env. Seed deterministic state via `localStorage.setItem('eoa.armies.v1', JSON.stringify([{...army}]))` then navigate to /builder/{id}. Useful testids: validation-panel, validation-legal, validation-illegal, validation-issue-<code> (no-line | support-over-limit | low-over-limit | upgrades-over-limit | primarch-over-limit), comp-line/-support/-low/-primarch (and -value), upgrade-count-{index}, upgrade-toggle-{index}-{upgradeId}, edit-cap-btn / cap-input / cap-save. Formation palette ids per factions.json: line — tactical-detachment, assault-detachment, terminator-detachment; support — destroyer-squad, recon-squad, inductii-squad, luperci-pack; LoW — stormbird-lander (450 pts), falchion-squadron; primarch — horus."
+}

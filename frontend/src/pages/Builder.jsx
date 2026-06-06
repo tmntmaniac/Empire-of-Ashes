@@ -6,6 +6,8 @@ import { armyTotal, formationCost } from "@/lib/points";
 import FormationEditor from "@/components/FormationEditor";
 import ConfirmDialog from "@/components/ConfirmDialog";
 import PointsCapBar from "@/components/PointsCapBar";
+import ArmyValidationPanel from "@/components/ArmyValidationPanel";
+import { validateArmy, MAX_UPGRADES_PER_LINE } from "@/lib/validation";
 import { ArrowLeft, Plus, Printer, Save } from "lucide-react";
 import { toast } from "sonner";
 
@@ -62,6 +64,8 @@ export default function Builder() {
         return acc;
     }, {});
     const hasHorus = (army.formations || []).some((f) => f.formationId === "horus");
+
+    const validation = validateArmy(army, faction);
 
     const addFormation = (formDef) => {
         const newForm = {
@@ -122,6 +126,9 @@ export default function Builder() {
                 onCapChange={(next) => setArmy({ ...army, pointsCap: next })}
             />
 
+            {/* Force composition validation */}
+            <ArmyValidationPanel result={validation} hasFormations={(army.formations || []).length > 0} />
+
             {/* Legion Trait */}
             <div className="panel panel-gold p-4 mb-6" data-testid="legion-trait">
                 <div className="font-mono text-[10px] tracking-[0.3em] text-[#C2A165] uppercase mb-1">// Legion Trait</div>
@@ -140,17 +147,23 @@ export default function Builder() {
                         <p className="text-[#888] mb-4 text-sm">Add your first detachment to begin building this force.</p>
                     </div>
                 )}
-                {(army.formations || []).map((f, i) => (
-                    <FormationEditor
-                        key={f.id}
-                        index={i}
-                        formation={f}
-                        formationDef={formDefMap[f.formationId]}
-                        faction={faction}
-                        onChange={(updated) => updateFormation(i, updated)}
-                        onRemove={() => removeFormation(i)}
-                    />
-                ))}
+                {(army.formations || []).map((f, i) => {
+                    const def = formDefMap[f.formationId];
+                    const isLine = def?.category === "Line";
+                    const upgradeMax = isLine ? MAX_UPGRADES_PER_LINE : null;
+                    return (
+                        <FormationEditor
+                            key={f.id}
+                            index={i}
+                            formation={f}
+                            formationDef={def}
+                            faction={faction}
+                            upgradeMax={upgradeMax}
+                            onChange={(updated) => updateFormation(i, updated)}
+                            onRemove={() => removeFormation(i)}
+                        />
+                    );
+                })}
             </div>
 
             <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="add-formation-btn">

@@ -3,7 +3,7 @@ import { ChevronDown, ChevronUp, Trash2, Minus, Plus } from "lucide-react";
 import UnitStatTable from "@/components/UnitStatTable";
 import { formationCost } from "@/lib/points";
 
-export default function FormationEditor({ formation, formationDef, faction, onChange, onRemove, index }) {
+export default function FormationEditor({ formation, formationDef, faction, onChange, onRemove, index, upgradeMax }) {
     const [open, setOpen] = useState(true);
     if (!formationDef) {
         return (
@@ -28,6 +28,10 @@ export default function FormationEditor({ formation, formationDef, faction, onCh
         if (exists) {
             onChange({ ...formation, upgrades: formation.upgrades.filter((u) => u.upgradeId !== upg.id) });
         } else {
+            // Enforce upgrade cap (Line: 4 per detachment) — block adding past the max.
+            if (typeof upgradeMax === "number" && (formation.upgrades || []).length >= upgradeMax) {
+                return;
+            }
             const newUp = { upgradeId: upg.id, selections: [], flagCost: 0 };
             if (upg.type === "flag") newUp.flagCost = upg.cost || 0;
             if (upg.type === "single" && upg.variants?.length) {
@@ -130,19 +134,31 @@ export default function FormationEditor({ formation, formationDef, faction, onCh
 
                     {allowed.length > 0 && (
                         <div>
-                            <div className="field-label mb-2">Upgrades</div>
+                            <div className="flex items-center justify-between mb-2">
+                                <div className="field-label">Upgrades</div>
+                                {typeof upgradeMax === "number" && (
+                                    <div
+                                        className={`font-mono text-[10px] tracking-widest uppercase ${(formation.upgrades || []).length > upgradeMax ? "text-[#C2392E]" : (formation.upgrades || []).length === upgradeMax ? "text-[#C2A165]" : "text-[#666]"}`}
+                                        data-testid={`upgrade-count-${index}`}
+                                    >
+                                        {(formation.upgrades || []).length} / {upgradeMax} taken
+                                    </div>
+                                )}
+                            </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                 {allowed.map((upg) => {
                                     const current = formation.upgrades?.find((u) => u.upgradeId === upg.id);
                                     const enabled = Boolean(current);
+                                    const atCap = typeof upgradeMax === "number" && !enabled && (formation.upgrades || []).length >= upgradeMax;
                                     return (
-                                        <div key={upg.id} className={`border p-3 ${enabled ? "border-[#2D937D] bg-[#0E1411]" : "border-[#222] bg-[#0A0C0B]"}`} data-testid={`upgrade-${index}-${upg.id}`}>
-                                            <label className="flex items-start gap-2 cursor-pointer">
+                                        <div key={upg.id} className={`border p-3 ${enabled ? "border-[#2D937D] bg-[#0E1411]" : atCap ? "border-[#1A1A1A] bg-[#0A0C0B] opacity-50" : "border-[#222] bg-[#0A0C0B]"}`} data-testid={`upgrade-${index}-${upg.id}`}>
+                                            <label className={`flex items-start gap-2 ${atCap ? "cursor-not-allowed" : "cursor-pointer"}`}>
                                                 <input
                                                     type="checkbox"
                                                     checked={enabled}
+                                                    disabled={atCap}
                                                     onChange={() => toggleUpgrade(upg)}
-                                                    className="mt-1 accent-[#2D937D]"
+                                                    className="mt-1 accent-[#2D937D] disabled:cursor-not-allowed"
                                                     data-testid={`upgrade-toggle-${index}-${upg.id}`}
                                                 />
                                                 <div className="flex-1">
