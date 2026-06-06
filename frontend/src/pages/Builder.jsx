@@ -5,6 +5,7 @@ import { fetchFaction } from "@/lib/api";
 import { armyTotal, formationCost } from "@/lib/points";
 import FormationEditor from "@/components/FormationEditor";
 import ConfirmDialog from "@/components/ConfirmDialog";
+import PointsCapBar from "@/components/PointsCapBar";
 import { ArrowLeft, Plus, Printer, Save } from "lucide-react";
 import { toast } from "sonner";
 
@@ -115,22 +116,13 @@ export default function Builder() {
             </div>
 
             {/* Points bar */}
-            <div className="panel p-4 mb-6" data-testid="points-bar">
-                <div className="flex items-center justify-between mb-2">
-                    <div className="font-mono text-[11px] tracking-[0.3em] text-[#888] uppercase">// Points Allocation</div>
-                    <div className={`font-display text-2xl tracking-tight ${over ? "text-[#C2392E]" : "text-[#2D937D]"}`} data-testid="points-total">
-                        {total} <span className="text-[#666]">/ {cap}</span> <span className="text-xs text-[#888]">pts</span>
-                    </div>
-                </div>
-                <div className="h-2 bg-[#1A1A1A] overflow-hidden">
-                    <div className={`h-full ${over ? "bg-[#7F1D1D]" : "bg-[#2D937D]"}`} style={{ width: `${pct}%` }} />
-                </div>
-                <div className="flex flex-wrap gap-3 mt-3 font-mono text-[10px] uppercase tracking-widest text-[#888]">
-                    <span className="tag tag-green" data-testid="count-line">Line {counts.Line || 0}</span>
-                    <span className="tag" data-testid="count-support">Support {counts.Support || 0}</span>
-                    {hasHorus && <span className="tag" style={{ color: "#C2A165", borderColor: "#C2A165" }} data-testid="count-primarch">Primarch: Horus</span>}
-                </div>
-            </div>
+            <PointsCapBar
+                total={total}
+                cap={cap}
+                counts={counts}
+                hasHorus={hasHorus}
+                onCapChange={(next) => setArmy({ ...army, pointsCap: next })}
+            />
 
             {/* Legion Trait */}
             <div className="panel panel-gold p-4 mb-6" data-testid="legion-trait">

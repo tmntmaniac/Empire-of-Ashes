@@ -1,0 +1,25 @@
+{
+  "summary": "Frontend-only testing of new PointsCapBar component in Builder. Created army via UI (FORGE A NEW FORCE), then exercised every documented test ID: points-bar, points-total ('0 / 3000 pts'), edit-cap-btn, cap-editor, cap-preset-{1000,1500,2000,3000,4000}, cap-input, cap-save, cap-cancel, cap-warning-over, cap-warning-approaching, cap-status-remaining, points-bar-fill. Verified state colors (green #2D937D below 90%, amber #C2A165 approaching, red #C2392E + bar #7F1D1D over cap), 100% bar fill when over cap, localStorage persistence across reloads under key 'eoa.armies.v1'. Regression-checked: add-formation-dialog opens with Line/Support/Lords of War/Primarch categories, ConfirmDialog (remove-formation-dialog) appears on remove with Keep cancel, Print navigation, Save button, browser back. All 18 assertions passed.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "PointsCapBar.jsx: total/cap pct calc duplicated in Builder.jsx (lines 56-57) but unused there — dead variables 'pct' and 'over' in Builder.jsx can be removed since PointsCapBar computes them internally.",
+    "PointsCapBar.commit() clamps cap between 100 and 20000 silently — consider surfacing a small inline hint when user enters out-of-range values (currently the input just snaps without feedback).",
+    "Approaching threshold uses total/cap >= 0.9 inclusive; at exactly 90% with non-integer remaining could be edge-case confusing but acceptable for MVP.",
+    "Builder.jsx: the inline 'pct' and 'over' constants (lines 56-57) are no longer used after PointsCapBar refactor — minor dead code."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "100%"},
+  "test_credentials": "N/A (no auth)",
+  "seed_data_creation": "Created one army 'TEST_PointsCap_Army' (Sons of Horus, 3000 pts default → mutated through 1500/2500/100/289/1375) with one Tactical Detachment formation. Stored in localStorage under 'eoa.armies.v1'.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "PointsCapBar is fully working: presets close editor immediately, input+save commits with clamp 100-20000, cancel reverts, state-driven colors verified (green/amber/red), Over Cap by X pts shown, bar fills 100% in dark red when over. Builder.jsx has minor dead code (unused pct/over constants on lines 56-57). All regression flows (add-formation-dialog, remove ConfirmDialog with Keep, print nav, save, localStorage persistence) work.",
+  "rca of the issue": "N/A — no defects found."
+}
