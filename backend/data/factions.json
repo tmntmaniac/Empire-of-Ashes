@@ -1,0 +1,346 @@
+{
+  "factions": [
+    {
+      "id": "sons-of-horus",
+      "name": "Sons of Horus",
+      "subtitle": "XVI Legion · The Luperci",
+      "color": "#2D937D",
+      "lore": "History records that it is the Sons of Horus Legion who lit the spark of rebellion and stood upon the ashes of the old Imperium. They above all others stand as a byword for treason to their foes, and as exemplars of resistance to adherents. They are the force of ambition, ruthlessness, and unbowed determination. Led by their charismatic Primarch Horus Lupercal, their every action is driven by a burning desire to carve out their own destiny in the stars.",
+      "legionTrait": {
+        "name": "Death Dealers",
+        "description": "When taking an Engage action, Infantry units add +1 to their Firefight value (up to a maximum of 2+)."
+      },
+      "compositionRules": [
+        "Max 3 Support detachments per Line detachment in the army.",
+        "Max 4 Upgrades per formation.",
+        "Max 1/3 of total points value may be spent on Lords of War or Allies.",
+        "Reaver, Luperci and Justaerian Detachments: 1 per 2,000 pts each.",
+        "Primarch Horus may only be taken once and counts as your Supreme Commander."
+      ],
+      "allies": {
+        "cohesive": [
+          "Daemons of the Ruinstorm",
+          "Imperialis Militia",
+          "Legio Titanicus",
+          "Mechanicum Taghmata",
+          "Solar Auxilia"
+        ],
+        "disruptive": [
+          "Knight Household"
+        ]
+      },
+      "formations": [
+        {
+          "id": "tactical-detachment",
+          "name": "Tactical Detachment",
+          "category": "Line",
+          "baseCost": 275,
+          "composition": "8 Tactical OR 8 Despoiler units",
+          "unitOptions": [
+            { "label": "8 Tactical units", "units": [{ "unit": "tactical", "count": 8 }] },
+            { "label": "8 Despoiler units", "units": [{ "unit": "despoiler", "count": 8 }] }
+          ],
+          "allowedUpgrades": ["standard-transport", "drop-assault", "assault-claw", "heavy-transport", "consul", "armoury-asset", "dreadnought", "rapier", "support-squads", "hyperios", "tank"]
+        },
+        {
+          "id": "assault-detachment",
+          "name": "Assault Detachment",
+          "category": "Line",
+          "baseCost": 300,
+          "composition": "8 Assault units (+25 each additional, up to 10)",
+          "unitOptions": [
+            { "label": "8 Assault units", "units": [{ "unit": "assault", "count": 8 }] }
+          ],
+          "extraUnit": { "unit": "assault", "cost": 25, "max": 2, "label": "Additional Assault unit" },
+          "allowedUpgrades": ["drop-assault", "consul"]
+        },
+        {
+          "id": "breacher-detachment",
+          "name": "Breacher Detachment",
+          "category": "Line",
+          "baseCost": 300,
+          "composition": "8 Breacher units (+25 each additional, up to 10)",
+          "unitOptions": [
+            { "label": "8 Breacher units", "units": [{ "unit": "breacher", "count": 8 }] }
+          ],
+          "extraUnit": { "unit": "breacher", "cost": 25, "max": 2, "label": "Additional Breacher unit" },
+          "allowedUpgrades": ["drop-assault", "assault-claw", "heavy-transport", "consul", "armoury-asset", "dreadnought", "hyperios", "tank"]
+        },
+        {
+          "id": "terminator-detachment",
+          "name": "Terminator Detachment",
+          "category": "Line",
+          "baseCost": 300,
+          "composition": "4 Terminator units (+75 each additional, up to 6)",
+          "unitOptions": [
+            { "label": "4 Terminator units", "units": [{ "unit": "terminator", "count": 4 }] }
+          ],
+          "extraUnit": { "unit": "terminator", "cost": 75, "max": 2, "label": "Additional Terminator unit" },
+          "allowedUpgrades": ["assault-claw", "heavy-transport", "teleport", "consul", "armoury-asset", "dreadnought", "hyperios", "tank"]
+        },
+        {
+          "id": "reaver-detachment",
+          "name": "Reaver Detachment",
+          "category": "Support",
+          "baseCost": 300,
+          "composition": "6 Reaver units",
+          "unitOptions": [
+            { "label": "6 Reaver units", "units": [{ "unit": "reaver", "count": 6 }] }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": ["standard-transport", "drop-assault", "assault-claw", "heavy-transport", "consul", "tank"]
+        },
+        {
+          "id": "luperci-pack",
+          "name": "Luperci Pack",
+          "category": "Support",
+          "baseCost": 300,
+          "composition": "6 Luperci units",
+          "unitOptions": [
+            { "label": "6 Luperci units", "units": [{ "unit": "luperci", "count": 6 }] }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": ["standard-transport", "assault-claw"]
+        },
+        {
+          "id": "justaerian-detachment",
+          "name": "Justaerian Detachment",
+          "category": "Support",
+          "baseCost": 350,
+          "composition": "4 Justaerian Terminator units",
+          "unitOptions": [
+            { "label": "4 Justaerian units", "units": [{ "unit": "justaerian", "count": 4 }] }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": ["assault-claw", "heavy-transport", "teleport", "consul", "tank", "dreadnought"]
+        },
+        {
+          "id": "horus",
+          "name": "Horus, the Warmaster",
+          "category": "Primarch",
+          "baseCost": 500,
+          "composition": "Horus + 3 Justaerian units",
+          "unitOptions": [
+            { "label": "Horus + 3 Justaerian", "units": [{ "unit": "horus", "count": 1 }, { "unit": "justaerian", "count": 3 }] }
+          ],
+          "maxCount": 1,
+          "allowedUpgrades": ["heavy-transport", "teleport", "armoury-asset", "tank", "hyperios"]
+        }
+      ],
+      "upgrades": [
+        {
+          "id": "standard-transport",
+          "name": "Standard Transport",
+          "description": "Add enough Rhino carriers to transport the entire formation after all other upgrades are added. You may upgrade 1 Rhino to a Damocles.",
+          "type": "multi",
+          "variants": [
+            { "id": "rhino", "name": "Rhino", "cost": 10 },
+            { "id": "damocles", "name": "Damocles Command Rhino", "cost": 15 }
+          ]
+        },
+        {
+          "id": "drop-assault",
+          "name": "Drop Assault",
+          "description": "The formation may deploy via Drop Pods. Use Spacecraft pool for Drop Pods.",
+          "type": "flag",
+          "cost": 0
+        },
+        {
+          "id": "heavy-transport",
+          "name": "Heavy Transport",
+          "description": "Add enough Land Raiders OR Spartans OR Termites OR Mastodons to transport the entire formation after all other upgrades are added.",
+          "type": "multi",
+          "variants": [
+            { "id": "land-raider-phobos", "name": "Land Raider Phobos", "cost": 75 },
+            { "id": "land-raider-proteus", "name": "Land Raider Proteus", "cost": 65 },
+            { "id": "spartan", "name": "Spartan Assault Tank", "cost": 125 },
+            { "id": "termite", "name": "Termite Assault Drill", "cost": 75 },
+            { "id": "mastodon", "name": "Mastodon", "cost": 225 }
+          ]
+        },
+        {
+          "id": "assault-claw",
+          "name": "Assault Claw",
+          "description": "Add enough Kharybdys OR Cestus Assault Rams to transport the entire formation after all other upgrades are added.",
+          "type": "multi",
+          "variants": [
+            { "id": "kharybdys", "name": "Kharybdys Assault Claw", "cost": 75 },
+            { "id": "cestus", "name": "Cestus Assault Ram", "cost": 50 }
+          ]
+        },
+        {
+          "id": "teleport",
+          "name": "Teleport",
+          "description": "Add the Teleport trait to each INF unit in the formation.",
+          "type": "flag",
+          "cost": 50
+        },
+        {
+          "id": "consul",
+          "name": "Consul",
+          "description": "Add 1 Champion, Librarian or Chaplain. One Champion per force may be upgraded to a Commander.",
+          "type": "single",
+          "cost": 50,
+          "variants": [
+            { "id": "champion", "name": "Champion" },
+            { "id": "librarian", "name": "Librarian" },
+            { "id": "chaplain", "name": "Chaplain" }
+          ]
+        },
+        {
+          "id": "dreadnought",
+          "name": "Dreadnought",
+          "description": "Add 1-2 Castraferrum, Contemptor, Leviathan or Deredeo dreadnoughts in any combination.",
+          "type": "multi",
+          "max": 2,
+          "variants": [
+            { "id": "castraferrum", "name": "Castraferrum Dreadnought", "cost": 50 },
+            { "id": "contemptor", "name": "Contemptor Dreadnought", "cost": 60 },
+            { "id": "leviathan", "name": "Leviathan Dreadnought", "cost": 100 },
+            { "id": "deredeo", "name": "Deredeo Dreadnought", "cost": 100 }
+          ]
+        },
+        {
+          "id": "support-squads",
+          "name": "Support Squads",
+          "description": "Add 1-4 Tactical Support or Heavy Support units.",
+          "type": "multi",
+          "max": 4,
+          "variants": [
+            { "id": "tactical-support", "name": "Tactical Support Squad", "cost": 25 },
+            { "id": "heavy-support", "name": "Heavy Support Squad", "cost": 50 }
+          ]
+        },
+        {
+          "id": "hyperios",
+          "name": "Hyperios",
+          "description": "Add 1-2 Whirlwind Hyperios.",
+          "type": "multi",
+          "max": 2,
+          "variants": [
+            { "id": "hyperios", "name": "Whirlwind Hyperios", "cost": 75 }
+          ]
+        },
+        {
+          "id": "tank",
+          "name": "Tank",
+          "description": "Add 1-2 tanks: Predators, Sicarans, Vindicators, Cerberus, Typhons or Kratos.",
+          "type": "multi",
+          "max": 2,
+          "variants": [
+            { "id": "predator", "name": "Predator", "cost": 60 },
+            { "id": "sicaran", "name": "Sicaran", "cost": 80 },
+            { "id": "vindicator", "name": "Vindicator", "cost": 50 },
+            { "id": "cerberus", "name": "Cerberus", "cost": 150 },
+            { "id": "typhon", "name": "Typhon", "cost": 150 },
+            { "id": "kratos", "name": "Kratos", "cost": 150 }
+          ]
+        },
+        {
+          "id": "rapier",
+          "name": "Rapier",
+          "description": "Add 1-4 Rapiers of any configuration.",
+          "type": "multi",
+          "max": 4,
+          "variants": [
+            { "id": "rapier", "name": "Rapier", "cost": 60 }
+          ]
+        },
+        {
+          "id": "armoury-asset",
+          "name": "Armoury Asset",
+          "description": "Upgrade 1-2 vehicles in this formation to special variants (Infernus, Executioner, Scorpius, Omega, Venator, Achilles, Deredeo, Vindicator Destroyer).",
+          "type": "multi",
+          "max": 2,
+          "variants": [
+            { "id": "infernus", "name": "Predator → Infernus", "cost": 20 },
+            { "id": "executioner", "name": "Predator → Executioner", "cost": 20 },
+            { "id": "scorpius", "name": "Predator → Scorpius", "cost": 20 },
+            { "id": "omega", "name": "Sicaran → Omega", "cost": 20 },
+            { "id": "venator", "name": "Sicaran → Venator", "cost": 20 },
+            { "id": "achilles", "name": "Land Raider Phobos → Achilles", "cost": 20 },
+            { "id": "deredeo-up", "name": "Contemptor → Deredeo", "cost": 40 },
+            { "id": "vindicator-destroyer", "name": "Vindicator → Destroyer", "cost": 20 }
+          ]
+        }
+      ],
+      "units": {
+        "tactical": {
+          "name": "Tactical Squad",
+          "type": "INF",
+          "speed": "15cm", "armour": "5+", "cc": "5+", "ff": "4+",
+          "weapons": [{ "name": "Bolters", "range": "(15cm)", "firepower": "small arms" }],
+          "notes": ["Can claim objectives."]
+        },
+        "despoiler": {
+          "name": "Despoiler Squad",
+          "type": "INF",
+          "speed": "15cm", "armour": "5+", "cc": "4+", "ff": "5+",
+          "weapons": [{ "name": "Bolt Pistols & Chainswords", "range": "(base)", "firepower": "(assault) EA (+1)" }],
+          "notes": ["Counts as Tactical for transport."]
+        },
+        "assault": {
+          "name": "Assault Squad",
+          "type": "INF",
+          "speed": "30cm", "armour": "5+", "cc": "3+", "ff": "5+",
+          "weapons": [{ "name": "Bolt Pistols & Chainswords", "range": "(base)", "firepower": "(assault) EA (+1)" }],
+          "notes": ["Jump Packs (Teleport-style move)."]
+        },
+        "breacher": {
+          "name": "Breacher Squad",
+          "type": "INF",
+          "speed": "15cm", "armour": "4+", "cc": "5+", "ff": "4+",
+          "weapons": [{ "name": "Bolters", "range": "(15cm)", "firepower": "small arms" }],
+          "notes": ["Reinforced armour."]
+        },
+        "terminator": {
+          "name": "Terminator Squad",
+          "type": "INF",
+          "speed": "15cm", "armour": "4+", "cc": "4+", "ff": "4+",
+          "weapons": [
+            { "name": "Power Fists", "range": "(base)", "firepower": "(assault) MW, EA (+1)" },
+            { "name": "Combi-bolters", "range": "(15cm)", "firepower": "small arms" }
+          ],
+          "notes": ["Reinforced armour.", "Thick rear armour."]
+        },
+        "reaver": {
+          "name": "Reaver Attack Squad",
+          "type": "INF",
+          "speed": "15cm", "armour": "4+", "cc": "3+", "ff": "4+",
+          "weapons": [
+            { "name": "Talons & Claws", "range": "(base)", "firepower": "(assault) Fleshbane, EA (+1)" },
+            { "name": "Banestrike Bolter", "range": "(15cm)", "firepower": "small arms, Sniper" }
+          ],
+          "notes": ["Berserk.", "Ferocity.", "Fearless.", "Invulnerable save.", "Cannot claim objectives.", "Counts as Tactical for transport."]
+        },
+        "luperci": {
+          "name": "Luperci",
+          "type": "INF",
+          "speed": "15cm", "armour": "4+", "cc": "4+", "ff": "5+",
+          "weapons": [{ "name": "Talons & Claws", "range": "(base)", "firepower": "(assault) Fleshbane, EA (+1)" }],
+          "notes": ["Berserk.", "Ferocity.", "Fearless.", "Invulnerable save.", "Cannot claim objectives.", "Counts as Tactical for transport."]
+        },
+        "justaerian": {
+          "name": "Justaerian Terminators",
+          "type": "INF",
+          "speed": "15cm", "armour": "4+", "cc": "3+", "ff": "4+",
+          "weapons": [
+            { "name": "Power Fists", "range": "(base)", "firepower": "(assault) MW, EA (+1)" },
+            { "name": "Multi-melta", "range": "(15cm)", "firepower": "AP5+/AT5+, MW (small arms) MW" }
+          ],
+          "notes": ["Reinforced armour.", "Thick rear armour."]
+        },
+        "horus": {
+          "name": "Horus Lupercal",
+          "type": "CH",
+          "speed": "15cm", "armour": "3+", "cc": "2+", "ff": "4+",
+          "weapons": [
+            { "name": "World Breaker", "range": "(base)", "firepower": "(assault) TK (1)" },
+            { "name": "Talons of Horus", "range": "(base) & (15cm)", "firepower": "(assault) MW, EA (+2) / (small arms) EA (+2)" }
+          ],
+          "notes": ["Demi-God.", "Invulnerable save.", "Reinforced armour.", "Thick rear armour.", "Supreme Commander."]
+        }
+      }
+    }
+  ]
+}
