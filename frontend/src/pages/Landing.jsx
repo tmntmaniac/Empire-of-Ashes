@@ -86,13 +86,13 @@ export default function Landing() {
                             </div>
                         </Link>
                     ))}
-                    {/* Future armies teaser — 18 Legions + Solar Auxilia + Imperialis Militia online */}
+                    {/* Future armies teaser — 18 Legions + Solar Aux + Imperialis Militia + Knights + Titans online */}
                     <div className="panel p-6 opacity-50 cursor-not-allowed" data-testid="faction-card-coming-soon">
                         <div className="font-mono text-[10px] tracking-[0.3em] text-[#666] uppercase mb-2 flex items-center gap-2">
                             <Lock className="w-3 h-3" strokeWidth={2} /> Incoming
                         </div>
-                        <h3 className="font-display text-3xl uppercase tracking-tight mb-3 text-[#555]">Auxiliary Forces</h3>
-                        <p className="text-xs text-[#666] font-sans leading-relaxed">Mechanicum Taghmata and Knight Households await transmission.</p>
+                        <h3 className="font-display text-3xl uppercase tracking-tight mb-3 text-[#555]">Mechanicum Taghmata</h3>
+                        <p className="text-xs text-[#666] font-sans leading-relaxed">The Cult of Mars awaits transmission — Thallax, Vorax, Castellax and Thanatar phalanxes incoming.</p>
                     </div>
                 </div>
             </section>

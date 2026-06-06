@@ -27,19 +27,20 @@ Build a force-builder web app (legionbuilder.app-style) for the fan "Empire of A
 - `GET /api/factions/unknown` — 404.
 
 ## Changelog
-- 2026-02 — Added `legions.json` with all 18 Legiones Astartes (Dark Angels, Emperor's Children, Iron Warriors, White Scars, Space Wolves, Imperial Fists, Night Lords, Blood Angels, Iron Hands, World Eaters, Ultramarines, Death Guard, Thousand Sons, Sons of Horus, Word Bearers, Salamanders, Raven Guard, Alpha Legion). Refactored `server.py` to merge baseline rules with per-legion identity/trait overrides. Removed stale "More Legions / Classified" placeholder on Landing (now teases auxiliary forces). 94/94 backend tests + 15/15 frontend scenarios pass.
-- 2026-02 — Populated the remaining 8 skeleton legions (Iron Hands, Night Lords, World Eaters, Death Guard, Thousand Sons, Ultramarines, Word Bearers, Alpha Legion) with full lore, legion trait, allies, extra formations (incl. Primarch detachment), per-formation `unitOptions` and Primarch + named-unit stat blocks. All 18 legions now expose ≥4 extra formations and a Primarch via `GET /api/factions/{id}`. API integrity scan: 0 broken unit references across all 18 factions. `/app/backend/data/legions.backup.json` retained as pre-patch snapshot.
-- 2026-02 — Added **Solar Auxilia** (17 formations, 40 units, 8 upgrades) and **Imperialis Militia** (20 formations, 39 units, 7 upgrades) as standalone factions in `factions.json` (no merge with Astartes baseline). Both expose `compositionLimits: {maxSupportPerLine:2, maxUpgradesPerLine:3, lowPct:0.33}`. Refactored `validation.js` and `Builder.jsx` to be data-driven via `limitsFor(faction)`; Astartes fall back to default 3/4 limits. Hardened `FormationEditor.jsx` against missing `faction.upgrades` and absent `selections` arrays on persisted/imported armies. Landing copy updated ("20 forces online"; coming-soon teaser now lists only Mechanicum + Knights). 4/4 new-army backend tests green; 11/12 frontend scenarios passed (the 1 fail — a FormationEditor crash on hand-injected lists — is fixed in this same change and verified via repro screenshot showing the proper validation error instead).
+- 2026-02 — Added `legions.json` with all 18 Legiones Astartes. Refactored `server.py` to merge baseline rules with per-legion identity/trait overrides.
+- 2026-02 — Populated the remaining 8 skeleton legions with full lore, legion trait, allies, extra formations (incl. Primarch detachment), per-formation `unitOptions` and Primarch + named-unit stat blocks.
+- 2026-02 — Added **Solar Auxilia** (17 formations, 40 units) and **Imperialis Militia** (20 formations, 39 units) as standalone factions in `factions.json`. Refactored `validation.js` and `Builder.jsx` to be data-driven via `limitsFor(faction)`. Hardened `FormationEditor.jsx` against missing `faction.upgrades` / `selections`.
+- 2026-02 — Patched flag upgrades that ADD units (`addedUnits: [{unit,count}]`) so Ogryn Brute Squad, Rapier Battery, Fire Support, Snipers, Ogryn Charonite all surface in the roster stat table. Converted `sa-support` to a multi upgrade with `bundleCost: 75`.
+- 2026-02 — Added **Knight Households** (7 formations, 15 units, 6 upgrades) and **Legio Titanicus** (9 formations, 12 units, 10 upgrades incl. 6 weapon-slot upgrades) as standalone factions. Introduced `conversion: true` flag on upgrades (Titan weapon-slot picks) so they pay variant cost without injecting fake units into the roster. 22 active factions total. 7/7 new-army backend tests + e2e smoke confirmed (KH Quesetorius Lance @ 425 pts, LT Warlord @ 850 pts, Warhound Pack @ 550 pts with 4 weapon slots).
 
 ## Backlog
-- P1 — Auxiliary armies: Mechanicum Taghmata, Knight Households (Solar Auxilia + Imperialis Militia now SHIPPED).
-- P1 — Deep-link `Build →` cards on Landing to pre-select the legion in the New Army dialog (`/armies?new=<id>`).
-- P2 — URL-based army sharing (base64-encoded stateless share string).
-- P2 — Per-legion accent color applied to the "Active" badge on Landing.
-- P2 — Cache `build_factions()` with mtime check (currently re-reads + deep-copies per request; fine for MVP scale).
-- P2 — Refresh stale tests in `test_legions.py` / `test_soh_isolation.py` (27 stale assertions still expect 18 factions and old Alpha Legion trait name).
+- P1 — **Mechanicum Taghmata** (next and final auxiliary army on the roadmap).
+- P2 — URL-based army sharing (stateless base64 share string).
+- P2 — Cache `build_factions()` with mtime check (currently re-reads + deep-copies per request).
+- P2 — Refresh stale tests in `test_legions.py` / `test_soh_isolation.py` (27 stale assertions still expect 18 factions and the old Alpha Legion trait name).
 - P3 — Export army list to PDF.
 - P3 — Rotate hero LORE on Landing (currently hardcoded Sons of Horus quote).
+- P3 — Per-faction conversion engine: surface Acheron/Atropos in the roster when Enhanced Forges is taken (currently the upgrade pays its cost but the original Knight unit remains visible).
 - P3 — `/api/health` readiness endpoint.
 
 ## Test credentials

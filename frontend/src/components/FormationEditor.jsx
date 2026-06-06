@@ -71,6 +71,9 @@ export default function FormationEditor({ formation, formationDef, faction, onCh
             });
             return;
         }
+        // `conversion: true` upgrades (e.g. Titan weapon-slot picks) pay a
+        // cost but do not add new unit rows to the roster.
+        if (upDef.conversion) return;
         (selectedUp.selections || []).forEach((s) => {
             if (!s.variantId || !s.count) return;
             // Resolve variant id against faction.units (variant.id == unit id by convention)
