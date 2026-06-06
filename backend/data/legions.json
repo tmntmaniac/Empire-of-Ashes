@@ -9,11 +9,95 @@
       "color": "#1F4D2B",
       "lore": "The First Legion, raised on the death-world of Caliban under the watchful eye of the Lion. Secretive, knightly and ancient, the Dark Angels keep the Emperor's faith with cold steel, hidden orders and grim resolve. Where lesser Legions break ranks, the Sons of Caliban form their unbroken line.",
       "legionTrait": {
-        "name": "Grim Resolve",
-        "description": "Dark Angels Infantry units count their initiative as one better than printed when taking Rally actions, and may re-roll the dice once when attempting to remove Blast Markers from a Rally."
+        "name": "Paragons of Battle",
+        "description": "Dark Angels may take 1 free Champion upgrade per 750 points and may upgrade any unit which has access to the Consul upgrade. In addition, units with a Champion, Lieutenant Commander, or Supreme Commander upgrade may add +1 to their Close Combat value (up to a maximum of 2+)."
+      },
+      "extraFormations": [
+        {
+          "id": "interremptor-detachment",
+          "name": "Interremptors",
+          "category": "Support",
+          "baseCost": 250,
+          "composition": "4 Interremptor units",
+          "unitOptions": [
+            { "label": "4 Interremptor units", "units": [ { "unit": "interremptor", "count": 4 } ] }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": ["drop-assault", "assault-claw", "consul"]
+        },
+        {
+          "id": "deathwing-companions",
+          "name": "Deathwing Companions",
+          "category": "Support",
+          "baseCost": 340,
+          "composition": "4 Deathwing Companion units",
+          "unitOptions": [
+            { "label": "4 Deathwing Companion units", "units": [ { "unit": "deathwing-companion", "count": 4 } ] }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": ["drop-assault", "assault-claw", "heavy-transport", "teleport", "consul"]
+        },
+        {
+          "id": "lion",
+          "name": "Lion El'Jonson",
+          "category": "Primarch",
+          "baseCost": 450,
+          "composition": "Lion El'Jonson + 3 Deathwing Companion units",
+          "unitOptions": [
+            {
+              "label": "Lion El'Jonson + 3 Deathwing Companions",
+              "units": [
+                { "unit": "lion", "count": 1 },
+                { "unit": "deathwing-companion", "count": 3 }
+              ]
+            }
+          ],
+          "maxCount": 1,
+          "allowedUpgrades": ["heavy-transport", "teleport", "armoury-asset", "tank", "hyperios"]
+        }
+      ],
+      "extraUnits": {
+        "deathwing-companion": {
+          "name": "Deathwing Companions",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
+          "weapons": [
+            { "name": "Calabanite Warblade", "range": "(base)", "firepower": "(assault) MW, Lance, EA (+1)" }
+          ],
+          "notes": ["Remorseless.", "Reinforced armour.", "Thick rear armour.", "Counts as Terminator for transport."]
+        },
+        "interremptor": {
+          "name": "Interremptor Squad",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "4+",
+          "ff": "4+",
+          "weapons": [
+            { "name": "Plasma Burners", "range": "15cm and (15cm)", "firepower": "2x AP4+/AT5+, Fleshbane, Lance / (assault) Fleshbane, Lance, EA (+1)" }
+          ],
+          "notes": ["Counts as Tactical for transport."]
+        },
+        "lion": {
+          "name": "Lion El'Jonson",
+          "type": "CH",
+          "speed": "15cm",
+          "armour": "3+",
+          "cc": "2+",
+          "ff": "3+",
+          "weapons": [
+            { "name": "Lion Sword", "range": "(base) and (base)", "firepower": "(assault) First strike, MW, EA (+1) / (assault) MW, EA (+1)" },
+            { "name": "Master Crafted Volkite Pistol", "range": "(15cm)", "firepower": "(small arms) Sniper, MW, EA (+1)" }
+          ],
+          "notes": ["Demi-God.", "Invulnerable save.", "Reinforced armour.", "Thick rear armour.", "Supreme Commander."]
+        }
       },
       "compositionRulesAppend": [
-        "Dreadwing, Ravenwing and Deathwing detachments are restricted to 1 per 2,000 pts each."
+        "Interremptors and Deathwing Companions: 1 per 2,000 pts each.",
+        "Primarch Lion El'Jonson may only be taken once and counts as your Supreme Commander."
       ]
     },
     {
@@ -23,9 +107,148 @@
       "color": "#7A2DA0",
       "lore": "Fulgrim's chosen, the III Legion are the Emperor's masterwork of perfection. Their every blow is a study in lethal grace, their parade-ground precision matched only by their pitiless cruelty in the wake of the Phoenician's fall.",
       "legionTrait": {
-        "name": "Flawless Execution",
-        "description": "Emperor's Children units may re-roll a single failed to-hit roll per attack action when Engaging or Sustaining Fire."
-      }
+        "name": "Exemplars of War",
+        "description": "Once per game, a player may elect to add 1 to their Strategy Rating when rolling for Initiative. For that turn, they may also re-roll any one additional failed Action test (you may not re-roll a re-roll). In addition, for that turn, any Character unit may add +1 to their Close Combat value (up to a maximum of 2+)."
+      },
+      "extraFormations": [
+        {
+          "id": "kakophoni-band",
+          "name": "Kakophoni Band",
+          "category": "Support",
+          "baseCost": 240,
+          "composition": "4-6 Kakophoni units (+60 per extra unit)",
+          "unitOptions": [
+            { "label": "4 Kakophoni units", "units": [ { "unit": "kakophoni", "count": 4 } ] },
+            { "label": "5 Kakophoni units (+60)", "units": [ { "unit": "kakophoni", "count": 5 } ], "extraCost": 60 },
+            { "label": "6 Kakophoni units (+120)", "units": [ { "unit": "kakophoni", "count": 6 } ], "extraCost": 120 }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": ["standard-transport", "drop-assault", "heavy-transport", "consul", "armoury-asset", "tank", "hyperios"]
+        },
+        {
+          "id": "palatine-blades-band",
+          "name": "Palatine Blades Band",
+          "category": "Support",
+          "baseCost": 275,
+          "composition": "4-6 Palatine Blade units (+65 per extra unit)",
+          "unitOptions": [
+            { "label": "4 Palatine Blade units", "units": [ { "unit": "palatine-blade", "count": 4 } ] },
+            { "label": "5 Palatine Blade units (+65)", "units": [ { "unit": "palatine-blade", "count": 5 } ], "extraCost": 65 },
+            { "label": "6 Palatine Blade units (+130)", "units": [ { "unit": "palatine-blade", "count": 6 } ], "extraCost": 130 }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": ["standard-transport", "drop-assault", "assault-claw", "heavy-transport", "consul"]
+        },
+        {
+          "id": "phoenix-terminator-detachment",
+          "name": "Phoenix Terminator Detachment",
+          "category": "Support",
+          "baseCost": 340,
+          "composition": "4 Phoenix Terminator units",
+          "unitOptions": [
+            { "label": "4 Phoenix Terminator units", "units": [ { "unit": "phoenix-terminator", "count": 4 } ] }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": ["assault-claw", "heavy-transport", "teleport", "consul"]
+        },
+        {
+          "id": "sunkiller-squad",
+          "name": "Sunkiller Squad",
+          "category": "Support",
+          "baseCost": 250,
+          "composition": "4 Sunkiller units",
+          "unitOptions": [
+            { "label": "4 Sunkiller units", "units": [ { "unit": "sunkiller", "count": 4 } ] }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": ["standard-transport", "drop-assault", "consul"]
+        },
+        {
+          "id": "fulgrim",
+          "name": "Fulgrim",
+          "category": "Primarch",
+          "baseCost": 450,
+          "composition": "Fulgrim + 3 Phoenix Terminator units",
+          "unitOptions": [
+            {
+              "label": "Fulgrim + 3 Phoenix Terminators",
+              "units": [
+                { "unit": "fulgrim", "count": 1 },
+                { "unit": "phoenix-terminator", "count": 3 }
+              ]
+            }
+          ],
+          "maxCount": 1,
+          "allowedUpgrades": ["assault-claw", "heavy-transport", "teleport"]
+        }
+      ],
+      "extraUnits": {
+        "kakophoni": {
+          "name": "Kakophoni Squad",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "5+",
+          "ff": "4+",
+          "weapons": [
+            { "name": "The Cacophony", "range": "30cm", "firepower": "2x AP4+/AT6+, Disrupt" }
+          ],
+          "notes": ["Fearless.", "Counts as Tactical for transport."]
+        },
+        "palatine-blade": {
+          "name": "Palatine Blades",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "5+",
+          "weapons": [
+            { "name": "Duelling Weapons", "range": "(base)", "firepower": "(assault) First strike, EA (+2)" }
+          ],
+          "notes": ["Counts as Tactical for transport."]
+        },
+        "phoenix-terminator": {
+          "name": "Phoenix Guard Squad",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "5+",
+          "weapons": [
+            { "name": "Phoenix Power Spears", "range": "(base)", "firepower": "(assault) First strike, MW, EA (+1)" }
+          ],
+          "notes": ["Reinforced armour.", "Thick rear armour."]
+        },
+        "sunkiller": {
+          "name": "Sunkiller Squad",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "5+",
+          "ff": "5+",
+          "weapons": [
+            { "name": "2x Lascannon", "range": "45cm", "firepower": "AT5+, Ignore cover" }
+          ],
+          "notes": ["Counts as Tactical for transport."]
+        },
+        "fulgrim": {
+          "name": "Fulgrim",
+          "type": "CH",
+          "speed": "15cm",
+          "armour": "3+",
+          "cc": "3+",
+          "ff": "4+",
+          "weapons": [
+            { "name": "Blade of Laer", "range": "(base)", "firepower": "(assault) First strike, MW, EA (+2)" },
+            { "name": "Firebrand", "range": "(15cm)", "firepower": "(small arms) Sniper, EA (+2)" }
+          ],
+          "notes": ["Demi-God.", "Invulnerable save (5+).", "Reinforced armour.", "Thick rear armour.", "Supreme Commander."]
+        }
+      },
+      "compositionRulesAppend": [
+        "Kakophoni Band, Palatine Blades Band, Phoenix Terminator Detachment and Sunkiller Squad: 1 per 2,000 pts each.",
+        "Primarch Fulgrim may only be taken once and counts as your Supreme Commander."
+      ]
     },
     {
       "id": "iron-warriors",
