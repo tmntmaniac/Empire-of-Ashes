@@ -48,7 +48,7 @@ export default function FormationEditor({ formation, formationDef, faction, onCh
         });
     };
 
-    const allowed = (formationDef.allowedUpgrades || []).map((id) => faction.upgrades.find((u) => u.id === id)).filter(Boolean);
+    const allowed = (formationDef.allowedUpgrades || []).map((id) => (faction.upgrades || []).find((u) => u.id === id)).filter(Boolean);
 
     // compute units for stat table
     const baseUnits = (option?.units || []).map((u) => ({ ...u, count: u.count }));
@@ -59,7 +59,7 @@ export default function FormationEditor({ formation, formationDef, faction, onCh
     const unitCounts = new Map(baseUnits.map((u) => [u.unit, u.count]));
     // Merge in selected upgrade variants so their stat lines appear in the roster
     (formation.upgrades || []).forEach((selectedUp) => {
-        const upDef = faction.upgrades.find((u) => u.id === selectedUp.upgradeId);
+        const upDef = (faction.upgrades || []).find((u) => u.id === selectedUp.upgradeId);
         if (!upDef || upDef.type === "flag") return;
         (selectedUp.selections || []).forEach((s) => {
             if (!s.variantId || !s.count) return;
@@ -173,7 +173,7 @@ export default function FormationEditor({ formation, formationDef, faction, onCh
 
                                             {enabled && upg.type === "single" && upg.variants && (
                                                 <select
-                                                    value={current.selections[0]?.variantId || ""}
+                                                    value={current.selections?.[0]?.variantId || ""}
                                                     onChange={(e) => updateUpgradeSel(upg.id, (u) => ({ ...u, selections: [{ variantId: e.target.value, count: 1, cost: upg.cost || 0 }] }))}
                                                     className="mt-2 w-full bg-[#050505] border border-[#333] focus:border-[#2D937D] focus:outline-none px-2 py-1 text-sm font-sans text-[#E0E0E0]"
                                                     data-testid={`upgrade-single-select-${index}-${upg.id}`}
@@ -185,12 +185,13 @@ export default function FormationEditor({ formation, formationDef, faction, onCh
                                             {enabled && upg.type === "multi" && upg.variants && (
                                                 <div className="mt-2 space-y-1">
                                                     {upg.variants.map((v) => {
-                                                        const sel = current.selections.find((s) => s.variantId === v.id);
+                                                        const selectionsList = current.selections || [];
+                                                        const sel = selectionsList.find((s) => s.variantId === v.id);
                                                         const count = sel?.count || 0;
-                                                        const totalCount = current.selections.reduce((s, x) => s + x.count, 0);
+                                                        const totalCount = selectionsList.reduce((s, x) => s + x.count, 0);
                                                         const max = upg.max;
                                                         const setCount = (n) => {
-                                                            const others = current.selections.filter((s) => s.variantId !== v.id);
+                                                            const others = selectionsList.filter((s) => s.variantId !== v.id);
                                                             const nextSelections = n > 0 ? [...others, { variantId: v.id, count: n, cost: v.cost || 0 }] : others;
                                                             updateUpgradeSel(upg.id, (u) => ({ ...u, selections: nextSelections }));
                                                         };
