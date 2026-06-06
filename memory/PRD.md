@@ -28,6 +28,7 @@ Build a force-builder web app (legionbuilder.app-style) for the fan "Empire of A
 
 ## Changelog
 - 2026-02 — Added `legions.json` with all 18 Legiones Astartes (Dark Angels, Emperor's Children, Iron Warriors, White Scars, Space Wolves, Imperial Fists, Night Lords, Blood Angels, Iron Hands, World Eaters, Ultramarines, Death Guard, Thousand Sons, Sons of Horus, Word Bearers, Salamanders, Raven Guard, Alpha Legion). Refactored `server.py` to merge baseline rules with per-legion identity/trait overrides. Removed stale "More Legions / Classified" placeholder on Landing (now teases auxiliary forces). 94/94 backend tests + 15/15 frontend scenarios pass.
+- 2026-02 — Populated the remaining 8 skeleton legions (Iron Hands, Night Lords, World Eaters, Death Guard, Thousand Sons, Ultramarines, Word Bearers, Alpha Legion) with full lore, legion trait, allies, extra formations (incl. Primarch detachment), per-formation `unitOptions` and Primarch + named-unit stat blocks. All 18 legions now expose ≥4 extra formations and a Primarch via `GET /api/factions/{id}`. API integrity scan: 0 broken unit references across all 18 factions. `/app/backend/data/legions.backup.json` retained as pre-patch snapshot.
 
 ## Backlog
 - P1 — Auxiliary armies: Mechanicum Taghmata, Solar Auxilia, Knight Households.
