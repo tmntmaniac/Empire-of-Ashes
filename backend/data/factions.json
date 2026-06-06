@@ -259,7 +259,7 @@
             { "id": "omega", "name": "Sicaran → Omega", "cost": 20 },
             { "id": "venator", "name": "Sicaran → Venator", "cost": 20 },
             { "id": "achilles", "name": "Land Raider Phobos → Achilles", "cost": 20 },
-            { "id": "deredeo-up", "name": "Contemptor → Deredeo", "cost": 40 },
+            { "id": "deredeo", "name": "Contemptor → Deredeo", "cost": 40 },
             { "id": "vindicator-destroyer", "name": "Vindicator → Destroyer", "cost": 20 }
           ]
         }

@@ -52,7 +52,19 @@ export default function FormationEditor({ formation, formationDef, faction, onCh
         const idx = baseUnits.findIndex((x) => x.unit === formationDef.extraUnit.unit);
         if (idx >= 0) baseUnits[idx] = { ...baseUnits[idx], count: baseUnits[idx].count + formation.extraUnits };
     }
-    const displayUnits = baseUnits.map((u) => ({ unitId: u.unit, count: u.count }));
+    const unitCounts = new Map(baseUnits.map((u) => [u.unit, u.count]));
+    // Merge in selected upgrade variants so their stat lines appear in the roster
+    (formation.upgrades || []).forEach((selectedUp) => {
+        const upDef = faction.upgrades.find((u) => u.id === selectedUp.upgradeId);
+        if (!upDef || upDef.type === "flag") return;
+        (selectedUp.selections || []).forEach((s) => {
+            if (!s.variantId || !s.count) return;
+            // Resolve variant id against faction.units (variant.id == unit id by convention)
+            if (!faction.units?.[s.variantId]) return;
+            unitCounts.set(s.variantId, (unitCounts.get(s.variantId) || 0) + s.count);
+        });
+    });
+    const displayUnits = Array.from(unitCounts.entries()).map(([unitId, count]) => ({ unitId, count }));
 
     const categoryColor = {
         Line: "tag-green",

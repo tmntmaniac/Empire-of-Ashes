@@ -1,0 +1,44 @@
+{
+  "summary": "Regression E2E test of upgrade-variant-in-roster feature. Initially reproduced a CRITICAL BUG where adding any non-base-unit upgrade variant (Rhino, Damocles, Predator, Sicaran, Castraferrum/Contemptor/Leviathan/Deredeo Dreadnoughts, Achilles, Vindicator-Destroyer, Champion/Librarian/Chaplain) failed to render in the formation Roster (UnitStatTable) — only formation cost updated, the row never appeared. Root cause was NOT in FormationEditor.jsx; the frontend merge code is correct. The backend was serving STALE FACTION_DATA cached at module import (only 9 units, missing 34 vehicle/character variants). Fixed by restarting backend (sudo supervisorctl restart backend). After restart, /api/factions/sons-of-horus returns full 43 units and all 18 regression assertions pass: Standard Transport (Rhino/Damocles), Tank (Predator+Sicaran w/ correct +60/+80 points and decrement removal), Dreadnought cycle (all 4 variants), Armoury Asset (Vindicator-Destroyer + Achilles), Consul single-select (Champion→Librarian swap), extraUnits +/- on Assault Detachment (300→325, 8→9 squad in roster), Horus uniqueness enforced (button disabled), save+reload persistence (all upgrades + variants reload correctly), Print View renders full roster with variant names ('Standard Transport — 1× Rhino, 1× Damocles Command Rhino', 'Armoury Asset — 1× Vindicator → Destroyer, 1× Land Raider Phobos → Achilles', 'Consul — 1× Librarian'). No console errors. The 3 'failed' tests in the post-fix run (army-listed/army-duplicated/army-deleted) are test-script timing artifacts after back-to-armies navigation — the underlying duplicate/delete/persistence feature works correctly (proven by the final print view of 'TEST_RegressionPost (Copy)' with full state intact and 'Army disbanded' toast on delete).",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "/api/factions/{faction_id}",
+        "issue": "FACTION_DATA is loaded once at module import (server.py:22) and cached. When factions.json on disk is updated, the running backend continues serving the OLD data. This caused the deployed preview backend to serve 9 units instead of the 43 units present in /app/backend/data/factions.json — breaking the entire upgrade-variant-in-roster feature. Workaround: sudo supervisorctl restart backend. Recommended fix: either (a) read JSON fresh on each request (small file, negligible cost), (b) watch the file for mtime changes and reload, or (c) add a /api/admin/reload endpoint for ops.",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_factions.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Make backend factions.json loading hot-reload-friendly: either remove the at-import cache (read on every request — factions.json is tiny) OR add an mtime check + reload OR expose an /api/admin/reload-data endpoint. This prevents future data updates from silently breaking the app until a manual supervisorctl restart.",
+    "(Optional) The review request described 'Standard Transport' as type:single — but factions.json defines it as type:multi (Rhino/Damocles via +/- counters). The current implementation is correct and matches the multi variant pattern; the review prose was slightly inaccurate. No action needed.",
+    "(Optional polish, carried over from prior iterations) Replace window.confirm() in ArmyManager.handleDelete with a Shadcn AlertDialog for visual consistency."
+  ],
+  "critical_code_review_comments": [
+    "server.py loads factions.json ONCE at module import — this is the root cause of the regression. For a localStorage-only MVP with a tiny JSON, just do `json.load(open(DATA_PATH))` inside each route handler. Trivially cheap and eliminates the silent-stale-cache failure mode.",
+    "FormationEditor.jsx merge logic (lines 50-67) is well-written: it correctly defends with `if (!faction.units?.[s.variantId]) return;` so missing unit defs just skip rendering — but this defensive skip is also what silently hid the regression. Consider a dev-only console.warn when a variantId has no matching unit; would catch data drift early.",
+    "/api/factions list endpoint returns only summary fields (id, name, subtitle, color, available) — this is good and intentional; the full data is only loaded via /api/factions/{id}. Confirmed working post-restart.",
+    "data-testid coverage is excellent across ArmyManager, Builder, FormationEditor, UnitStatTable, PrintView — enabled comprehensive E2E testing with zero selector fragility."
+  ],
+  "updated_files": [],
+  "success_rate": {
+    "backend": "100% (after restart) — was effectively 0% for variant data before",
+    "frontend": "100% on the regression target (18/18 critical assertions pass after backend restart). 3 post-flow assertions failed due to test-script timing only; underlying features verified working via the final Print View screenshot."
+  },
+  "test_credentials": "None required (no auth). /app/memory/test_credentials.md is absent — acceptable for this no-auth MVP.",
+  "seed_data_creation": "Created and torn down TEST_RegressionPost / TEST_BugRepro armies in localStorage (key: eoa.armies.v1).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "If upgrade-variant rows disappear from Roster again, FIRST check `curl https://armageddon-squad.preview.emergentagent.com/api/factions/sons-of-horus | python -c 'import json,sys;print(len(json.load(sys.stdin)[\"units\"]))'` — should be 43. If it returns 9, the backend has stale FACTION_DATA cached → `sudo supervisorctl restart backend`. The frontend FormationEditor merge logic is correct as-is; do not touch it. Standard Transport is type=multi (not single) with rhino/damocles +/- counters. Dreadnought is type=multi max=2 with 4 variants. The unique variant ids used by the roster lookup (must all exist as keys in faction.units): rhino, damocles, land-raider-phobos, land-raider-proteus, spartan, termite, mastodon, kharybdys, cestus, castraferrum, contemptor, leviathan, deredeo, predator, sicaran, vindicator, cerberus, typhon, kratos, hyperios, rapier, tactical-support, heavy-support, infernus, executioner, scorpius, omega, venator, achilles, vindicator-destroyer, champion, librarian, chaplain, commander.",
+  "rca_of_the_issue": "REPRODUCTION: 1) cleared localStorage, 2) created army, 3) added Tactical Detachment, 4) toggled Tank upgrade, 5) clicked upgrade-variant-plus-0-tank-predator → formation-cost-0 went 275→335 (+60 correct) but unit-stat-table still showed only '8× Tactical Squad' with no Predator row. INVESTIGATION: probed /api/factions/sons-of-horus from the browser via fetch; Object.keys(f.units) returned only 9 keys [tactical, despoiler, assault, breacher, terminator, reaver, luperci, justaerian, horus] — missing all vehicle/character units. Cross-checked the on-disk /app/backend/data/factions.json with python — 43 unit keys present including rhino, predator, achilles, etc. ROOT CAUSE: backend/server.py loads `FACTION_DATA = json.load(open(DATA_PATH))` at module import time; the running backend process had loaded an older version of factions.json before the data file was updated to include the 34 additional vehicle/character variant units, and never reloaded. FormationEditor's defensive guard `if (!faction.units?.[s.variantId]) return;` correctly skipped the missing variantIds → no row added → silent failure (no console error). MITIGATION: `sudo supervisorctl restart backend` forced FACTION_DATA reload. Re-ran full E2E → all 18 regression assertions pass. LONG-TERM FIX (main agent): remove the import-time cache in server.py and read factions.json per-request, OR add mtime-based reload."
+}
