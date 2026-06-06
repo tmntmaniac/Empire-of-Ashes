@@ -86,13 +86,13 @@ export default function Landing() {
                             </div>
                         </Link>
                     ))}
-                    {/* Coming soon placeholder */}
+                    {/* Future armies teaser — all 18 Legiones Astartes are now live */}
                     <div className="panel p-6 opacity-50 cursor-not-allowed" data-testid="faction-card-coming-soon">
                         <div className="font-mono text-[10px] tracking-[0.3em] text-[#666] uppercase mb-2 flex items-center gap-2">
-                            <Lock className="w-3 h-3" strokeWidth={2} /> Classified
+                            <Lock className="w-3 h-3" strokeWidth={2} /> Incoming
                         </div>
-                        <h3 className="font-display text-3xl uppercase tracking-tight mb-3 text-[#555]">More Legions</h3>
-                        <p className="text-xs text-[#666] font-sans leading-relaxed">Additional Legions of the Heresy era await transmission.</p>
+                        <h3 className="font-display text-3xl uppercase tracking-tight mb-3 text-[#555]">Auxiliary Forces</h3>
+                        <p className="text-xs text-[#666] font-sans leading-relaxed">Mechanicum Taghmata, Solar Auxilia and Knight Households await transmission.</p>
                     </div>
                 </div>
             </section>
