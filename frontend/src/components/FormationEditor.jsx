@@ -37,6 +37,8 @@ export default function FormationEditor({ formation, formationDef, faction, onCh
             if (upg.type === "single" && upg.variants?.length) {
                 newUp.selections = [{ variantId: upg.variants[0].id, count: 1, cost: upg.cost || 0 }];
             }
+            // Multi upgrades that bundle a flat cost (e.g. sa-support: 4-pick mix for 75 pts)
+            if (upg.type === "multi" && upg.bundleCost) newUp.flagCost = upg.bundleCost;
             onChange({ ...formation, upgrades: [...(formation.upgrades || []), newUp] });
         }
     };
@@ -57,10 +59,18 @@ export default function FormationEditor({ formation, formationDef, faction, onCh
         if (idx >= 0) baseUnits[idx] = { ...baseUnits[idx], count: baseUnits[idx].count + formation.extraUnits };
     }
     const unitCounts = new Map(baseUnits.map((u) => [u.unit, u.count]));
-    // Merge in selected upgrade variants so their stat lines appear in the roster
+    // Merge in selected upgrade variants + flag-with-addedUnits so their stat lines appear in the roster
     (formation.upgrades || []).forEach((selectedUp) => {
         const upDef = (faction.upgrades || []).find((u) => u.id === selectedUp.upgradeId);
-        if (!upDef || upDef.type === "flag") return;
+        if (!upDef) return;
+        // Flag upgrades that ADD units (e.g. Ogryn Brute Squad, Rapier Battery, Snipers)
+        if (upDef.type === "flag") {
+            (upDef.addedUnits || []).forEach((au) => {
+                if (!faction.units?.[au.unit]) return;
+                unitCounts.set(au.unit, (unitCounts.get(au.unit) || 0) + (au.count || 0));
+            });
+            return;
+        }
         (selectedUp.selections || []).forEach((s) => {
             if (!s.variantId || !s.count) return;
             // Resolve variant id against faction.units (variant.id == unit id by convention)
@@ -166,6 +176,7 @@ export default function FormationEditor({ formation, formationDef, faction, onCh
                                                         <div className="font-display text-base uppercase tracking-tight">{upg.name}</div>
                                                         {upg.type === "flag" && upg.cost > 0 && <span className="font-mono text-xs text-[#C2A165]">+{upg.cost}</span>}
                                                         {upg.type === "single" && <span className="font-mono text-xs text-[#C2A165]">+{upg.cost}</span>}
+                                                        {upg.type === "multi" && upg.bundleCost > 0 && <span className="font-mono text-xs text-[#C2A165]">+{upg.bundleCost}</span>}
                                                     </div>
                                                     <div className="text-xs text-[#888] font-sans leading-snug">{upg.description}</div>
                                                 </div>
@@ -200,7 +211,7 @@ export default function FormationEditor({ formation, formationDef, faction, onCh
                                                             <div key={v.id} className="flex items-center justify-between gap-2 text-sm">
                                                                 <div className="flex-1">
                                                                     <span className="text-[#E0E0E0]">{v.name}</span>
-                                                                    <span className="font-mono text-xs text-[#C2A165] ml-2">+{v.cost} pts</span>
+                                                                    {v.cost > 0 && <span className="font-mono text-xs text-[#C2A165] ml-2">+{v.cost} pts</span>}
                                                                 </div>
                                                                 <div className="flex items-center gap-1">
                                                                     <button type="button" onClick={() => setCount(Math.max(0, count - 1))} className="px-2 py-0.5 border border-[#333] hover:border-[#555]" data-testid={`upgrade-variant-minus-${index}-${upg.id}-${v.id}`}>−</button>

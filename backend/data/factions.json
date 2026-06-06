@@ -3418,21 +3418,46 @@
           "name": "Ogryn Charonite Squad",
           "type": "flag",
           "cost": 75,
-          "description": "Add 2 Ogryn Charonite units."
+          "description": "Add 2 Ogryn Charonite units.",
+          "addedUnits": [
+            {
+              "unit": "ogryn-charonite",
+              "count": 2
+            }
+          ]
         },
         {
           "id": "sa-rapier-battery",
           "name": "Rapier Battery",
           "type": "flag",
           "cost": 125,
-          "description": "Add 4 Solar Auxilia Rapier Platform units."
+          "description": "Add 4 Solar Auxilia Rapier Platform units.",
+          "addedUnits": [
+            {
+              "unit": "sa-rapier-platform",
+              "count": 4
+            }
+          ]
         },
         {
           "id": "sa-support",
           "name": "Solar Auxilia Support",
-          "type": "flag",
-          "cost": 75,
-          "description": "Add 4 Auxilia Close Support (Flamer) Sections or Veletaris Storm units in any combination."
+          "type": "multi",
+          "description": "Add 4 units in any combination of Auxilia Close Support (Flamer) Sections and/or Veletaris Storm Sections (75 pts total).",
+          "max": 4,
+          "bundleCost": 75,
+          "variants": [
+            {
+              "id": "sa-close-support-section",
+              "name": "Auxilia Close Support (Flamer) Section",
+              "cost": 0
+            },
+            {
+              "id": "veletaris-storm",
+              "name": "Veletaris Storm Section",
+              "cost": 0
+            }
+          ]
         },
         {
           "id": "sa-transport",
@@ -5068,7 +5093,13 @@
           "name": "Fire Support",
           "type": "flag",
           "cost": 100,
-          "description": "Add 4 Fire Support Team units."
+          "description": "Add 4 Fire Support Team units.",
+          "addedUnits": [
+            {
+              "unit": "fire-support-team",
+              "count": 4
+            }
+          ]
         },
         {
           "id": "im-heavy-transport",
@@ -5093,14 +5124,26 @@
           "name": "Ogryn Brute Squad",
           "type": "flag",
           "cost": 150,
-          "description": "Add 4 Ogryn Brute units."
+          "description": "Add 4 Ogryn Brute units.",
+          "addedUnits": [
+            {
+              "unit": "ogryn-brute-squad",
+              "count": 4
+            }
+          ]
         },
         {
           "id": "im-sniper",
           "name": "Snipers",
           "type": "flag",
           "cost": 75,
-          "description": "Add 4 Recon Team units."
+          "description": "Add 4 Recon Team units.",
+          "addedUnits": [
+            {
+              "unit": "recon-team",
+              "count": 4
+            }
+          ]
         },
         {
           "id": "im-transport",
