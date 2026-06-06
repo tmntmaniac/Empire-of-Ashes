@@ -37,7 +37,7 @@ export default function Landing() {
                         </div>
                         <h1 className="font-display text-5xl sm:text-7xl uppercase leading-[0.92] tracking-tight mb-6" data-testid="hero-title">
                             Forge the<br />
-                            <span className="text-[#2D937D]">Warmaster's</span> Legion
+                            <span className="text-[#2D937D]">Warmaster&apos;s</span> Legion
                         </h1>
                         <p className="text-base sm:text-lg text-[#B8B8B8] max-w-2xl leading-relaxed mb-10 font-sans" data-testid="hero-lore">
                             {LORE}
@@ -58,10 +58,10 @@ export default function Landing() {
             <section className="max-w-7xl mx-auto px-6 py-16">
                 <div className="flex items-end justify-between mb-8 border-b border-[#222] pb-4">
                     <div>
-                        <div className="font-mono text-[11px] tracking-[0.3em] text-[#888] uppercase mb-2">// Legions Available</div>
+                        <div className="font-mono text-[11px] tracking-[0.3em] text-[#888] uppercase mb-2">// Forces Available</div>
                         <h2 className="font-display text-3xl sm:text-4xl uppercase tracking-tight">Choose Your Allegiance</h2>
                     </div>
-                    <div className="font-mono text-xs text-[#666] uppercase tracking-widest hidden sm:block">{factions.length} legion{factions.length === 1 ? "" : "s"} online</div>
+                    <div className="font-mono text-xs text-[#666] uppercase tracking-widest hidden sm:block">{factions.length} force{factions.length === 1 ? "" : "s"} online</div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -86,13 +86,13 @@ export default function Landing() {
                             </div>
                         </Link>
                     ))}
-                    {/* Future armies teaser — all 18 Legiones Astartes are now live */}
+                    {/* Future armies teaser — 18 Legions + Solar Auxilia + Imperialis Militia online */}
                     <div className="panel p-6 opacity-50 cursor-not-allowed" data-testid="faction-card-coming-soon">
                         <div className="font-mono text-[10px] tracking-[0.3em] text-[#666] uppercase mb-2 flex items-center gap-2">
                             <Lock className="w-3 h-3" strokeWidth={2} /> Incoming
                         </div>
                         <h3 className="font-display text-3xl uppercase tracking-tight mb-3 text-[#555]">Auxiliary Forces</h3>
-                        <p className="text-xs text-[#666] font-sans leading-relaxed">Mechanicum Taghmata, Solar Auxilia and Knight Households await transmission.</p>
+                        <p className="text-xs text-[#666] font-sans leading-relaxed">Mechanicum Taghmata and Knight Households await transmission.</p>
                     </div>
                 </div>
             </section>

@@ -1,0 +1,55 @@
+{
+  "summary": "Validated Solar Auxilia + Imperialis Militia faction expansion end-to-end. Backend: 4/4 new-army regression tests pass, GET /api/factions returns exactly 20 active ids (18 Astartes + solar-auxilia + imperialis-militia), and both new factions expose compositionLimits={maxSupportPerLine:2, maxUpgradesPerLine:3, lowPct:0.33} with complete formations/units/upgrades arrays. Frontend: Landing renders 20 active faction cards plus the 'Auxiliary Forces / Mechanicum Taghmata' coming-soon teaser. Clicking faction-card-solar-auxilia navigates to /armies?new=solar-auxilia, opens the Forge Army dialog with Solar Auxilia preselected; confirm-new-army creates an army in localStorage and lands on /builder/<id>. The Solar Auxilia builder Legion Trait line correctly states 'May field 2 Support per Line, with up to 3 Upgrades per formation' (verified visually) and the collapsible Composition Rules panel lists the same 2/3 limits. Validation engine: injected SA army with 1 Line + 3 Support produces the exact required error 'Too many Support detachments \u2014 3 taken, max 2 allowed (2 per Line).' rendered inside data-testid='army-validation-panel'. Sons of Horus army still renders Composition Rules with 'Max 3 Support detachments per Line detachment' + 'Max 4 Upgrades per formation' \u2014 Astartes defaults fallback confirmed.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/factions (n/a) and /api/factions/<legion>", "issue": "Pre-existing tests in /app/backend/tests/test_legions.py and test_soh_isolation.py expect exactly 18 factions and a specific Alpha Legion trait name ('Hydra\u0027s Many Heads' vs current 'Twin Serpents'); 27 stale assertions now fail. NOT caused by the SA/IM feature \u2014 the new-army suite is green. Update legacy expectations to len(>=18) and current trait labels."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "FormationEditor", "issue": "Runtime crash 'Cannot read properties of undefined (reading find)' when loading an SA army whose Infantry Tercio formation carries 4 upgrade entries via direct localStorage injection (shape {id, upgradeId}). Stack: Array.map -> FormationEditor (bundle.js:46897). The over-limit error message is gated behind validateArmy() which does fire, but the editor view crashes BEFORE the validation panel reaches the screen, masking the expected 'Infantry Tercio has 4 upgrades \u2014 max 3 per Line detachment.' UX. Real UI flow currently prevents reaching 4 upgrades (line 32 of FormationEditor blocks the add at upgradeMax), but defensive rendering should still avoid crashing on hand-edited / imported lists. Likely a missing optional chain on faction.upgrades.find or a unit-lookup in unitOptions. Needs investigation by main agent.", "selector": "FormationEditor (bundle.js:46897:50)", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Forge Army dialog", "issues": ["LEGION selector is still a native HTML <select> rather than the shadcn Select used elsewhere (carried over from iteration_8)."]},
+      {"screen": "Builder \u2192 Composition Rules", "issues": ["Composition Rules panel is a collapsed <details> by default \u2014 acceptable, but the actual rule list is also surfaced inline via the Legion Trait paragraph, so users see the limits even without expanding."]}
+    ]
+  },
+  "tests_executed": [
+    {"name": "pytest /app/backend/tests/test_new_armies.py", "result": "PASS (4/4)"},
+    {"name": "GET /api/factions returns 20 active ids including solar-auxilia + imperialis-militia", "result": "PASS"},
+    {"name": "GET /api/factions/solar-auxilia compositionLimits == {2,3,0.33}", "result": "PASS"},
+    {"name": "GET /api/factions/imperialis-militia compositionLimits == {2,3,0.33}", "result": "PASS"},
+    {"name": "GET /api/factions/sons-of-horus omits compositionLimits (frontend default fallback)", "result": "PASS"},
+    {"name": "Landing renders 20 faction-card-<id> cards + coming-soon teaser", "result": "PASS"},
+    {"name": "Click faction-card-solar-auxilia opens Forge Army dialog with Solar Auxilia preselected", "result": "PASS"},
+    {"name": "confirm-new-army (Solar Auxilia) creates army in localStorage and routes to /builder/<id>", "result": "PASS"},
+    {"name": "SA builder Legion Trait paragraph contains '2 Support per Line' and '3 Upgrades per formation'", "result": "PASS"},
+    {"name": "SA army with 1 Line + 3 Support shows 'Too many Support detachments \u2014 3 taken, max 2 allowed (2 per Line).' in army-validation-panel", "result": "PASS"},
+    {"name": "SoH army Composition Rules still show 'Max 3 Support' and 'Max 4 Upgrades' (Astartes default fallback)", "result": "PASS"},
+    {"name": "SA army with 4 upgrades on Infantry Tercio triggers FormationEditor runtime crash (not graceful validation error)", "result": "FAIL"}
+  ],
+  "test_report_links": ["/app/backend/tests/test_new_armies.py", "/app/test_reports/pytest/pytest_new_armies.xml"],
+  "action_items": [
+    "Investigate FormationEditor crash when a formation\u0027s upgrades array exceeds upgradeMax (or contains stale ids). Add defensive null-checks around faction.upgrades.find / unitOptions.find so over-limit lists render with a validation error instead of throwing.",
+    "Update pre-existing tests in test_legions.py / test_soh_isolation.py to reflect 20-faction roster and current legion trait names (27 stale failures unrelated to this feature).",
+    "(Carried over) Replace native <select> in NewArmyDialog with shadcn Select for theming consistency.",
+    "(Carried over) Reconsider faction-card-coming-soon placeholder \u2014 still shown alongside 20 active cards."
+  ],
+  "critical_code_review_comments": [
+    "validation.js limitsFor() correctly falls back to DEFAULT_LIMITS when faction.compositionLimits is absent \u2014 verified SoH still uses 3/4/0.33 while SA/IM use 2/3/0.33.",
+    "FormationEditor.jsx lines 51 & 62 call faction.upgrades.find unconditionally. If a future faction omits upgrades, or a persisted army carries an upgradeId no longer present in faction data (e.g. a removed upgrade), the component will crash. Wrap with (faction.upgrades || []).find and skip render on null.",
+    "server.build_factions() deep-copies the entire baseline per request per legion AND now also iterates through any non-overridden baseline factions (SA, IM). For 20 factions x request this is still cheap, but consider an mtime-keyed in-memory cache before Mechanicum/Knights land.",
+    "Landing.jsx still hardcodes the 'Auxiliary Forces / Mechanicum Taghmata' teaser tile even though Solar Auxilia + Imperialis Militia are now shipping \u2014 update the lore copy to reflect the next-up factions.",
+    "test_new_armies.py and test_legions.py share no fixtures; consider promoting BASE_URL/_get into conftest.py to centralise the http client and stop divergent timeouts."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% on new-armies suite (4/4); 146/173 on full backend regression (27 stale legacy assertions unrelated to this feature)", "frontend": "11/12 critical UI scenarios. Only failure is FormationEditor crash on hand-injected 4-upgrade list."},
+  "test_credentials": "n/a (no auth, localStorage MVP)",
+  "seed_data_creation": "Three test armies injected into localStorage during the test session for validation paths: TEST_SA_Validation (1 Line + 3 Support), TEST_SA_Upgrades (1 Line + 4 upgrades \u2014 triggered crash), TEST_SoH (empty fallback check). All stored under key 'eoa.armies.v1' in the test browser context only; not persisted server-side.",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Storage key is 'eoa.armies.v1' in localStorage. Army shape: {id, name, factionId, pointsCap, formations:[{id, formationId, units:[], upgrades:[{id,upgradeId}]}], createdAt, updatedAt}. The new-army dialog is gated by data-testid='confirm-new-army' (NOT 'empty-create-btn' which is the dashboard CTA \u2014 they share the BEGIN MUSTER label and tripped iteration 9). Composition Rules panel is a collapsed <details data-testid='composition-rules'>; set .open=true to read its text. Validation messages render inside [data-testid='army-validation-panel']. SA formation ids tested: infantry-tercio (Line), tarantula-battery / carnodon-squadron / sa-sentinel-squadron (Support). SA upgrade ids: sa-transport, sa-infantry-support-tank, sa-ogryn-charonite, sa-rapier-battery, sa-support. Pre-existing test_legions.py / test_soh_isolation.py have 27 stale assertions \u2014 do not treat as regressions of this feature.",
+  "rca of the issue": "FormationEditor crash on 4-upgrade Infantry Tercio: the editor unconditionally calls faction.upgrades.find / unitOptions.find while iterating an attached upgrade list. When the persisted upgrades array exceeds the formation's allowedUpgrades or carries an upgradeId not resolvable in faction.upgrades, find() returns undefined and downstream property access (e.g. .name, .points, .units) throws. The validation engine correctly flags 'max 3 per Line', but the crash happens during render before the panel reaches the DOM. Mitigation: add (faction.upgrades || []).find ... ?? null and bail out of the per-upgrade render block when the def is null, surfacing the validation error instead of crashing the page. Reproduction: localStorage.setItem('eoa.armies.v1', JSON.stringify([{id:'x', factionId:'solar-auxilia', pointsCap:3000, formations:[{id:'f1', formationId:'infantry-tercio', units:[], upgrades:[{id:'u1',upgradeId:'sa-transport'},{id:'u2',upgradeId:'sa-infantry-support-tank'},{id:'u3',upgradeId:'sa-ogryn-charonite'},{id:'u4',upgradeId:'sa-rapier-battery'}]}]}])); then visit /builder/x \u2192 red error overlay 'Cannot read properties of undefined (reading find)'."
+}

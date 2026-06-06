@@ -7,7 +7,7 @@ import FormationEditor from "@/components/FormationEditor";
 import ConfirmDialog from "@/components/ConfirmDialog";
 import PointsCapBar from "@/components/PointsCapBar";
 import ArmyValidationPanel from "@/components/ArmyValidationPanel";
-import { validateArmy, MAX_UPGRADES_PER_LINE } from "@/lib/validation";
+import { validateArmy, limitsFor } from "@/lib/validation";
 import { ArrowLeft, Plus, Printer, Save } from "lucide-react";
 import { toast } from "sonner";
 
@@ -144,7 +144,7 @@ export default function Builder() {
                 {(army.formations || []).map((f, i) => {
                     const def = formDefMap[f.formationId];
                     const isLine = def?.category === "Line";
-                    const upgradeMax = isLine ? MAX_UPGRADES_PER_LINE : null;
+                    const upgradeMax = isLine ? limitsFor(faction).maxUpgradesPerLine : null;
                     return (
                         <FormationEditor
                             key={f.id}
