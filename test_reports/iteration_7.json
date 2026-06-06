@@ -1,0 +1,55 @@
+{
+  "summary": "End-to-end validation of the 18 Legiones Astartes expansion. Backend merge logic in /app/backend/server.py was exercised via 44 new pytest cases in /app/backend/tests/test_legions.py (all 18 legions list + detail, identity/trait/color overrides, Dark Angels compositionRulesAppend, 404 path, baseline-roster inheritance). All 94 backend tests across the suite pass (no regressions). Frontend smoke covered the Landing grid (18/18 cards + counter), Builder for 3 legions (Dark Angels, Salamanders, Alpha Legion) with trait card + Tactical Detachment add (275 pts), and localStorage persistence across reload.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Landing /", "issues": ["'Choose Your Allegiance' grid still shows the 'More Legions / Classified' Coming Soon placeholder tile even though all 18 legions are now available. Consider hiding it or repurposing for Mechanicum / Solar Auxilia teases."]}
+    ]
+  },
+  "tests_executed": [
+    {"name": "GET /api/factions returns 18", "result": "PASS", "evidence": "ids = [18 expected legion ids]"},
+    {"name": "Each faction summary has id/name/subtitle/color/legionTrait{name,description}", "result": "PASS"},
+    {"name": "Identity overrides applied in list (name/color/trait per legion)", "result": "PASS"},
+    {"name": "GET /api/factions/{id} for all 18 legions returns full doc with formations/upgrades/units inherited from baseline", "result": "PASS"},
+    {"name": "All 18 legions share baseline formation/unit counts (no roster loss on merge)", "result": "PASS"},
+    {"name": "GET /api/factions/unknown -> 404", "result": "PASS"},
+    {"name": "Dark Angels compositionRulesAppend merges Dreadwing/Ravenwing/Deathwing rule WITHOUT dropping baseline rules", "result": "PASS"},
+    {"name": "Salamanders trait = 'Promethean Fire' (flamer mention preserved)", "result": "PASS"},
+    {"name": "Landing shows 18 faction cards with data-testid=faction-card-<id>", "result": "PASS"},
+    {"name": "Landing counter reads '18 legions online' rendered uppercase via CSS (visually '18 LEGIONS ONLINE')", "result": "PASS"},
+    {"name": "Builder Dark Angels -> name + 'Grim Resolve' trait card rendered", "result": "PASS"},
+    {"name": "Builder Salamanders -> name + 'Promethean Fire' trait card rendered", "result": "PASS"},
+    {"name": "Builder Alpha Legion -> name + 'Hydra\u2019s Many Heads' trait card rendered", "result": "PASS"},
+    {"name": "Tactical Detachment add via add-formation-btn -> add-formation-tactical-detachment updates total 0->275 pts", "result": "PASS"},
+    {"name": "Save then navigate Landing -> /armies: army persists in localStorage key 'eoa.armies.v1' with correct factionId/name/formations[]", "result": "PASS"}
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_legions.py",
+    "/app/test_reports/pytest/pytest_legions.xml"
+  ],
+  "action_items": [
+    "(Optional UX) Hide or repurpose the 'More Legions / Classified' placeholder card on the Landing grid now that all 18 legions ship.",
+    "(Optional UX) Faction cards on Landing link to /armies but do not pre-select the clicked legion in the New Army dialog. Consider deep-linking ?faction=<id> or routing to /armies?new=<id> so a player who clicks 'Dark Angels -> Build' lands on a Forge Army dialog with Dark Angels pre-selected."
+  ],
+  "critical_code_review_comments": [
+    "server.py build_factions() re-reads JSON on every request and deep-copies the baseline for each legion. Correct for hot-reload and isolation, but each /api/factions/{id} call deep-copies ~70 units * 46 formations * 18 legions when listing - acceptable for an MVP-scale dataset, but worth caching with an mtime check if the roster grows.",
+    "Merge order is correct: compositionRulesAppend extends after a potential compositionRules override; legions.json only uses Append for Dark Angels so the baseline rules stay intact (verified by test).",
+    "build_factions() falls back to baseline_list[0] when baseFactionId is misconfigured, but never logs the misconfiguration - add a logger.warning so silent fallbacks are observable.",
+    "Landing.jsx hardcodes hero LORE to a Sons of Horus quote even though the grid now lists 18 legions. Hero copy should either rotate or use neutral Heresy-era framing.",
+    "Landing 'faction-card-coming-soon' placeholder is now stale (all 18 legions present) - flagged under design_issues.",
+    "Color contrast: white-scars uses #E6E2D3 (near-white) on the dark panel - reads fine, but the Active badge text-[#050505] bg-[#2D937D] will not adapt to per-legion accent. Cosmetic only.",
+    "Backend has no /api/health endpoint; root '/' returns the faction id list which is fine for now but consider a dedicated readiness probe before deploy."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_legions.py (new)"
+  ],
+  "success_rate": {"backend": "100% (94/94, including 44 new legion tests)", "frontend": "100% (15/15 scenarios)"},
+  "test_credentials": "n/a (localStorage-only app, no auth)",
+  "seed_data_creation": "During Playwright run, created 3 test armies (TEST_dark-angels_v2, TEST_salamanders_v2, TEST_alpha-legion_v2) in localStorage key 'eoa.armies.v1'. Client-side only; no server-side side-effects.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend regression: run `pytest /app/backend/tests/ -v`. The new merge logic is exercised by test_legions.py (44 cases). Frontend flow used: Landing -> /armies -> [data-testid=new-army-btn] -> dialog [new-army-name, new-army-faction(select)] -> confirm-new-army -> /builder/:id ([builder-army-name, legion-trait]) -> [add-formation-btn] -> [add-formation-dialog] -> [add-formation-tactical-detachment] -> [builder-save-btn]. Persistence key: 'eoa.armies.v1'. The Landing 'Choose Your Allegiance' counter is rendered with Tailwind 'uppercase' class so the DOM text is lowercase ('18 legions online') but visually 'LEGIONS ONLINE' - tests should compare case-insensitively.",
+  "rca of the issue": "No bugs reproduced. Merge logic correctly inherits roster (formations/upgrades/units) from sons-of-horus baseline while overriding identity (id/name/subtitle/color/lore) and legionTrait. compositionRulesAppend appends without replacing; compositionRules overrides replace fully. 404 path verified."
+}

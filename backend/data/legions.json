@@ -1,0 +1,207 @@
+{
+  "_comment": "Legion-specific overrides. The baseline (formations, upgrades, units, transports) is inherited from factions.json. Each legion below overrides identity, lore, legionTrait, allies and (optionally) compositionRules. Stats for unique characters / line variants can be added under 'unitOverrides' or 'extraUnits' which the backend merges at runtime.",
+  "baseFactionId": "sons-of-horus",
+  "legions": [
+    {
+      "id": "dark-angels",
+      "name": "Dark Angels",
+      "subtitle": "I Legion · The First",
+      "color": "#1F4D2B",
+      "lore": "The First Legion, raised on the death-world of Caliban under the watchful eye of the Lion. Secretive, knightly and ancient, the Dark Angels keep the Emperor's faith with cold steel, hidden orders and grim resolve. Where lesser Legions break ranks, the Sons of Caliban form their unbroken line.",
+      "legionTrait": {
+        "name": "Grim Resolve",
+        "description": "Dark Angels Infantry units count their initiative as one better than printed when taking Rally actions, and may re-roll the dice once when attempting to remove Blast Markers from a Rally."
+      },
+      "compositionRulesAppend": [
+        "Dreadwing, Ravenwing and Deathwing detachments are restricted to 1 per 2,000 pts each."
+      ]
+    },
+    {
+      "id": "emperors-children",
+      "name": "Emperor's Children",
+      "subtitle": "III Legion · The Phoenician's Own",
+      "color": "#7A2DA0",
+      "lore": "Fulgrim's chosen, the III Legion are the Emperor's masterwork of perfection. Their every blow is a study in lethal grace, their parade-ground precision matched only by their pitiless cruelty in the wake of the Phoenician's fall.",
+      "legionTrait": {
+        "name": "Flawless Execution",
+        "description": "Emperor's Children units may re-roll a single failed to-hit roll per attack action when Engaging or Sustaining Fire."
+      }
+    },
+    {
+      "id": "iron-warriors",
+      "name": "Iron Warriors",
+      "subtitle": "IV Legion · The Olympians",
+      "color": "#8C8079",
+      "lore": "Perturabo's grim engineers excel at the brutal arithmetic of siegecraft. Where they march, walls fall and warriors are broken upon the anvil of their guns. They take no joy in war — only the cold satisfaction of a problem solved.",
+      "legionTrait": {
+        "name": "Siege Masters",
+        "description": "Iron Warriors units count all terrain as one category less dense when claiming cover against them, and add +1 to the strength of attacks against Fortifications and War Engines."
+      }
+    },
+    {
+      "id": "white-scars",
+      "name": "White Scars",
+      "subtitle": "V Legion · The Storm Riders",
+      "color": "#E6E2D3",
+      "lore": "Hailing from the steppes of Chogoris, the V Legion ride to war with the speed of the open sky. Jaghatai's sons strike like a hurricane and are gone before retribution can land, the thunder of their guns the only mark left in their wake.",
+      "legionTrait": {
+        "name": "Lightning Attack",
+        "description": "White Scars detachments may make a Marching move and still fire as if they had taken an Advance action. Mounted and Skimmer units add +5cm to their speed when Advancing."
+      }
+    },
+    {
+      "id": "space-wolves",
+      "name": "Space Wolves",
+      "subtitle": "VI Legion · The Rout",
+      "color": "#324C5E",
+      "lore": "Leman Russ's wolf-pack from frozen Fenris. Half warriors, half wild, the VI are the Emperor's executioners — loosed when diplomacy ends and only slaughter remains.",
+      "legionTrait": {
+        "name": "Sons of Russ",
+        "description": "Space Wolves Infantry units add +1 to their Assault value (to a maximum of 2+) and may re-roll a single failed to-hit roll in close combat each turn."
+      }
+    },
+    {
+      "id": "imperial-fists",
+      "name": "Imperial Fists",
+      "subtitle": "VII Legion · Praetorians of Terra",
+      "color": "#D0A93B",
+      "lore": "Rogal Dorn's praetorians, master builders of the Imperium's defences. Stoic, immovable and bound by absolute discipline, the Imperial Fists hold the line where any other Legion would break.",
+      "legionTrait": {
+        "name": "Stoic Defenders",
+        "description": "Imperial Fists Infantry units that have not moved this turn add +1 to their armour save when defending against ranged attacks, and re-roll failed Garrison rolls."
+      }
+    },
+    {
+      "id": "night-lords",
+      "name": "Night Lords",
+      "subtitle": "VIII Legion · The Murder Sky",
+      "color": "#2C2F4A",
+      "lore": "Konrad Curze's sons wage war by terror. Heralded by screaming vox-broadcasts and the corpses of the conquered, the VIII Legion are the Imperium's nightmare made flesh.",
+      "legionTrait": {
+        "name": "Terror Tactics",
+        "description": "Enemy detachments engaged or fired upon by Night Lords units add +1 Blast Marker to their formation each turn this attack inflicts at least one casualty."
+      }
+    },
+    {
+      "id": "blood-angels",
+      "name": "Blood Angels",
+      "subtitle": "IX Legion · Sons of Sanguinius",
+      "color": "#A41C1C",
+      "lore": "The most beautiful and the most savage. Sanguinius's winged sons are paragons of nobility and yet bear a secret thirst that ever threatens to drown them. In the assault they are without peer.",
+      "legionTrait": {
+        "name": "Red Thirst",
+        "description": "Blood Angels Assault and Jump-pack units add +1 to their close combat value (to a maximum of 2+) on any turn in which they Charge."
+      }
+    },
+    {
+      "id": "iron-hands",
+      "name": "Iron Hands",
+      "subtitle": "X Legion · The Gorgon's Sons",
+      "color": "#3C3F44",
+      "lore": "Ferrus Manus taught his Legion that flesh is weak. The X Legion replace what the Emperor gave them with cold iron, marching to war as half-machines that feel neither doubt nor pain.",
+      "legionTrait": {
+        "name": "Flesh is Weak",
+        "description": "Iron Hands units may re-roll a single failed armour save per attack action. Dreadnought and Automata units within 15cm of an Iron Hands HQ re-roll failed repair rolls."
+      }
+    },
+    {
+      "id": "world-eaters",
+      "name": "World Eaters",
+      "subtitle": "XII Legion · The Eaters of Worlds",
+      "color": "#C2C2C2",
+      "lore": "Angron's butchers, every warrior bears the Butcher's Nails. They live to kill, and find no honour but the honour of the close fight. Discipline ends where the enemy is in reach.",
+      "legionTrait": {
+        "name": "Blood Frenzy",
+        "description": "World Eaters Infantry units must Charge if any enemy is within charge range when given an Engage order. They add +1 attack in the first round of any close combat."
+      }
+    },
+    {
+      "id": "ultramarines",
+      "name": "Ultramarines",
+      "subtitle": "XIII Legion · The Children of Guilliman",
+      "color": "#1F4FA4",
+      "lore": "The XIII Legion is the very pattern of the Astartes. Guilliman's sons fight to the letter of the Codex, their drills perfect, their formations textbook, their discipline absolute.",
+      "legionTrait": {
+        "name": "Codex Astartes",
+        "description": "Ultramarines detachments may re-roll their initiative roll once per turn. Combined attacks involving two or more Ultramarines detachments add +1 to the final to-hit roll."
+      }
+    },
+    {
+      "id": "death-guard",
+      "name": "Death Guard",
+      "subtitle": "XIV Legion · The Reapers",
+      "color": "#7B8C4E",
+      "lore": "Mortarion's sons march through poison-clouds where no other Legion can stand. Slow, unbreakable, terrifying — they are the corrosion that eats away at the foundations of all that resist them.",
+      "legionTrait": {
+        "name": "Indomitable",
+        "description": "Death Guard Infantry units are not slowed by difficult or dangerous terrain and re-roll failed saves against Barrage attacks."
+      }
+    },
+    {
+      "id": "thousand-sons",
+      "name": "Thousand Sons",
+      "subtitle": "XV Legion · The Wisdom-Bringers",
+      "color": "#C44E10",
+      "lore": "Magnus's Legion of scholar-warriors. Every Astartes a sorcerer, every blade etched with arcane lore. They fight to preserve knowledge in a galaxy that would burn it.",
+      "legionTrait": {
+        "name": "Sorcerous Lore",
+        "description": "Once per turn a Thousand Sons character may add +1 to the Firefight value of one friendly Infantry unit within 15cm until the end of the turn."
+      }
+    },
+    {
+      "id": "sons-of-horus",
+      "name": "Sons of Horus",
+      "subtitle": "XVI Legion · The Luperci",
+      "color": "#2D937D",
+      "lore": "History records that it is the Sons of Horus Legion who lit the spark of rebellion and stood upon the ashes of the old Imperium. They above all others stand as a byword for treason to their foes, and as exemplars of resistance to adherents. They are the force of ambition, ruthlessness, and unbowed determination.",
+      "legionTrait": {
+        "name": "Death Dealers",
+        "description": "When taking an Engage action, Infantry units add +1 to their Firefight value (up to a maximum of 2+)."
+      }
+    },
+    {
+      "id": "word-bearers",
+      "name": "Word Bearers",
+      "subtitle": "XVII Legion · The Bearers of the Word",
+      "color": "#7A1F1F",
+      "lore": "Lorgar's faithful, the only Legion to truly believe. Where they go, daemons follow; where they preach, worlds burn in the name of gods both old and new.",
+      "legionTrait": {
+        "name": "Zealots",
+        "description": "Word Bearers Infantry units are immune to the morale penalty for being broken in the first turn they receive Blast Markers. Allied Daemons of the Ruinstorm count as Cohesive Allies and do not count against the army's Allies points cap."
+      }
+    },
+    {
+      "id": "salamanders",
+      "name": "Salamanders",
+      "subtitle": "XVIII Legion · The Drakes",
+      "color": "#0E5C3A",
+      "lore": "Vulkan's sons from volcanic Nocturne. Master artificers, they make their own arms from the molten heart of their home, and bear the fire that forged them into the close fight.",
+      "legionTrait": {
+        "name": "Promethean Fire",
+        "description": "Salamanders Infantry units add +1 to their close range Firefight value when firing flamer-pattern weapons, and may re-roll a single failed armour save per attack action against fire-based attacks."
+      }
+    },
+    {
+      "id": "raven-guard",
+      "name": "Raven Guard",
+      "subtitle": "XIX Legion · The Black Shields of Deliverance",
+      "color": "#1A1A1A",
+      "lore": "Corvus Corax's freed people. Where lesser Legions wage open war, the Raven Guard fight from the shadow — they are the blade in the dark, the ambush at dawn, the rebellion that cannot be silenced.",
+      "legionTrait": {
+        "name": "Shadow Masters",
+        "description": "Raven Guard Infantry detachments may be set up using Infiltrate after both armies have deployed, and gain +5cm to their speed on the first turn of the game."
+      }
+    },
+    {
+      "id": "alpha-legion",
+      "name": "Alpha Legion",
+      "subtitle": "XX Legion · The Hydra",
+      "color": "#3F6E60",
+      "lore": "Alpharius and Omegon's Legion of masks. They are the dagger that strikes from no direction at all — operatives, infiltrators, master strategists who fight the war before the battle begins.",
+      "legionTrait": {
+        "name": "Hydra's Many Heads",
+        "description": "At the start of the first turn, one Alpha Legion detachment of the player's choice may immediately make a free Advance move before either side activates a formation. Enemy units that fire on Alpha Legion detachments suffer -1 to-hit on the first turn of the game."
+      }
+    }
+  ]
+}
