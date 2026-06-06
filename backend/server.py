@@ -16,10 +16,16 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-# Load static faction data
+# Static faction data — read fresh per request (file is small, ~tens of KB).
+# Avoids the import-time cache pitfall where on-disk edits to factions.json
+# would otherwise require a manual `supervisorctl restart backend`.
 DATA_PATH = ROOT_DIR / 'data' / 'factions.json'
-with open(DATA_PATH, 'r', encoding='utf-8') as fh:
-    FACTION_DATA = json.load(fh)
+
+
+def load_faction_data():
+    with open(DATA_PATH, 'r', encoding='utf-8') as fh:
+        return json.load(fh)
+
 
 app = FastAPI(title="Empire of Ashes Force Builder API")
 api_router = APIRouter(prefix="/api")
@@ -27,12 +33,14 @@ api_router = APIRouter(prefix="/api")
 
 @api_router.get("/")
 async def root():
-    return {"message": "Empire of Ashes API online", "factions": [f["id"] for f in FACTION_DATA["factions"]]}
+    data = load_faction_data()
+    return {"message": "Empire of Ashes API online", "factions": [f["id"] for f in data["factions"]]}
 
 
 @api_router.get("/factions")
 async def list_factions():
     """Return summary of all factions."""
+    data = load_faction_data()
     return {
         "factions": [
             {
@@ -42,7 +50,7 @@ async def list_factions():
                 "color": f.get("color", "#2D937D"),
                 "available": True,
             }
-            for f in FACTION_DATA["factions"]
+            for f in data["factions"]
         ]
     }
 
@@ -50,7 +58,8 @@ async def list_factions():
 @api_router.get("/factions/{faction_id}")
 async def get_faction(faction_id: str):
     """Return full faction data including formations, upgrades and units."""
-    for f in FACTION_DATA["factions"]:
+    data = load_faction_data()
+    for f in data["factions"]:
         if f["id"] == faction_id:
             return f
     raise HTTPException(status_code=404, detail=f"Faction '{faction_id}' not found")

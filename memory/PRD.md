@@ -40,6 +40,11 @@ Build a force builder web application (similar to legionbuilder.app) for the "Em
   - Print view with print-total and back nav.
   - Full data-testid coverage on all interactive elements.
   - **Testing**: Backend 6/6 pytest pass, Frontend 16/16 e2e flows pass (iteration_1 and iteration_2 confirm). No console errors.
+- **Feb 2026** — Upgrade-variant Roster integration.
+  - `factions.json` expanded to 43 units, 8 formations, 12 upgrades; all variant ids resolve to unit defs.
+  - `FormationEditor.jsx` merges selected upgrade variants into `displayUnits` passed to `UnitStatTable` so Rhino/Damocles/Predator/Sicaran/Dreadnought variants/Consuls/Armoury assets all render their stats in the roster.
+  - **Backend hot-reload fix**: `server.py` now reads `factions.json` fresh per request (removed import-time cache that silently served stale data until manual `supervisorctl restart`).
+  - **Testing**: iteration_3 — 18/18 critical regression assertions pass post-fix. Backend pytest 6/6 pass. No console errors.
 
 ## Roadmap
 
