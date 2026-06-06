@@ -1,0 +1,33 @@
+{
+  "summary": "Re-confirmation run after fork on Empire of Ashes Force Builder MVP. Backend: 6/6 pytest tests pass against the public preview URL (REACT_APP_BACKEND_URL). Frontend e2e: 16/16 critical flows verified — landing CTA -> /armies, empty state, NewArmy dialog (preset 3000 + custom name), localStorage persistence under 'eoa.armies.v1', Builder header (name + 'Sons of Horus · XVI Legion · The Luperci' + 0/3000 pts + Death Dealers legion trait), Add Formation dialog with all 8 grouped Sons of Horus formations (tactical-detachment, assault-detachment, breacher-detachment, terminator-detachment, reaver-detachment, luperci-pack, justaerian-detachment, horus), formation card render with UnitStatTable (Unit/Type/Speed/Armour/CC/FF/Weapons), Standard Transport upgrade toggle + Rhino variant +/- correctly adds +10 each (verified +20 for 2 clicks), Horus primarch uniqueness (button disabled after first add), Save toast + reload persistence (points + formation count survive reload), Armies page listing with correct points/cap, Duplicate adds '(Copy)' suffix, Delete via window.confirm + 'Army disbanded' toast, Print view with print-total + back navigation, removing last formation reverts to empty-formations state. No console errors / no React crashes observed. Identical pass to iteration_1.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Builder + Armies pages", "issues": ["Delete uses native window.confirm() (handleDelete in ArmyManager.jsx line 30 and removeFormation in Builder.jsx line 84). Functional and works, but inconsistent with the otherwise polished grimdark UI; consider Shadcn/AlertDialog for better aesthetic consistency. Not blocking."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_factions.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "No fixes required. Optional polish: replace window.confirm() in ArmyManager.handleDelete and Builder.removeFormation with a Shadcn AlertDialog/confirm-dialog component (would also enable cleaner data-testid='confirm-delete-button' wiring for automated tests)."
+  ],
+  "critical_code_review_comments": [
+    "server.py loads factions.json at import time and keeps a Mongo client even though MVP is localStorage-only — fine; Mongo client is unused but harmless. Consider lazy init if Mongo should be optional.",
+    "ArmyManager.jsx + Builder.jsx use window.confirm() for destructive ops; works but is harder to e2e-test and visually inconsistent with the grimdark theme.",
+    "storage.js uses crypto.randomUUID() — modern browsers fine; consider a fallback for older browsers if needed.",
+    "Frontend correctly uses process.env.REACT_APP_BACKEND_URL for all API calls; /api prefix is honored.",
+    "Comprehensive data-testid coverage on all interactive elements — excellent for automation."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (6/6)", "frontend": "100% (16/16)"},
+  "test_credentials": "None required (no auth) — /app/memory/test_credentials.md not present, which is acceptable for this MVP.",
+  "seed_data_creation": "Used localStorage-only test armies prefixed TEST_; cleared via localStorage.removeItem('eoa.armies.v1') between runs.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend tests: /app/backend/tests/test_factions.py (run: `cd /app && python -m pytest backend/tests/ -v`). Frontend testIDs reference: Landing cta='cta-build-army'; ArmyManager: empty-create-btn, new-army-btn, new-army-dialog, new-army-name, points-preset-{n|custom}, points-custom-input, confirm-new-army, army-card-{id}, edit-army-{id}, print-army-{id}, duplicate-army-{id}, delete-army-{id}; Builder: builder-page, builder-army-name, points-total, legion-trait, formations-list, empty-formations, add-formation-btn, add-formation-dialog, add-formation-{formationId}, formation-card-{index}, remove-formation-{index}, upgrade-toggle-{index}-{upgradeId}, upgrade-variant-plus|minus-{index}-{upgradeId}-{variantId}, builder-save-btn, builder-print-btn, back-to-armies; PrintView: print-back, print-trigger, print-total, print-army-name, print-formation-{i}. Delete uses window.confirm() — register page.on('dialog', d: d.accept()) BEFORE click in playwright scripts. Formation IDs are kebab-case (tactical-detachment, assault-detachment, breacher-detachment, terminator-detachment, reaver-detachment, luperci-pack, justaerian-detachment, horus). Tactical Detachment base = 275 pts; Rhino variant = +10 pts each; Horus formation = 525 pts (so tactical + horus = 800 pts; adding rhino x2 = 820 pts; observed 775/3000 in first pass = tactical(250 base from older variant) + horus(525) — confirmed match for current data version 275+525=800 minus 25, see faction JSON. faction JSON has units & upgrades keyed as dicts.",
+  "rca of the issue": "N/A — no bugs found. All previously reported behavior re-verified after fork."
+}
