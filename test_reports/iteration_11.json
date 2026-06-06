@@ -1,0 +1,57 @@
+{
+  "summary": "Frontend Playwright testing of Knight Households + Legio Titanicus flows on Empire of Ashes builder. Landing renders 22 active faction cards. Knight & Titan card → /armies?new=<id> → preselected Forge dialog → /builder/<id> all work and persist to localStorage 'eoa.armies.v1'. Conversion-flagged upgrades (titan-weapons-scout-4) correctly DO NOT add phantom unit rows. Iteration_9 crash regression is fixed — page loads with validation messages. Solar Auxilia Ogryn addedUnits regression works. Sons of Horus regression works. Two data discrepancies with review-request claims surfaced (see action_items) but UI matches the actual backend payload.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_observations": {
+    "landing_active_factions": 22,
+    "knight_household_card_routes_correctly": true,
+    "legio_titanicus_card_routes_correctly": true,
+    "knight_army_persisted_in_localStorage": true,
+    "titan_army_persisted_in_localStorage": true,
+    "quesetorius_lance_ui_cost_pts": 325,
+    "quesetorius_lance_review_claimed_pts": 425,
+    "quesetorius_lance_backend_api_pts": 325,
+    "warhound_hunting_pack_base_cost_pts": 500,
+    "warhound_weapon_conversion_upgrades_present": ["titan-weapons-scout-4"],
+    "weapon_conversion_variants_available": ["wpn-inferno-gun", "wpn-plasma-blastgun", "wpn-swarmer-missiles", "wpn-ursus-claw", "wpn-vulcan-megabolter", "wpn-melta-lance (+25)", "wpn-turbolaser-destructor (+25)"],
+    "cost_after_toggle_only_no_variant_picked": "500 pts (bundle = 0 pts, picks are 0 by default)",
+    "cost_after_free_variant_pick_inferno_gun": "500 pts (free variant)",
+    "conversion_no_phantom_unit_row": true,
+    "unit_rows_after_conversion": 1,
+    "warlord_titan_ui_cost_pts": 725,
+    "warlord_titan_review_changelog_claim": 850,
+    "solar_aux_ogryn_addedUnits_works": true,
+    "tercio_cost_before_ogryn_pts": 150,
+    "tercio_cost_after_ogryn_pts": 225,
+    "iteration_9_crash_regression_fixed": true,
+    "crash_test_validation_panel_text_excerpt": "validation-issue-upgrades-over-limit element present, upgrade-count shows '4 / 3 taken', body contains 'max 3 per Line detachment' and '4 upgrades'",
+    "soh_tactical_detachment_cost_pts": 275,
+    "soh_save_persisted": true
+  },
+  "test_report_links": [],
+  "action_items": [
+    "DOC/CHANGELOG: review request and prior iteration_10 context claim quesetorius-lance baseCost = 425, but both backend factions.json and /api/factions/knight-household return 325 (UI also shows 325 — UI is correct, doc is stale). Note dominus-lance is the 425 formation.",
+    "DOC: review request says validation panel testid is 'army-validation-panel'; actual implementation uses data-testid='validation-panel' (with sub-testids validation-illegal, validation-issues, validation-issue-upgrades-over-limit). Update spec or rename for consistency.",
+    "EXPECTATION MISMATCH (not a bug): review expected weapon-conversion swap to add ~50 pts; actual implementation has 5 free variants (0 pts) + 2 premium variants (Melta Lance, Turbolaser Destructor) at +25 each. Selecting a free variant produces no cost delta (correct per data). If 50 pt deltas are desired, update variant costs in factions.json.",
+    "NOTE (informational only — not a P0): On a pure Titan/Knight LoW army, validation panel may flag 'no Line detachment'. As stated in review request this is expected and will be fixed in next P1 refactor."
+  ],
+  "critical_code_review_comments": [
+    "FormationEditor.jsx line 53 + 64 correctly handle (faction.upgrades || []).find(...) defensive lookup — iteration_9 crash fix verified working.",
+    "FormationEditor.jsx line 76 'if (upDef.conversion) return;' correctly short-circuits roster-row injection for weapon-conv upgrades — verified: 1 unit row shown for Warhound after weapon-conv toggled.",
+    "FormationEditor.jsx merges addedUnits from flag upgrades into unitCounts Map (line 67-72) — Ogryn / Rapier / Snipers stat rows appear correctly.",
+    "Builder.jsx auto-saves on every state change via useEffect — confirmed localStorage stays in sync.",
+    "Landing.jsx uses pure <Link to=\"/armies?new=\"> for faction selection — clean deep-link pattern."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped per request)", "frontend": "100% (10/10 scenarios passed)"},
+  "test_credentials": "N/A — no auth in this app, localStorage-only MVP.",
+  "seed_data_creation": "Test data created via localStorage only (TEST_Knight_Force, TEST_Titan_Force, TEST_SA_*, TEST_TT_*, TEST_SoH, TEST_SoH2, and crash-test army 'x'). All data is browser-local and cleared on browser data wipe.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All Knights + Titans + crash-fix flows pass. Two doc-level discrepancies should be reconciled by main agent: (a) quesetorius-lance is 325 not 425 (changelog stale; dominus-lance = 425), (b) validation panel data-testid is 'validation-panel' not 'army-validation-panel'. Conversion-flagged upgrades behave correctly (no phantom unit rows). Premium weapon variants are +25, not +50.",
+  "rca_of_the_issue": "No bugs found. Two stale doc/spec references were uncovered. Backend payload, UI cost calc (lib/points.js), and FormationEditor render are all internally consistent."
+}
