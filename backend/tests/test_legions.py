@@ -102,15 +102,21 @@ class TestFactionDetail:
         assert d["legionTrait"]["name"] == exp["trait"]
 
     def test_baseline_roster_size_consistent(self):
-        """All legions should share the same formation/unit count as the baseline."""
-        baseline = requests.get(f"{BASE_URL}/api/factions/sons-of-horus", timeout=15).json()
-        n_form = len(baseline["formations"])
-        n_units = len(baseline["units"]) if isinstance(baseline["units"], (list, dict)) else 0
+        """All non-SoH legions share the same formation/unit count (baseline Legiones Astartes).
+
+        Sons of Horus carries extra formations/units (Reaver, Luperci, Justaerian, Horus,
+        Despoiler) via legions.json overrides and is intentionally larger.
+        """
+        ref = requests.get(f"{BASE_URL}/api/factions/ultramarines", timeout=15).json()
+        n_form = len(ref["formations"])
+        n_units = len(ref["units"]) if isinstance(ref["units"], (list, dict)) else 0
         for fid in EXPECTED_IDS:
+            if fid == "sons-of-horus":
+                continue
             d = requests.get(f"{BASE_URL}/api/factions/{fid}", timeout=15).json()
-            assert len(d["formations"]) == n_form, f"{fid} has {len(d['formations'])} formations vs baseline {n_form}"
+            assert len(d["formations"]) == n_form, f"{fid} has {len(d['formations'])} formations vs ref {n_form}"
             cur_units = len(d["units"]) if isinstance(d["units"], (list, dict)) else 0
-            assert cur_units == n_units, f"{fid} has {cur_units} units vs baseline {n_units}"
+            assert cur_units == n_units, f"{fid} has {cur_units} units vs ref {n_units}"
 
     def test_404_on_unknown_id(self):
         r = requests.get(f"{BASE_URL}/api/factions/not-a-real-legion", timeout=15)
@@ -129,7 +135,9 @@ class TestDarkAngelsCompositionAppend:
         for keyword in ("Dreadwing", "Ravenwing", "Deathwing"):
             assert keyword in joined, f"missing {keyword} in compositionRules: {rules}"
         # And the baseline rules should still be present (not replaced).
-        baseline_rules = requests.get(f"{BASE_URL}/api/factions/sons-of-horus", timeout=15).json().get("compositionRules") or []
+        # Use Ultramarines (no compositionRulesAppend / Overrides) as the
+        # canonical Legiones Astartes baseline ruleset.
+        baseline_rules = requests.get(f"{BASE_URL}/api/factions/ultramarines", timeout=15).json().get("compositionRules") or []
         for br in baseline_rules:
             assert br in rules, f"baseline rule lost on dark-angels: {br}"
 

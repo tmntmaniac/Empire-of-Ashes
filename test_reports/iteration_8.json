@@ -1,0 +1,57 @@
+{
+  "summary": "Validated Sons of Horus override isolation and Landing -> ArmyManager deep-link flow. Backend: 169/169 pytest cases pass (added 56 new isolation tests in test_soh_isolation.py + updated 2 stale roster-size/composition baseline tests that previously assumed SoH was the master template). Frontend: Landing renders exactly 18 legion cards, clicking faction-card-dark-angels navigates to /armies, opens Forge Army dialog with Legion pre-selected to Dark Angels, and strips the ?new= query param. Same flow verified for Iron Warriors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Forge Army dialog (/armies)", "issues": ["LEGION selector is a native HTML <select> element rather than the shadcn Select component used elsewhere in the app. Visually inconsistent with the grimdark theme and other selectors. Consider migrating data-testid='new-army-faction' to shadcn Select for consistent styling."]},
+      {"screen": "Landing /", "issues": ["'More Legions / Classified' (faction-card-coming-soon) placeholder tile still present despite all 18 legions shipping - flagged in iteration_7 and still open."]}
+    ]
+  },
+  "tests_executed": [
+    {"name": "GET /api/factions returns exactly 18 ids", "result": "PASS"},
+    {"name": "GET /api/factions list does NOT include 'legiones-astartes' baseline", "result": "PASS"},
+    {"name": "GET /api/factions/sons-of-horus has formations reaver-detachment/luperci-pack/justaerian-detachment/horus", "result": "PASS"},
+    {"name": "GET /api/factions/sons-of-horus units dict contains despoiler/reaver/luperci/justaerian/horus", "result": "PASS"},
+    {"name": "SoH tactical-detachment unitOptions include '8 Despoiler units'", "result": "PASS"},
+    {"name": "SoH compositionRules contain Reaver/Luperci/Justaerian 1-per-2,000 rule + Primarch Horus Supreme Commander rule", "result": "PASS"},
+    {"name": "17 non-SoH legions DO NOT contain reaver-detachment/luperci-pack/justaerian-detachment/horus formations (parametrized x17)", "result": "PASS"},
+    {"name": "17 non-SoH legions DO NOT contain despoiler/reaver/luperci/justaerian/horus units (parametrized x17)", "result": "PASS"},
+    {"name": "17 non-SoH legions tactical-detachment has no 'Despoiler' option (parametrized x17)", "result": "PASS"},
+    {"name": "17 non-SoH legions have own legionTrait (not 'Legiones Astartes' placeholder, not 'Death Dealers')", "result": "PASS"},
+    {"name": "Updated test_baseline_roster_size_consistent now compares against ultramarines instead of SoH (SoH legitimately larger)", "result": "PASS"},
+    {"name": "Updated TestDarkAngelsCompositionAppend now compares baseline rules against ultramarines (was SoH)", "result": "PASS"},
+    {"name": "Landing renders 18 legion faction-card-<id> testids (excluding coming-soon placeholder)", "result": "PASS"},
+    {"name": "Click faction-card-dark-angels -> URL becomes /armies?new=dark-angels then strips to /armies, dialog opens with Dark Angels pre-selected", "result": "PASS"},
+    {"name": "Click faction-card-iron-warriors -> same flow, Iron Warriors pre-selected (confirmed visually in screenshot)", "result": "PASS"}
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_soh_isolation.py",
+    "/app/backend/tests/test_legions.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "(Optional UX) Replace the native <select> behind data-testid='new-army-faction' in NewArmyDialog with the shadcn Select component used elsewhere in the app so the dialog matches the grimdark theme.",
+    "(Optional UX, carried over) Hide or repurpose the faction-card-coming-soon placeholder tile on Landing - all 18 legions are now shipping."
+  ],
+  "critical_code_review_comments": [
+    "server.py build_factions(): merge logic correctly applies extraUnits/extraFormations/formationOptionsAppend/compositionRulesAppend only to the legion that declares them - verified by 51 parametrized isolation tests. Baseline (id 'legiones-astartes') is correctly hidden from /api/factions list.",
+    "server.py line 86: unitOverrides merge is shallow ({**units[uid], **patch}). If a future override patches a nested field like weapons[*].damage, the entire weapons array will be replaced rather than deep-merged. Document this or switch to deep-merge.",
+    "server.py line 100: formationOptionsAppend silently ignores entries whose formationId doesn't exist in the legion. A logger.warning on miss would catch typos in legions.json.",
+    "ArmyManager.jsx ?new=<id> consumption: works correctly, but it does not validate that the id actually exists in the factions list before opening the dialog. A bogus URL like /armies?new=foo will open the dialog with no Legion selected. Consider falling back to the first faction or showing a toast.",
+    "NewArmyDialog Legion selector is a native HTML <select> (visible in screenshot). Inconsistent with the shadcn-based design system used elsewhere; also harder to style for grimdark theme.",
+    "build_factions() still deep-copies the full baseline per request per legion. For an MVP this is fine; once you ship Mechanicum / Solar Auxilia consider an in-memory cache keyed on file mtime."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_legions.py (test_baseline_roster_size_consistent + test_dreadwing_rule_appended now use ultramarines as baseline reference instead of sons-of-horus)",
+    "/app/backend/tests/test_soh_isolation.py (new - 56 parametrized cases covering baseline hiding, SoH overrides, no-bleed isolation across 17 legions)"
+  ],
+  "success_rate": {"backend": "100% (169/169)", "frontend": "100% (3/3 critical scenarios + 18-card render)"},
+  "test_credentials": "n/a (no auth, localStorage MVP)",
+  "seed_data_creation": "None (no armies persisted during this run; only opened/closed Forge Army dialogs).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend regression: `pytest /app/backend/tests/ -v` should report 169 passed. The new isolation tests live in /app/backend/tests/test_soh_isolation.py and use REACT_APP_BACKEND_URL from frontend/.env. Frontend deep-link contract: /armies?new=<faction-id> opens NewArmyDialog with faction pre-selected, then strips ?new= via history replace. The Legion dropdown is a native <select> (data-testid='new-army-faction') so Playwright inner_text() returns ALL option labels - verify selection via the screenshot or by reading element.evaluate('el => el.value'). Baseline id is 'legiones-astartes' in factions.json; legions.json sets baseFactionId='legiones-astartes' and SoH owns extraFormations/extraUnits/formationOptionsAppend/compositionRulesAppend for the Reaver/Luperci/Justaerian/Horus/Despoiler content.",
+  "rca of the issue": "No bug reproduced. The previous contamination (every legion inheriting Reaver/Luperci/Justaerian/Horus/Despoiler from a SoH master template) is fully resolved: factions.json now holds a generic Legiones Astartes baseline (hidden from the list), and SoH-specific entries live under legions.json overrides for sons-of-horus only. Verified by parametrized tests across all 17 other legions."
+}

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { listArmies, deleteArmy, duplicateArmy, upsertArmy, newArmy } from "@/lib/storage";
 import { fetchFactions, fetchFaction } from "@/lib/api";
 import { armyTotal } from "@/lib/points";
@@ -11,10 +11,12 @@ const POINT_PRESETS = [1000, 1500, 2000, 3000, 4000];
 
 export default function ArmyManager() {
     const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [armies, setArmies] = useState([]);
     const [factions, setFactions] = useState([]);
     const [factionCache, setFactionCache] = useState({});
     const [showDialog, setShowDialog] = useState(false);
+    const [presetFactionId, setPresetFactionId] = useState(null);
     const [pendingDelete, setPendingDelete] = useState(null);
 
     const refresh = () => setArmies(listArmies());
@@ -23,10 +25,29 @@ export default function ArmyManager() {
         refresh();
         fetchFactions().then((fs) => {
             setFactions(fs);
-            // preload SoH for points display
-            fs.forEach((f) => fetchFaction(f.id).then((d) => setFactionCache((c) => ({ ...c, [f.id]: d }))));
+            // preload each faction so the army cards can compute points totals
+            Promise.all(fs.map((f) => fetchFaction(f.id))).then((details) => {
+                setFactionCache(Object.fromEntries(details.map((d) => [d.id, d])));
+            });
         });
     }, []);
+
+    // Deep-link: /armies?new=<factionId> opens the New Army dialog pre-selected.
+    // We wait until the factions list has loaded so the dialog renders with
+    // the requested legion already chosen.
+    const consumedNewParam = useRef(false);
+    useEffect(() => {
+        if (consumedNewParam.current) return;
+        const pre = searchParams.get("new");
+        if (!pre) return;
+        if (factions.length === 0) return;
+        consumedNewParam.current = true;
+        setPresetFactionId(pre);
+        setShowDialog(true);
+        const next = new URLSearchParams(searchParams);
+        next.delete("new");
+        setSearchParams(next, { replace: true });
+    }, [searchParams, setSearchParams, factions]);
 
     const handleDelete = (id, name) => {
         setPendingDelete({ id, name });
@@ -108,11 +129,13 @@ export default function ArmyManager() {
             {showDialog && (
                 <NewArmyDialog
                     factions={factions}
-                    onClose={() => setShowDialog(false)}
+                    initialFactionId={presetFactionId}
+                    onClose={() => { setShowDialog(false); setPresetFactionId(null); }}
                     onCreate={(payload) => {
                         const a = newArmy(payload);
                         upsertArmy(a);
                         setShowDialog(false);
+                        setPresetFactionId(null);
                         toast.success("Army forged.");
                         navigate(`/builder/${a.id}`);
                     }}
@@ -135,9 +158,13 @@ export default function ArmyManager() {
     );
 }
 
-function NewArmyDialog({ factions, onClose, onCreate }) {
+function NewArmyDialog({ factions, initialFactionId, onClose, onCreate }) {
     const [name, setName] = useState("");
-    const [factionId, setFactionId] = useState(factions[0]?.id || "sons-of-horus");
+    const [factionId, setFactionId] = useState(
+        initialFactionId && factions.some((f) => f.id === initialFactionId)
+            ? initialFactionId
+            : (factions[0]?.id || "sons-of-horus")
+    );
     const [preset, setPreset] = useState(3000);
     const [custom, setCustom] = useState("");
 

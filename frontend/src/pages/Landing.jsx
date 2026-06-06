@@ -73,7 +73,7 @@ export default function Landing() {
                     {!loading && factions.map((f) => (
                         <Link
                             key={f.id}
-                            to="/armies"
+                            to={`/armies?new=${f.id}`}
                             className="panel panel-accent p-6 group relative overflow-hidden hover:border-[#2D937D] transition-colors"
                             data-testid={`faction-card-${f.id}`}
                         >

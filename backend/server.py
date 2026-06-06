@@ -76,22 +76,40 @@ def build_factions():
         if 'allies' in override:
             faction['allies'] = override['allies']
 
-        # Optional per-legion unit roster tweaks.
-        if 'extraUnits' in override and isinstance(faction.get('units'), list):
-            faction['units'] = faction['units'] + override['extraUnits']
-        if 'unitOverrides' in override and isinstance(faction.get('units'), list):
-            patches = {u['id']: u for u in override['unitOverrides'] if 'id' in u}
-            faction['units'] = [
-                {**u, **patches[u['id']]} if u.get('id') in patches else u
-                for u in faction['units']
-            ]
+        # Optional per-legion unit roster tweaks. `units` is a dict keyed by id
+        # in the baseline, so extra/override entries are merged dict-style.
+        units = faction.get('units')
+        if 'extraUnits' in override and isinstance(units, dict):
+            units.update(override['extraUnits'])
+        if 'unitOverrides' in override and isinstance(units, dict):
+            for uid, patch in override['unitOverrides'].items():
+                if uid in units:
+                    units[uid] = {**units[uid], **patch}
+
+        # Optional per-legion formation additions (e.g. Reaver / Justaerian).
+        if 'extraFormations' in override and isinstance(faction.get('formations'), list):
+            faction['formations'] = faction['formations'] + override['extraFormations']
+
+        # Optional per-legion extra unitOptions on an existing formation
+        # (e.g. SoH Despoiler choice on the Tactical Detachment).
+        if 'formationOptionsAppend' in override and isinstance(faction.get('formations'), list):
+            by_id = {fm['id']: fm for fm in faction['formations']}
+            for entry in override['formationOptionsAppend']:
+                fid = entry.get('formationId')
+                opt = entry.get('option')
+                if fid in by_id and opt is not None:
+                    by_id[fid].setdefault('unitOptions', []).append(opt)
 
         merged.append(faction)
 
     # Include any baseline factions that aren't overridden by legions.json
     # (e.g. future Mechanicum / Solar Auxilia entries added directly there).
+    # The base template referenced by `baseFactionId` is hidden from the
+    # playable list — it exists purely to seed every Legion's shared rules.
     overridden_ids = {f['id'] for f in merged}
     for f in baseline_list:
+        if f['id'] == base_id:
+            continue
         if f['id'] not in overridden_ids:
             merged.append(f)
 

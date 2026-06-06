@@ -1,6 +1,6 @@
 {
   "_comment": "Legion-specific overrides. The baseline (formations, upgrades, units, transports) is inherited from factions.json. Each legion below overrides identity, lore, legionTrait, allies and (optionally) compositionRules. Stats for unique characters / line variants can be added under 'unitOverrides' or 'extraUnits' which the backend merges at runtime.",
-  "baseFactionId": "sons-of-horus",
+  "baseFactionId": "legiones-astartes",
   "legions": [
     {
       "id": "dark-angels",
@@ -157,7 +157,256 @@
       "legionTrait": {
         "name": "Death Dealers",
         "description": "When taking an Engage action, Infantry units add +1 to their Firefight value (up to a maximum of 2+)."
-      }
+      },
+      "extraFormations": [
+        {
+          "id": "reaver-detachment",
+          "name": "Reaver Detachment",
+          "category": "Line",
+          "baseCost": 300,
+          "composition": "6 Reaver units",
+          "unitOptions": [
+            {
+              "label": "6 Reaver units",
+              "units": [
+                {
+                  "unit": "reaver",
+                  "count": 6
+                }
+              ]
+            }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": [
+            "standard-transport",
+            "drop-assault",
+            "assault-claw",
+            "heavy-transport",
+            "consul",
+            "tank"
+          ]
+        },
+        {
+          "id": "luperci-pack",
+          "name": "Luperci Pack",
+          "category": "Support",
+          "baseCost": 300,
+          "composition": "6 Luperci units",
+          "unitOptions": [
+            {
+              "label": "6 Luperci units",
+              "units": [
+                {
+                  "unit": "luperci",
+                  "count": 6
+                }
+              ]
+            }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": [
+            "standard-transport",
+            "assault-claw"
+          ]
+        },
+        {
+          "id": "justaerian-detachment",
+          "name": "Justaerian Detachment",
+          "category": "Support",
+          "baseCost": 350,
+          "composition": "4 Justaerian Terminator units",
+          "unitOptions": [
+            {
+              "label": "4 Justaerian units",
+              "units": [
+                {
+                  "unit": "justaerian",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "maxPerPoints": 2000,
+          "allowedUpgrades": [
+            "assault-claw",
+            "heavy-transport",
+            "teleport",
+            "consul",
+            "tank",
+            "dreadnought"
+          ]
+        },
+        {
+          "id": "horus",
+          "name": "Horus, the Warmaster",
+          "category": "Primarch",
+          "baseCost": 500,
+          "composition": "Horus + 3 Justaerian units",
+          "unitOptions": [
+            {
+              "label": "Horus + 3 Justaerian",
+              "units": [
+                {
+                  "unit": "horus",
+                  "count": 1
+                },
+                {
+                  "unit": "justaerian",
+                  "count": 3
+                }
+              ]
+            }
+          ],
+          "maxCount": 1,
+          "allowedUpgrades": [
+            "heavy-transport",
+            "teleport",
+            "armoury-asset",
+            "tank",
+            "hyperios"
+          ]
+        }
+      ],
+      "extraUnits": {
+        "despoiler": {
+          "name": "Despoiler Squad",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "5+",
+          "cc": "4+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Bolt Pistols & Chainswords",
+              "range": "(base)",
+              "firepower": "(assault) EA (+1)"
+            }
+          ],
+          "notes": [
+            "Counts as Tactical for transport."
+          ]
+        },
+        "reaver": {
+          "name": "Reaver Attack Squad",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
+          "weapons": [
+            {
+              "name": "Talons & Claws",
+              "range": "(base)",
+              "firepower": "(assault) Fleshbane, EA (+1)"
+            },
+            {
+              "name": "Banestrike Bolter",
+              "range": "(15cm)",
+              "firepower": "small arms, Sniper"
+            }
+          ],
+          "notes": [
+            "Berserk.",
+            "Ferocity.",
+            "Fearless.",
+            "Invulnerable save.",
+            "Cannot claim objectives.",
+            "Counts as Tactical for transport."
+          ]
+        },
+        "luperci": {
+          "name": "Luperci",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "4+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Talons & Claws",
+              "range": "(base)",
+              "firepower": "(assault) Fleshbane, EA (+1)"
+            }
+          ],
+          "notes": [
+            "Berserk.",
+            "Ferocity.",
+            "Fearless.",
+            "Invulnerable save.",
+            "Cannot claim objectives.",
+            "Counts as Tactical for transport."
+          ]
+        },
+        "justaerian": {
+          "name": "Justaerian Terminators",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
+          "weapons": [
+            {
+              "name": "Power Fists",
+              "range": "(base)",
+              "firepower": "(assault) MW, EA (+1)"
+            },
+            {
+              "name": "Multi-melta",
+              "range": "(15cm)",
+              "firepower": "AP5+/AT5+, MW (small arms) MW"
+            }
+          ],
+          "notes": [
+            "Reinforced armour.",
+            "Thick rear armour."
+          ]
+        },
+        "horus": {
+          "name": "Horus Lupercal",
+          "type": "CH",
+          "speed": "15cm",
+          "armour": "3+",
+          "cc": "2+",
+          "ff": "4+",
+          "weapons": [
+            {
+              "name": "World Breaker",
+              "range": "(base)",
+              "firepower": "(assault) TK (1)"
+            },
+            {
+              "name": "Talons of Horus",
+              "range": "(base) & (15cm)",
+              "firepower": "(assault) MW, EA (+2) / (small arms) EA (+2)"
+            }
+          ],
+          "notes": [
+            "Demi-God.",
+            "Invulnerable save.",
+            "Reinforced armour.",
+            "Thick rear armour.",
+            "Supreme Commander."
+          ]
+        }
+      },
+      "compositionRulesAppend": [
+        "Primarch Horus may only be taken once and counts as your Supreme Commander.",
+        "Reaver, Luperci and Justaerian Detachments: 1 per 2,000 pts each."
+      ],
+      "formationOptionsAppend": [
+        {
+          "formationId": "tactical-detachment",
+          "option": {
+            "label": "8 Despoiler units",
+            "units": [
+              {
+                "unit": "despoiler",
+                "count": 8
+              }
+            ]
+          }
+        }
+      ]
     },
     {
       "id": "word-bearers",
