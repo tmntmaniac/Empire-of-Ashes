@@ -14,29 +14,23 @@ import { toast } from "sonner";
 export default function Builder() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const [army, setArmy] = useState(null);
+    const [army, setArmy] = useState(() => getArmy(id));
     const [faction, setFaction] = useState(null);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(army ? null : "Army not found.");
     const [addOpen, setAddOpen] = useState(false);
     const [removeIdx, setRemoveIdx] = useState(null);
 
     useEffect(() => {
-        const a = getArmy(id);
-        if (!a) {
-            setError("Army not found.");
-            return;
-        }
-        setArmy(a);
-        fetchFaction(a.factionId).then(setFaction).catch(() => setError("Failed to load faction codex."));
-    }, [id]);
+        if (!army) return;
+        fetchFaction(army.factionId).then(setFaction).catch(() => setError("Failed to load faction codex."));
+    }, [army?.factionId]);
 
     // Auto save on every change
     useEffect(() => {
         if (army && faction) {
             upsertArmy(army);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [army]);
+    }, [army, faction]);
 
     const formDefMap = useMemo(() => Object.fromEntries((faction?.formations || []).map((f) => [f.id, f])), [faction]);
 
