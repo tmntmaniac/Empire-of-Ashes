@@ -87,8 +87,18 @@ def build_factions():
                     units[uid] = {**units[uid], **patch}
 
         # Optional per-legion formation additions (e.g. Reaver / Justaerian).
+        # If an extra formation shares an `id` with a baseline formation
+        # (e.g. Iron Warriors re-flavour `land-raider-squadron` as a Line slot),
+        # the override replaces the baseline entry in place rather than
+        # producing a duplicate id (which would otherwise collide as React keys).
         if 'extraFormations' in override and isinstance(faction.get('formations'), list):
-            faction['formations'] = faction['formations'] + override['extraFormations']
+            existing_by_id = {fm['id']: idx for idx, fm in enumerate(faction['formations'])}
+            for extra in override['extraFormations']:
+                eid = extra.get('id')
+                if eid in existing_by_id:
+                    faction['formations'][existing_by_id[eid]] = extra
+                else:
+                    faction['formations'].append(extra)
 
         # Optional per-legion extra unitOptions on an existing formation
         # (e.g. SoH Despoiler choice on the Tactical Detachment).
