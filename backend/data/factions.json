@@ -37,10 +37,38 @@
           "baseCost": 275,
           "composition": "8 Tactical OR 8 Despoiler units",
           "unitOptions": [
-            { "label": "8 Tactical units", "units": [{ "unit": "tactical", "count": 8 }] },
-            { "label": "8 Despoiler units", "units": [{ "unit": "despoiler", "count": 8 }] }
+            {
+              "label": "8 Tactical units",
+              "units": [
+                {
+                  "unit": "tactical",
+                  "count": 8
+                }
+              ]
+            },
+            {
+              "label": "8 Despoiler units",
+              "units": [
+                {
+                  "unit": "despoiler",
+                  "count": 8
+                }
+              ]
+            }
           ],
-          "allowedUpgrades": ["standard-transport", "drop-assault", "assault-claw", "heavy-transport", "consul", "armoury-asset", "dreadnought", "rapier", "support-squads", "hyperios", "tank"]
+          "allowedUpgrades": [
+            "standard-transport",
+            "drop-assault",
+            "assault-claw",
+            "heavy-transport",
+            "consul",
+            "armoury-asset",
+            "dreadnought",
+            "rapier",
+            "support-squads",
+            "hyperios",
+            "tank"
+          ]
         },
         {
           "id": "assault-detachment",
@@ -49,10 +77,26 @@
           "baseCost": 300,
           "composition": "8 Assault units (+25 each additional, up to 10)",
           "unitOptions": [
-            { "label": "8 Assault units", "units": [{ "unit": "assault", "count": 8 }] }
+            {
+              "label": "8 Assault units",
+              "units": [
+                {
+                  "unit": "assault",
+                  "count": 8
+                }
+              ]
+            }
           ],
-          "extraUnit": { "unit": "assault", "cost": 25, "max": 2, "label": "Additional Assault unit" },
-          "allowedUpgrades": ["drop-assault", "consul"]
+          "extraUnit": {
+            "unit": "assault",
+            "cost": 25,
+            "max": 2,
+            "label": "Additional Assault unit"
+          },
+          "allowedUpgrades": [
+            "drop-assault",
+            "consul"
+          ]
         },
         {
           "id": "breacher-detachment",
@@ -61,10 +105,32 @@
           "baseCost": 300,
           "composition": "8 Breacher units (+25 each additional, up to 10)",
           "unitOptions": [
-            { "label": "8 Breacher units", "units": [{ "unit": "breacher", "count": 8 }] }
+            {
+              "label": "8 Breacher units",
+              "units": [
+                {
+                  "unit": "breacher",
+                  "count": 8
+                }
+              ]
+            }
           ],
-          "extraUnit": { "unit": "breacher", "cost": 25, "max": 2, "label": "Additional Breacher unit" },
-          "allowedUpgrades": ["drop-assault", "assault-claw", "heavy-transport", "consul", "armoury-asset", "dreadnought", "hyperios", "tank"]
+          "extraUnit": {
+            "unit": "breacher",
+            "cost": 25,
+            "max": 2,
+            "label": "Additional Breacher unit"
+          },
+          "allowedUpgrades": [
+            "drop-assault",
+            "assault-claw",
+            "heavy-transport",
+            "consul",
+            "armoury-asset",
+            "dreadnought",
+            "hyperios",
+            "tank"
+          ]
         },
         {
           "id": "terminator-detachment",
@@ -73,22 +139,59 @@
           "baseCost": 300,
           "composition": "4 Terminator units (+75 each additional, up to 6)",
           "unitOptions": [
-            { "label": "4 Terminator units", "units": [{ "unit": "terminator", "count": 4 }] }
+            {
+              "label": "4 Terminator units",
+              "units": [
+                {
+                  "unit": "terminator",
+                  "count": 4
+                }
+              ]
+            }
           ],
-          "extraUnit": { "unit": "terminator", "cost": 75, "max": 2, "label": "Additional Terminator unit" },
-          "allowedUpgrades": ["assault-claw", "heavy-transport", "teleport", "consul", "armoury-asset", "dreadnought", "hyperios", "tank"]
+          "extraUnit": {
+            "unit": "terminator",
+            "cost": 75,
+            "max": 2,
+            "label": "Additional Terminator unit"
+          },
+          "allowedUpgrades": [
+            "assault-claw",
+            "heavy-transport",
+            "teleport",
+            "consul",
+            "armoury-asset",
+            "dreadnought",
+            "hyperios",
+            "tank"
+          ]
         },
         {
           "id": "reaver-detachment",
           "name": "Reaver Detachment",
-          "category": "Support",
+          "category": "Line",
           "baseCost": 300,
           "composition": "6 Reaver units",
           "unitOptions": [
-            { "label": "6 Reaver units", "units": [{ "unit": "reaver", "count": 6 }] }
+            {
+              "label": "6 Reaver units",
+              "units": [
+                {
+                  "unit": "reaver",
+                  "count": 6
+                }
+              ]
+            }
           ],
           "maxPerPoints": 2000,
-          "allowedUpgrades": ["standard-transport", "drop-assault", "assault-claw", "heavy-transport", "consul", "tank"]
+          "allowedUpgrades": [
+            "standard-transport",
+            "drop-assault",
+            "assault-claw",
+            "heavy-transport",
+            "consul",
+            "tank"
+          ]
         },
         {
           "id": "luperci-pack",
@@ -97,10 +200,21 @@
           "baseCost": 300,
           "composition": "6 Luperci units",
           "unitOptions": [
-            { "label": "6 Luperci units", "units": [{ "unit": "luperci", "count": 6 }] }
+            {
+              "label": "6 Luperci units",
+              "units": [
+                {
+                  "unit": "luperci",
+                  "count": 6
+                }
+              ]
+            }
           ],
           "maxPerPoints": 2000,
-          "allowedUpgrades": ["standard-transport", "assault-claw"]
+          "allowedUpgrades": [
+            "standard-transport",
+            "assault-claw"
+          ]
         },
         {
           "id": "justaerian-detachment",
@@ -109,10 +223,985 @@
           "baseCost": 350,
           "composition": "4 Justaerian Terminator units",
           "unitOptions": [
-            { "label": "4 Justaerian units", "units": [{ "unit": "justaerian", "count": 4 }] }
+            {
+              "label": "4 Justaerian units",
+              "units": [
+                {
+                  "unit": "justaerian",
+                  "count": 4
+                }
+              ]
+            }
           ],
           "maxPerPoints": 2000,
-          "allowedUpgrades": ["assault-claw", "heavy-transport", "teleport", "consul", "tank", "dreadnought"]
+          "allowedUpgrades": [
+            "assault-claw",
+            "heavy-transport",
+            "teleport",
+            "consul",
+            "tank",
+            "dreadnought"
+          ]
+        },
+        {
+          "id": "assault-squad-support",
+          "name": "Assault Squad (Support)",
+          "category": "Support",
+          "baseCost": 175,
+          "composition": "4 Assault units",
+          "unitOptions": [
+            {
+              "label": "4 Assault units",
+              "units": [
+                {
+                  "unit": "assault",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": [
+            "drop-assault",
+            "consul"
+          ]
+        },
+        {
+          "id": "breacher-squad-support",
+          "name": "Breacher Squad (Support)",
+          "category": "Support",
+          "baseCost": 175,
+          "composition": "4 Breacher units",
+          "unitOptions": [
+            {
+              "label": "4 Breacher units",
+              "units": [
+                {
+                  "unit": "breacher",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": [
+            "drop-assault",
+            "assault-claw",
+            "heavy-transport",
+            "consul",
+            "armoury-asset",
+            "dreadnought"
+          ]
+        },
+        {
+          "id": "destroyer-squad",
+          "name": "Destroyer Squad",
+          "category": "Support",
+          "baseCost": 225,
+          "composition": "4 Destroyer units",
+          "unitOptions": [
+            {
+              "label": "4 Destroyer units",
+              "units": [
+                {
+                  "unit": "destroyer",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": [
+            "drop-assault",
+            "consul"
+          ]
+        },
+        {
+          "id": "inductii-squad",
+          "name": "Inductii Squad",
+          "category": "Support",
+          "baseCost": 225,
+          "composition": "8 Inductii units (+20 each, up to 12)",
+          "unitOptions": [
+            {
+              "label": "8 Inductii units",
+              "units": [
+                {
+                  "unit": "inductii",
+                  "count": 8
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "inductii",
+            "cost": 20,
+            "max": 4,
+            "label": "Additional Inductii unit"
+          },
+          "allowedUpgrades": [
+            "standard-transport",
+            "drop-assault"
+          ]
+        },
+        {
+          "id": "rapier-battery",
+          "name": "Rapier Battery",
+          "category": "Support",
+          "baseCost": 265,
+          "composition": "6 Rapiers (any configuration)",
+          "unitOptions": [
+            {
+              "label": "6 Rapiers",
+              "units": [
+                {
+                  "unit": "rapier",
+                  "count": 6
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": [
+            "drop-assault"
+          ]
+        },
+        {
+          "id": "recon-squad",
+          "name": "Recon Squad",
+          "category": "Support",
+          "baseCost": 150,
+          "composition": "4 Recon units",
+          "unitOptions": [
+            {
+              "label": "4 Recon units",
+              "units": [
+                {
+                  "unit": "recon",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": [
+            "standard-transport",
+            "drop-assault",
+            "assault-claw",
+            "consul"
+          ]
+        },
+        {
+          "id": "scout-detachment",
+          "name": "Scout Detachment",
+          "category": "Support",
+          "baseCost": 225,
+          "composition": "6 Scout units",
+          "unitOptions": [
+            {
+              "label": "6 Scout units",
+              "units": [
+                {
+                  "unit": "scout",
+                  "count": 6
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": [
+            "drop-assault",
+            "consul"
+          ]
+        },
+        {
+          "id": "veteran-squad",
+          "name": "Veteran Squad",
+          "category": "Support",
+          "baseCost": 300,
+          "composition": "6 Veteran units (+50 each, up to 8)",
+          "unitOptions": [
+            {
+              "label": "6 Veteran units",
+              "units": [
+                {
+                  "unit": "veteran",
+                  "count": 6
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "veteran",
+            "cost": 50,
+            "max": 2,
+            "label": "Additional Veteran unit"
+          },
+          "allowedUpgrades": [
+            "drop-assault",
+            "assault-claw",
+            "heavy-transport",
+            "standard-transport",
+            "consul",
+            "armoury-asset",
+            "dreadnought"
+          ]
+        },
+        {
+          "id": "outrider-squad",
+          "name": "Outrider Squad",
+          "category": "Support",
+          "baseCost": 125,
+          "composition": "4 Outriders OR Attack Bikes (+25 each, up to 6)",
+          "unitOptions": [
+            {
+              "label": "4 Outriders",
+              "units": [
+                {
+                  "unit": "outrider",
+                  "count": 4
+                }
+              ]
+            },
+            {
+              "label": "4 Attack Bikes",
+              "units": [
+                {
+                  "unit": "attack-bike",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "outrider",
+            "cost": 25,
+            "max": 2,
+            "label": "Additional Outrider/Attack Bike"
+          },
+          "allowedUpgrades": [
+            "consul"
+          ]
+        },
+        {
+          "id": "jetbike-squad",
+          "name": "Jetbike Squad",
+          "category": "Support",
+          "baseCost": 150,
+          "composition": "4 Scimitar Jetbikes (+30 each, up to 6)",
+          "unitOptions": [
+            {
+              "label": "4 Scimitar Jetbikes",
+              "units": [
+                {
+                  "unit": "scimitar",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "scimitar",
+            "cost": 30,
+            "max": 2,
+            "label": "Additional Scimitar Jetbike"
+          },
+          "allowedUpgrades": [
+            "consul"
+          ]
+        },
+        {
+          "id": "land-speeder-squadron",
+          "name": "Land Speeder Squadron",
+          "category": "Support",
+          "baseCost": 175,
+          "composition": "4 Land Speeders (+40 each, up to 6)",
+          "unitOptions": [
+            {
+              "label": "4 Land Speeders",
+              "units": [
+                {
+                  "unit": "land-speeder",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "land-speeder",
+            "cost": 40,
+            "max": 2,
+            "label": "Additional Land Speeder"
+          },
+          "allowedUpgrades": [
+            "consul"
+          ]
+        },
+        {
+          "id": "javelin-squadron",
+          "name": "Javelin Attack Speeder Squadron",
+          "category": "Support",
+          "baseCost": 200,
+          "composition": "4 Javelin Attack Speeders (+50 each, up to 6)",
+          "unitOptions": [
+            {
+              "label": "4 Javelin Attack Speeders",
+              "units": [
+                {
+                  "unit": "javelin",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "javelin",
+            "cost": 50,
+            "max": 2,
+            "label": "Additional Javelin Attack Speeder"
+          },
+          "allowedUpgrades": [
+            "consul"
+          ]
+        },
+        {
+          "id": "castraferrum-talon",
+          "name": "Castraferrum Dreadnought Talon",
+          "category": "Support",
+          "baseCost": 200,
+          "composition": "4 Castraferrum Dreadnoughts (+50 each, up to 6)",
+          "unitOptions": [
+            {
+              "label": "4 Castraferrum",
+              "units": [
+                {
+                  "unit": "castraferrum",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "castraferrum",
+            "cost": 50,
+            "max": 2,
+            "label": "Additional Castraferrum"
+          },
+          "allowedUpgrades": [
+            "consul"
+          ]
+        },
+        {
+          "id": "contemptor-talon",
+          "name": "Contemptor Dreadnought Talon",
+          "category": "Support",
+          "baseCost": 240,
+          "composition": "4 Contemptors (+60 each, up to 6)",
+          "unitOptions": [
+            {
+              "label": "4 Contemptors",
+              "units": [
+                {
+                  "unit": "contemptor",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "contemptor",
+            "cost": 60,
+            "max": 2,
+            "label": "Additional Contemptor"
+          },
+          "allowedUpgrades": [
+            "drop-assault",
+            "consul",
+            "armoury-asset"
+          ]
+        },
+        {
+          "id": "leviathan-talon",
+          "name": "Leviathan Dreadnought Talon",
+          "category": "Support",
+          "baseCost": 300,
+          "composition": "3 Leviathans (any configuration)",
+          "unitOptions": [
+            {
+              "label": "3 Leviathans",
+              "units": [
+                {
+                  "unit": "leviathan",
+                  "count": 3
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": [
+            "drop-assault",
+            "consul"
+          ]
+        },
+        {
+          "id": "air-defence-battery",
+          "name": "Air Defence Battery",
+          "category": "Support",
+          "baseCost": 250,
+          "composition": "3 Skyreaper Defenders OR Whirlwind Hyperios",
+          "unitOptions": [
+            {
+              "label": "3 Skyreaper Defenders",
+              "units": [
+                {
+                  "unit": "skyreaper",
+                  "count": 3
+                }
+              ]
+            },
+            {
+              "label": "3 Whirlwind Hyperios",
+              "units": [
+                {
+                  "unit": "hyperios",
+                  "count": 3
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": [
+            "hyperios"
+          ]
+        },
+        {
+          "id": "artillery-battery-arquitor",
+          "name": "Artillery Battery — Arquitor",
+          "category": "Support",
+          "baseCost": 300,
+          "composition": "4 Arquitor Bombards",
+          "unitOptions": [
+            {
+              "label": "4 Arquitors",
+              "units": [
+                {
+                  "unit": "arquitor",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": [
+            "consul"
+          ]
+        },
+        {
+          "id": "artillery-battery-basilisk",
+          "name": "Artillery Battery — Basilisk",
+          "category": "Support",
+          "baseCost": 325,
+          "composition": "4 Basilisks",
+          "unitOptions": [
+            {
+              "label": "4 Basilisks",
+              "units": [
+                {
+                  "unit": "basilisk",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": [
+            "consul"
+          ]
+        },
+        {
+          "id": "artillery-battery-medusa",
+          "name": "Artillery Battery — Medusa",
+          "category": "Support",
+          "baseCost": 250,
+          "composition": "4 Medusas",
+          "unitOptions": [
+            {
+              "label": "4 Medusas",
+              "units": [
+                {
+                  "unit": "medusa",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": [
+            "consul"
+          ]
+        },
+        {
+          "id": "artillery-battery-whirlwind",
+          "name": "Artillery Battery — Whirlwind",
+          "category": "Support",
+          "baseCost": 300,
+          "composition": "4 Whirlwinds",
+          "unitOptions": [
+            {
+              "label": "4 Whirlwinds",
+              "units": [
+                {
+                  "unit": "whirlwind",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": [
+            "consul"
+          ]
+        },
+        {
+          "id": "kratos-heavy-squadron",
+          "name": "Kratos Heavy Squadron",
+          "category": "Support",
+          "baseCost": 400,
+          "composition": "3 Kratos",
+          "unitOptions": [
+            {
+              "label": "3 Kratos",
+              "units": [
+                {
+                  "unit": "kratos",
+                  "count": 3
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": [
+            "consul",
+            "hyperios"
+          ]
+        },
+        {
+          "id": "land-raider-squadron",
+          "name": "Land Raider Squadron",
+          "category": "Support",
+          "baseCost": 320,
+          "composition": "4 Land Raiders Phobos OR Proteus (+75/+65 each, up to 6)",
+          "unitOptions": [
+            {
+              "label": "4 Land Raider Phobos",
+              "units": [
+                {
+                  "unit": "land-raider-phobos",
+                  "count": 4
+                }
+              ]
+            },
+            {
+              "label": "4 Land Raider Proteus",
+              "units": [
+                {
+                  "unit": "land-raider-proteus",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "land-raider-phobos",
+            "cost": 75,
+            "max": 2,
+            "label": "Additional Land Raider Phobos"
+          },
+          "allowedUpgrades": [
+            "consul",
+            "armoury-asset",
+            "hyperios"
+          ]
+        },
+        {
+          "id": "predator-squadron",
+          "name": "Predator Squadron",
+          "category": "Support",
+          "baseCost": 240,
+          "composition": "4 Predators (+60 each, up to 6)",
+          "unitOptions": [
+            {
+              "label": "4 Predators",
+              "units": [
+                {
+                  "unit": "predator",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "predator",
+            "cost": 60,
+            "max": 2,
+            "label": "Additional Predator"
+          },
+          "allowedUpgrades": [
+            "consul",
+            "armoury-asset",
+            "hyperios"
+          ]
+        },
+        {
+          "id": "sabre-squadron",
+          "name": "Sabre Squadron",
+          "category": "Support",
+          "baseCost": 185,
+          "composition": "4 Sabres (+50 each, up to 6)",
+          "unitOptions": [
+            {
+              "label": "4 Sabres",
+              "units": [
+                {
+                  "unit": "sabre",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "sabre",
+            "cost": 50,
+            "max": 2,
+            "label": "Additional Sabre"
+          },
+          "allowedUpgrades": [
+            "consul"
+          ]
+        },
+        {
+          "id": "sicaran-squadron",
+          "name": "Sicaran Squadron",
+          "category": "Support",
+          "baseCost": 300,
+          "composition": "4 Sicarans (+80 each, up to 6)",
+          "unitOptions": [
+            {
+              "label": "4 Sicarans",
+              "units": [
+                {
+                  "unit": "sicaran",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "sicaran",
+            "cost": 80,
+            "max": 2,
+            "label": "Additional Sicaran"
+          },
+          "allowedUpgrades": [
+            "consul",
+            "hyperios"
+          ]
+        },
+        {
+          "id": "vindicator-squadron",
+          "name": "Vindicator Squadron",
+          "category": "Support",
+          "baseCost": 200,
+          "composition": "4 Vindicators (+50 each, up to 6)",
+          "unitOptions": [
+            {
+              "label": "4 Vindicators",
+              "units": [
+                {
+                  "unit": "vindicator",
+                  "count": 4
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "vindicator",
+            "cost": 50,
+            "max": 2,
+            "label": "Additional Vindicator"
+          },
+          "allowedUpgrades": [
+            "consul",
+            "armoury-asset",
+            "hyperios"
+          ]
+        },
+        {
+          "id": "storm-eagle-flight",
+          "name": "Storm Eagle Flight",
+          "category": "Support",
+          "baseCost": 125,
+          "composition": "1 Storm Eagle (+100 each, up to 3)",
+          "unitOptions": [
+            {
+              "label": "1 Storm Eagle",
+              "units": [
+                {
+                  "unit": "storm-eagle",
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "storm-eagle",
+            "cost": 100,
+            "max": 2,
+            "label": "Additional Storm Eagle"
+          },
+          "allowedUpgrades": []
+        },
+        {
+          "id": "thunderhawk-gunship",
+          "name": "Thunderhawk",
+          "category": "Support",
+          "baseCost": 250,
+          "composition": "1 Thunderhawk Gunship",
+          "unitOptions": [
+            {
+              "label": "1 Thunderhawk",
+              "units": [
+                {
+                  "unit": "thunderhawk",
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": []
+        },
+        {
+          "id": "thunderhawk-transporter-flight",
+          "name": "Thunderhawk Transporter Flight",
+          "category": "Support",
+          "baseCost": 100,
+          "composition": "1 Thunderhawk Transporter (+100 each, up to 3)",
+          "unitOptions": [
+            {
+              "label": "1 Thunderhawk Transporter",
+              "units": [
+                {
+                  "unit": "thunderhawk-transporter",
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "thunderhawk-transporter",
+            "cost": 100,
+            "max": 2,
+            "label": "Additional Thunderhawk Transporter"
+          },
+          "allowedUpgrades": []
+        },
+        {
+          "id": "legion-spacecraft-strike-cruiser",
+          "name": "Legion Spacecraft — Strike Cruiser",
+          "category": "Support",
+          "baseCost": 200,
+          "composition": "1 Strike Cruiser",
+          "unitOptions": [
+            {
+              "label": "1 Strike Cruiser",
+              "units": [
+                {
+                  "unit": "strike-cruiser",
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": []
+        },
+        {
+          "id": "legion-spacecraft-battleship",
+          "name": "Legion Spacecraft — Battle Barge",
+          "category": "Support",
+          "baseCost": 300,
+          "composition": "1 Battle Barge",
+          "unitOptions": [
+            {
+              "label": "1 Battle Barge",
+              "units": [
+                {
+                  "unit": "battleship",
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": []
+        },
+        {
+          "id": "plutona-assault-drill",
+          "name": "Plutona Assault Drill",
+          "category": "Lords of War",
+          "baseCost": 300,
+          "composition": "1 Plutona Assault Drill",
+          "unitOptions": [
+            {
+              "label": "1 Plutona",
+              "units": [
+                {
+                  "unit": "plutona",
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": []
+        },
+        {
+          "id": "heavy-tank-battery",
+          "name": "Heavy Tank Battery",
+          "category": "Lords of War",
+          "baseCost": 400,
+          "composition": "3 Cerberus OR Typhon",
+          "unitOptions": [
+            {
+              "label": "3 Cerberus",
+              "units": [
+                {
+                  "unit": "cerberus",
+                  "count": 3
+                }
+              ]
+            },
+            {
+              "label": "3 Typhon",
+              "units": [
+                {
+                  "unit": "typhon",
+                  "count": 3
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": [
+            "consul"
+          ]
+        },
+        {
+          "id": "superheavy-squadron",
+          "name": "Superheavy Squadron",
+          "category": "Lords of War",
+          "baseCost": 250,
+          "composition": "1 Fellblade OR Glaive (+250 each, up to 3)",
+          "unitOptions": [
+            {
+              "label": "1 Fellblade",
+              "units": [
+                {
+                  "unit": "fellblade",
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "label": "1 Glaive",
+              "units": [
+                {
+                  "unit": "glaive",
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "fellblade",
+            "cost": 250,
+            "max": 2,
+            "label": "Additional Fellblade/Glaive"
+          },
+          "allowedUpgrades": [
+            "consul"
+          ]
+        },
+        {
+          "id": "superheavy-tank-destroyer",
+          "name": "Superheavy Tank Destroyer",
+          "category": "Lords of War",
+          "baseCost": 300,
+          "composition": "1 Falchion",
+          "unitOptions": [
+            {
+              "label": "1 Falchion",
+              "units": [
+                {
+                  "unit": "falchion",
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": []
+        },
+        {
+          "id": "gunship-flight",
+          "name": "Gunship Flight",
+          "category": "Lords of War",
+          "baseCost": 300,
+          "composition": "2 Fire Raptors (+150 each, up to 3)",
+          "unitOptions": [
+            {
+              "label": "2 Fire Raptors",
+              "units": [
+                {
+                  "unit": "fire-raptor",
+                  "count": 2
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "fire-raptor",
+            "cost": 150,
+            "max": 1,
+            "label": "Additional Fire Raptor"
+          },
+          "allowedUpgrades": []
+        },
+        {
+          "id": "interceptor-flight",
+          "name": "Interceptor Flight",
+          "category": "Lords of War",
+          "baseCost": 250,
+          "composition": "2 Xiphons (+125 each, up to 3)",
+          "unitOptions": [
+            {
+              "label": "2 Xiphons",
+              "units": [
+                {
+                  "unit": "xiphon",
+                  "count": 2
+                }
+              ]
+            }
+          ],
+          "extraUnit": {
+            "unit": "xiphon",
+            "cost": 125,
+            "max": 1,
+            "label": "Additional Xiphon"
+          },
+          "allowedUpgrades": []
+        },
+        {
+          "id": "stormbird-lander",
+          "name": "Stormbird Lander",
+          "category": "Lords of War",
+          "baseCost": 450,
+          "composition": "1 Stormbird",
+          "unitOptions": [
+            {
+              "label": "1 Stormbird",
+              "units": [
+                {
+                  "unit": "stormbird",
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "allowedUpgrades": []
         },
         {
           "id": "horus",
@@ -121,10 +1210,28 @@
           "baseCost": 500,
           "composition": "Horus + 3 Justaerian units",
           "unitOptions": [
-            { "label": "Horus + 3 Justaerian", "units": [{ "unit": "horus", "count": 1 }, { "unit": "justaerian", "count": 3 }] }
+            {
+              "label": "Horus + 3 Justaerian",
+              "units": [
+                {
+                  "unit": "horus",
+                  "count": 1
+                },
+                {
+                  "unit": "justaerian",
+                  "count": 3
+                }
+              ]
+            }
           ],
           "maxCount": 1,
-          "allowedUpgrades": ["heavy-transport", "teleport", "armoury-asset", "tank", "hyperios"]
+          "allowedUpgrades": [
+            "heavy-transport",
+            "teleport",
+            "armoury-asset",
+            "tank",
+            "hyperios"
+          ]
         }
       ],
       "upgrades": [
@@ -134,8 +1241,16 @@
           "description": "Add enough Rhino carriers to transport the entire formation after all other upgrades are added. You may upgrade 1 Rhino to a Damocles.",
           "type": "multi",
           "variants": [
-            { "id": "rhino", "name": "Rhino", "cost": 10 },
-            { "id": "damocles", "name": "Damocles Command Rhino", "cost": 15 }
+            {
+              "id": "rhino",
+              "name": "Rhino",
+              "cost": 10
+            },
+            {
+              "id": "damocles",
+              "name": "Damocles Command Rhino",
+              "cost": 15
+            }
           ]
         },
         {
@@ -151,11 +1266,31 @@
           "description": "Add enough Land Raiders OR Spartans OR Termites OR Mastodons to transport the entire formation after all other upgrades are added.",
           "type": "multi",
           "variants": [
-            { "id": "land-raider-phobos", "name": "Land Raider Phobos", "cost": 75 },
-            { "id": "land-raider-proteus", "name": "Land Raider Proteus", "cost": 65 },
-            { "id": "spartan", "name": "Spartan Assault Tank", "cost": 125 },
-            { "id": "termite", "name": "Termite Assault Drill", "cost": 75 },
-            { "id": "mastodon", "name": "Mastodon", "cost": 225 }
+            {
+              "id": "land-raider-phobos",
+              "name": "Land Raider Phobos",
+              "cost": 75
+            },
+            {
+              "id": "land-raider-proteus",
+              "name": "Land Raider Proteus",
+              "cost": 65
+            },
+            {
+              "id": "spartan",
+              "name": "Spartan Assault Tank",
+              "cost": 125
+            },
+            {
+              "id": "termite",
+              "name": "Termite Assault Drill",
+              "cost": 75
+            },
+            {
+              "id": "mastodon",
+              "name": "Mastodon",
+              "cost": 225
+            }
           ]
         },
         {
@@ -164,8 +1299,16 @@
           "description": "Add enough Kharybdys OR Cestus Assault Rams to transport the entire formation after all other upgrades are added.",
           "type": "multi",
           "variants": [
-            { "id": "kharybdys", "name": "Kharybdys Assault Claw", "cost": 75 },
-            { "id": "cestus", "name": "Cestus Assault Ram", "cost": 50 }
+            {
+              "id": "kharybdys",
+              "name": "Kharybdys Assault Claw",
+              "cost": 75
+            },
+            {
+              "id": "cestus",
+              "name": "Cestus Assault Ram",
+              "cost": 50
+            }
           ]
         },
         {
@@ -182,9 +1325,18 @@
           "type": "single",
           "cost": 50,
           "variants": [
-            { "id": "champion", "name": "Champion" },
-            { "id": "librarian", "name": "Librarian" },
-            { "id": "chaplain", "name": "Chaplain" }
+            {
+              "id": "champion",
+              "name": "Champion"
+            },
+            {
+              "id": "librarian",
+              "name": "Librarian"
+            },
+            {
+              "id": "chaplain",
+              "name": "Chaplain"
+            }
           ]
         },
         {
@@ -194,10 +1346,26 @@
           "type": "multi",
           "max": 2,
           "variants": [
-            { "id": "castraferrum", "name": "Castraferrum Dreadnought", "cost": 50 },
-            { "id": "contemptor", "name": "Contemptor Dreadnought", "cost": 60 },
-            { "id": "leviathan", "name": "Leviathan Dreadnought", "cost": 100 },
-            { "id": "deredeo", "name": "Deredeo Dreadnought", "cost": 100 }
+            {
+              "id": "castraferrum",
+              "name": "Castraferrum Dreadnought",
+              "cost": 50
+            },
+            {
+              "id": "contemptor",
+              "name": "Contemptor Dreadnought",
+              "cost": 60
+            },
+            {
+              "id": "leviathan",
+              "name": "Leviathan Dreadnought",
+              "cost": 100
+            },
+            {
+              "id": "deredeo",
+              "name": "Deredeo Dreadnought",
+              "cost": 100
+            }
           ]
         },
         {
@@ -207,8 +1375,16 @@
           "type": "multi",
           "max": 4,
           "variants": [
-            { "id": "tactical-support", "name": "Tactical Support Squad", "cost": 25 },
-            { "id": "heavy-support", "name": "Heavy Support Squad", "cost": 50 }
+            {
+              "id": "tactical-support",
+              "name": "Tactical Support Squad",
+              "cost": 25
+            },
+            {
+              "id": "heavy-support",
+              "name": "Heavy Support Squad",
+              "cost": 50
+            }
           ]
         },
         {
@@ -218,7 +1394,11 @@
           "type": "multi",
           "max": 2,
           "variants": [
-            { "id": "hyperios", "name": "Whirlwind Hyperios", "cost": 75 }
+            {
+              "id": "hyperios",
+              "name": "Whirlwind Hyperios",
+              "cost": 75
+            }
           ]
         },
         {
@@ -228,12 +1408,36 @@
           "type": "multi",
           "max": 2,
           "variants": [
-            { "id": "predator", "name": "Predator", "cost": 60 },
-            { "id": "sicaran", "name": "Sicaran", "cost": 80 },
-            { "id": "vindicator", "name": "Vindicator", "cost": 50 },
-            { "id": "cerberus", "name": "Cerberus", "cost": 150 },
-            { "id": "typhon", "name": "Typhon", "cost": 150 },
-            { "id": "kratos", "name": "Kratos", "cost": 150 }
+            {
+              "id": "predator",
+              "name": "Predator",
+              "cost": 60
+            },
+            {
+              "id": "sicaran",
+              "name": "Sicaran",
+              "cost": 80
+            },
+            {
+              "id": "vindicator",
+              "name": "Vindicator",
+              "cost": 50
+            },
+            {
+              "id": "cerberus",
+              "name": "Cerberus",
+              "cost": 150
+            },
+            {
+              "id": "typhon",
+              "name": "Typhon",
+              "cost": 150
+            },
+            {
+              "id": "kratos",
+              "name": "Kratos",
+              "cost": 150
+            }
           ]
         },
         {
@@ -243,7 +1447,11 @@
           "type": "multi",
           "max": 4,
           "variants": [
-            { "id": "rapier", "name": "Rapier", "cost": 60 }
+            {
+              "id": "rapier",
+              "name": "Rapier",
+              "cost": 60
+            }
           ]
         },
         {
@@ -253,14 +1461,46 @@
           "type": "multi",
           "max": 2,
           "variants": [
-            { "id": "infernus", "name": "Predator → Infernus", "cost": 20 },
-            { "id": "executioner", "name": "Predator → Executioner", "cost": 20 },
-            { "id": "scorpius", "name": "Predator → Scorpius", "cost": 20 },
-            { "id": "omega", "name": "Sicaran → Omega", "cost": 20 },
-            { "id": "venator", "name": "Sicaran → Venator", "cost": 20 },
-            { "id": "achilles", "name": "Land Raider Phobos → Achilles", "cost": 20 },
-            { "id": "deredeo", "name": "Contemptor → Deredeo", "cost": 40 },
-            { "id": "vindicator-destroyer", "name": "Vindicator → Destroyer", "cost": 20 }
+            {
+              "id": "infernus",
+              "name": "Predator → Infernus",
+              "cost": 20
+            },
+            {
+              "id": "executioner",
+              "name": "Predator → Executioner",
+              "cost": 20
+            },
+            {
+              "id": "scorpius",
+              "name": "Predator → Scorpius",
+              "cost": 20
+            },
+            {
+              "id": "omega",
+              "name": "Sicaran → Omega",
+              "cost": 20
+            },
+            {
+              "id": "venator",
+              "name": "Sicaran → Venator",
+              "cost": 20
+            },
+            {
+              "id": "achilles",
+              "name": "Land Raider Phobos → Achilles",
+              "cost": 20
+            },
+            {
+              "id": "deredeo",
+              "name": "Contemptor → Deredeo",
+              "cost": 40
+            },
+            {
+              "id": "vindicator-destroyer",
+              "name": "Vindicator → Destroyer",
+              "cost": 20
+            }
           ]
         }
       ],
@@ -268,412 +1508,1536 @@
         "tactical": {
           "name": "Tactical Squad",
           "type": "INF",
-          "speed": "15cm", "armour": "5+", "cc": "5+", "ff": "4+",
-          "weapons": [{ "name": "Bolters", "range": "(15cm)", "firepower": "small arms" }],
-          "notes": ["Can claim objectives."]
+          "speed": "15cm",
+          "armour": "5+",
+          "cc": "5+",
+          "ff": "4+",
+          "weapons": [
+            {
+              "name": "Bolters",
+              "range": "(15cm)",
+              "firepower": "small arms"
+            }
+          ],
+          "notes": [
+            "Can claim objectives."
+          ]
         },
         "despoiler": {
           "name": "Despoiler Squad",
           "type": "INF",
-          "speed": "15cm", "armour": "5+", "cc": "4+", "ff": "5+",
-          "weapons": [{ "name": "Bolt Pistols & Chainswords", "range": "(base)", "firepower": "(assault) EA (+1)" }],
-          "notes": ["Counts as Tactical for transport."]
+          "speed": "15cm",
+          "armour": "5+",
+          "cc": "4+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Bolt Pistols & Chainswords",
+              "range": "(base)",
+              "firepower": "(assault) EA (+1)"
+            }
+          ],
+          "notes": [
+            "Counts as Tactical for transport."
+          ]
         },
         "assault": {
           "name": "Assault Squad",
           "type": "INF",
-          "speed": "30cm", "armour": "5+", "cc": "3+", "ff": "5+",
-          "weapons": [{ "name": "Bolt Pistols & Chainswords", "range": "(base)", "firepower": "(assault) EA (+1)" }],
-          "notes": ["Jump Packs (Teleport-style move)."]
+          "speed": "30cm",
+          "armour": "5+",
+          "cc": "3+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Bolt Pistols & Chainswords",
+              "range": "(base)",
+              "firepower": "(assault) EA (+1)"
+            }
+          ],
+          "notes": [
+            "Jump Packs (Teleport-style move)."
+          ]
         },
         "breacher": {
           "name": "Breacher Squad",
           "type": "INF",
-          "speed": "15cm", "armour": "4+", "cc": "5+", "ff": "4+",
-          "weapons": [{ "name": "Bolters", "range": "(15cm)", "firepower": "small arms" }],
-          "notes": ["Reinforced armour."]
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "5+",
+          "ff": "4+",
+          "weapons": [
+            {
+              "name": "Bolters",
+              "range": "(15cm)",
+              "firepower": "small arms"
+            }
+          ],
+          "notes": [
+            "Reinforced armour."
+          ]
         },
         "terminator": {
           "name": "Terminator Squad",
           "type": "INF",
-          "speed": "15cm", "armour": "4+", "cc": "4+", "ff": "4+",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "4+",
+          "ff": "4+",
           "weapons": [
-            { "name": "Power Fists", "range": "(base)", "firepower": "(assault) MW, EA (+1)" },
-            { "name": "Combi-bolters", "range": "(15cm)", "firepower": "small arms" }
+            {
+              "name": "Power Fists",
+              "range": "(base)",
+              "firepower": "(assault) MW, EA (+1)"
+            },
+            {
+              "name": "Combi-bolters",
+              "range": "(15cm)",
+              "firepower": "small arms"
+            }
           ],
-          "notes": ["Reinforced armour.", "Thick rear armour."]
+          "notes": [
+            "Reinforced armour.",
+            "Thick rear armour."
+          ]
         },
         "reaver": {
           "name": "Reaver Attack Squad",
           "type": "INF",
-          "speed": "15cm", "armour": "4+", "cc": "3+", "ff": "4+",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
           "weapons": [
-            { "name": "Talons & Claws", "range": "(base)", "firepower": "(assault) Fleshbane, EA (+1)" },
-            { "name": "Banestrike Bolter", "range": "(15cm)", "firepower": "small arms, Sniper" }
+            {
+              "name": "Talons & Claws",
+              "range": "(base)",
+              "firepower": "(assault) Fleshbane, EA (+1)"
+            },
+            {
+              "name": "Banestrike Bolter",
+              "range": "(15cm)",
+              "firepower": "small arms, Sniper"
+            }
           ],
-          "notes": ["Berserk.", "Ferocity.", "Fearless.", "Invulnerable save.", "Cannot claim objectives.", "Counts as Tactical for transport."]
+          "notes": [
+            "Berserk.",
+            "Ferocity.",
+            "Fearless.",
+            "Invulnerable save.",
+            "Cannot claim objectives.",
+            "Counts as Tactical for transport."
+          ]
         },
         "luperci": {
           "name": "Luperci",
           "type": "INF",
-          "speed": "15cm", "armour": "4+", "cc": "4+", "ff": "5+",
-          "weapons": [{ "name": "Talons & Claws", "range": "(base)", "firepower": "(assault) Fleshbane, EA (+1)" }],
-          "notes": ["Berserk.", "Ferocity.", "Fearless.", "Invulnerable save.", "Cannot claim objectives.", "Counts as Tactical for transport."]
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "4+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Talons & Claws",
+              "range": "(base)",
+              "firepower": "(assault) Fleshbane, EA (+1)"
+            }
+          ],
+          "notes": [
+            "Berserk.",
+            "Ferocity.",
+            "Fearless.",
+            "Invulnerable save.",
+            "Cannot claim objectives.",
+            "Counts as Tactical for transport."
+          ]
         },
         "justaerian": {
           "name": "Justaerian Terminators",
           "type": "INF",
-          "speed": "15cm", "armour": "4+", "cc": "3+", "ff": "4+",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
           "weapons": [
-            { "name": "Power Fists", "range": "(base)", "firepower": "(assault) MW, EA (+1)" },
-            { "name": "Multi-melta", "range": "(15cm)", "firepower": "AP5+/AT5+, MW (small arms) MW" }
+            {
+              "name": "Power Fists",
+              "range": "(base)",
+              "firepower": "(assault) MW, EA (+1)"
+            },
+            {
+              "name": "Multi-melta",
+              "range": "(15cm)",
+              "firepower": "AP5+/AT5+, MW (small arms) MW"
+            }
           ],
-          "notes": ["Reinforced armour.", "Thick rear armour."]
+          "notes": [
+            "Reinforced armour.",
+            "Thick rear armour."
+          ]
         },
         "horus": {
           "name": "Horus Lupercal",
           "type": "CH",
-          "speed": "15cm", "armour": "3+", "cc": "2+", "ff": "4+",
+          "speed": "15cm",
+          "armour": "3+",
+          "cc": "2+",
+          "ff": "4+",
           "weapons": [
-            { "name": "World Breaker", "range": "(base)", "firepower": "(assault) TK (1)" },
-            { "name": "Talons of Horus", "range": "(base) & (15cm)", "firepower": "(assault) MW, EA (+2) / (small arms) EA (+2)" }
+            {
+              "name": "World Breaker",
+              "range": "(base)",
+              "firepower": "(assault) TK (1)"
+            },
+            {
+              "name": "Talons of Horus",
+              "range": "(base) & (15cm)",
+              "firepower": "(assault) MW, EA (+2) / (small arms) EA (+2)"
+            }
           ],
-          "notes": ["Demi-God.", "Invulnerable save.", "Reinforced armour.", "Thick rear armour.", "Supreme Commander."]
+          "notes": [
+            "Demi-God.",
+            "Invulnerable save.",
+            "Reinforced armour.",
+            "Thick rear armour.",
+            "Supreme Commander."
+          ]
         },
         "champion": {
           "name": "Champion",
           "type": "CH",
-          "speed": "-", "armour": "4+", "cc": "3+", "ff": "4+",
+          "speed": "-",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
           "weapons": [
-            { "name": "Charnabal Sabre", "range": "(base)", "firepower": "(assault) MW, Lance, EA (+1)" }
+            {
+              "name": "Charnabal Sabre",
+              "range": "(base)",
+              "firepower": "(assault) MW, Lance, EA (+1)"
+            }
           ],
-          "notes": ["Invulnerable save.", "Leader.", "May be upgraded to Commander (1 per force)."]
+          "notes": [
+            "Invulnerable save.",
+            "Leader.",
+            "May be upgraded to Commander (1 per force)."
+          ]
         },
         "librarian": {
           "name": "Librarian",
           "type": "CH",
-          "speed": "-", "armour": "4+", "cc": "3+", "ff": "4+",
+          "speed": "-",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
           "weapons": [
-            { "name": "Force Weapon", "range": "(base)", "firepower": "(assault) MW, EA (+1)" },
-            { "name": "Smite", "range": "(15cm)", "firepower": "(small arms) MW, EA (+1)" }
+            {
+              "name": "Force Weapon",
+              "range": "(base)",
+              "firepower": "(assault) MW, EA (+1)"
+            },
+            {
+              "name": "Smite",
+              "range": "(15cm)",
+              "firepower": "(small arms) MW, EA (+1)"
+            }
           ],
-          "notes": ["Invulnerable save.", "Leader."]
+          "notes": [
+            "Invulnerable save.",
+            "Leader."
+          ]
         },
         "chaplain": {
           "name": "Chaplain",
           "type": "CH",
-          "speed": "-", "armour": "4+", "cc": "3+", "ff": "4+",
+          "speed": "-",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
           "weapons": [
-            { "name": "Crozius Arcanum", "range": "(base)", "firepower": "(assault) Fleshbane, EA (+1)" }
+            {
+              "name": "Crozius Arcanum",
+              "range": "(base)",
+              "firepower": "(assault) Fleshbane, EA (+1)"
+            }
           ],
-          "notes": ["Invulnerable save.", "Inspiring.", "Leader."]
+          "notes": [
+            "Invulnerable save.",
+            "Inspiring.",
+            "Leader."
+          ]
         },
         "commander": {
           "name": "Commander",
           "type": "CH",
-          "speed": "-", "armour": "4+", "cc": "3+", "ff": "4+",
+          "speed": "-",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
           "weapons": [
-            { "name": "Paragon Blade", "range": "(base)", "firepower": "(assault) Fleshbane, EA (+1)" }
+            {
+              "name": "Paragon Blade",
+              "range": "(base)",
+              "firepower": "(assault) Fleshbane, EA (+1)"
+            }
           ],
-          "notes": ["Invulnerable save.", "Supreme Commander."]
+          "notes": [
+            "Invulnerable save.",
+            "Supreme Commander."
+          ]
         },
         "rhino": {
           "name": "Rhino",
           "type": "AV",
-          "speed": "30cm", "armour": "5+", "cc": "6+", "ff": "5+",
+          "speed": "30cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "5+",
           "weapons": [
-            { "name": "Combi-bolters", "range": "(15cm)", "firepower": "small arms" }
+            {
+              "name": "Combi-bolters",
+              "range": "(15cm)",
+              "firepower": "small arms"
+            }
           ],
-          "notes": ["Transport (may carry 2 Tactical)."]
+          "notes": [
+            "Transport (may carry 2 Tactical)."
+          ]
         },
         "damocles": {
           "name": "Damocles Command Rhino",
           "type": "AV",
-          "speed": "30cm", "armour": "5+", "cc": "6+", "ff": "5+",
+          "speed": "30cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "5+",
           "weapons": [
-            { "name": "Combi-bolters", "range": "(15cm)", "firepower": "small arms" }
+            {
+              "name": "Combi-bolters",
+              "range": "(15cm)",
+              "firepower": "small arms"
+            }
           ],
-          "notes": ["Leader.", "Transport (may carry 2 Tactical)."]
+          "notes": [
+            "Leader.",
+            "Transport (may carry 2 Tactical)."
+          ]
         },
         "land-raider-phobos": {
           "name": "Land Raider Phobos",
           "type": "WE",
-          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "4+",
+          "speed": "25cm",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "4+",
           "weapons": [
-            { "name": "2× TL Lascannon", "range": "45cm", "firepower": "AT4+" },
-            { "name": "TL Heavy Bolter", "range": "30cm", "firepower": "AP4+" }
+            {
+              "name": "2× TL Lascannon",
+              "range": "45cm",
+              "firepower": "AT4+"
+            },
+            {
+              "name": "TL Heavy Bolter",
+              "range": "30cm",
+              "firepower": "AP4+"
+            }
           ],
-          "notes": ["DC1.", "Invulnerable save.", "Reinforced armour.", "Thick rear armour.", "Transport (1 Tactical/Breacher/Terminator)."]
+          "notes": [
+            "DC1.",
+            "Invulnerable save.",
+            "Reinforced armour.",
+            "Thick rear armour.",
+            "Transport (1 Tactical/Breacher/Terminator)."
+          ]
         },
         "land-raider-proteus": {
           "name": "Land Raider Proteus",
           "type": "WE",
-          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "speed": "25cm",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "5+",
           "weapons": [
-            { "name": "2× TL Lascannon", "range": "45cm", "firepower": "AT4+" },
-            { "name": "TL Heavy Bolter", "range": "30cm", "firepower": "AP4+" }
+            {
+              "name": "2× TL Lascannon",
+              "range": "45cm",
+              "firepower": "AT4+"
+            },
+            {
+              "name": "TL Heavy Bolter",
+              "range": "30cm",
+              "firepower": "AP4+"
+            }
           ],
-          "notes": ["DC1.", "Invulnerable save.", "Reinforced armour.", "Thick rear armour.", "Transport (2 Tactical/Breacher OR 1 Terminator)."]
+          "notes": [
+            "DC1.",
+            "Invulnerable save.",
+            "Reinforced armour.",
+            "Thick rear armour.",
+            "Transport (2 Tactical/Breacher OR 1 Terminator)."
+          ]
         },
         "spartan": {
           "name": "Spartan Assault Tank",
           "type": "WE",
-          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "speed": "25cm",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "5+",
           "weapons": [
-            { "name": "2× Quad Lascannons", "range": "45cm", "firepower": "AT3+" },
-            { "name": "TL Heavy Bolter", "range": "30cm", "firepower": "AP4+" }
+            {
+              "name": "2× Quad Lascannons",
+              "range": "45cm",
+              "firepower": "AT3+"
+            },
+            {
+              "name": "TL Heavy Bolter",
+              "range": "30cm",
+              "firepower": "AP4+"
+            }
           ],
-          "notes": ["DC2.", "Reinforced armour.", "Thick rear armour.", "Transport (4 Tactical/Breacher OR 2 Terminator)."]
+          "notes": [
+            "DC2.",
+            "Reinforced armour.",
+            "Thick rear armour.",
+            "Transport (4 Tactical/Breacher OR 2 Terminator)."
+          ]
         },
         "termite": {
           "name": "Termite Assault Drill",
           "type": "AV",
-          "speed": "10cm", "armour": "5+", "cc": "4+", "ff": "5+",
+          "speed": "10cm",
+          "armour": "5+",
+          "cc": "4+",
+          "ff": "5+",
           "weapons": [
-            { "name": "Heavy Melta Cutter", "range": "(base)", "firepower": "(assault) MW" },
-            { "name": "TL Volkite Caliver", "range": "15cm", "firepower": "AP4+, Disrupt" }
+            {
+              "name": "Heavy Melta Cutter",
+              "range": "(base)",
+              "firepower": "(assault) MW"
+            },
+            {
+              "name": "TL Volkite Caliver",
+              "range": "15cm",
+              "firepower": "AP4+, Disrupt"
+            }
           ],
-          "notes": ["Self planetfall (turn 2+).", "Reinforced armour.", "Thick rear armour.", "Walker.", "Transport (2 INF)."]
+          "notes": [
+            "Self planetfall (turn 2+).",
+            "Reinforced armour.",
+            "Thick rear armour.",
+            "Walker.",
+            "Transport (2 INF)."
+          ]
         },
         "mastodon": {
           "name": "Mastodon",
           "type": "WE",
-          "speed": "20cm", "armour": "4+", "cc": "5+", "ff": "4+",
+          "speed": "20cm",
+          "armour": "4+",
+          "cc": "5+",
+          "ff": "4+",
           "weapons": [
-            { "name": "Siege Melta Array", "range": "(base)", "firepower": "(assault) MW, Siege, EA (+2)" },
-            { "name": "2× Heavy Flamer", "range": "15cm & (15cm)", "firepower": "AP4+, Ignore cover / (small arms) Ignore cover" }
+            {
+              "name": "Siege Melta Array",
+              "range": "(base)",
+              "firepower": "(assault) MW, Siege, EA (+2)"
+            },
+            {
+              "name": "2× Heavy Flamer",
+              "range": "15cm & (15cm)",
+              "firepower": "AP4+, Ignore cover / (small arms) Ignore cover"
+            }
           ],
-          "notes": ["DC4.", "2 Void shields.", "Reinforced armour.", "Transport (10 Tactical/Breacher/Terminator/Dread; Terminators & Dreads count as 2)."]
+          "notes": [
+            "DC4.",
+            "2 Void shields.",
+            "Reinforced armour.",
+            "Transport (10 Tactical/Breacher/Terminator/Dread; Terminators & Dreads count as 2)."
+          ]
         },
         "kharybdys": {
           "name": "Kharybdis Assault Claw",
           "type": "AV",
-          "speed": "35cm", "armour": "4+", "cc": "5+", "ff": "5+",
+          "speed": "35cm",
+          "armour": "4+",
+          "cc": "5+",
+          "ff": "5+",
           "weapons": [
-            { "name": "Storm Launcher", "range": "30cm", "firepower": "3× AP5+/AT6+, Single shot" },
-            { "name": "Melta Ram", "range": "(base)", "firepower": "(assault) MW, EA (+1), Siege" },
-            { "name": "Heat Blast", "range": "15cm & (15cm)", "firepower": "2× AP4+/AT4+, Disrupt / (small arms) MW, EA (+1)" }
+            {
+              "name": "Storm Launcher",
+              "range": "30cm",
+              "firepower": "3× AP5+/AT6+, Single shot"
+            },
+            {
+              "name": "Melta Ram",
+              "range": "(base)",
+              "firepower": "(assault) MW, EA (+1), Siege"
+            },
+            {
+              "name": "Heat Blast",
+              "range": "15cm & (15cm)",
+              "firepower": "2× AP4+/AT4+, Disrupt / (small arms) MW, EA (+1)"
+            }
           ],
-          "notes": ["Planetfall.", "Skimmer.", "Transport (4 Assault/Breacher/Rapier/Tactical OR 2 Terminator OR 1 Castraferrum/Contemptor)."]
+          "notes": [
+            "Planetfall.",
+            "Skimmer.",
+            "Transport (4 Assault/Breacher/Rapier/Tactical OR 2 Terminator OR 1 Castraferrum/Contemptor)."
+          ]
         },
         "cestus": {
           "name": "Cestus Assault Ram",
           "type": "AV",
-          "speed": "35cm", "armour": "5+", "cc": "6+", "ff": "4+",
+          "speed": "35cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "4+",
           "weapons": [
-            { "name": "Firefury Missiles", "range": "30cm", "firepower": "AP3+/AT3+, MW" },
-            { "name": "Magna Melta", "range": "15cm & (15cm)", "firepower": "AP4+/AT4+, MW / (small arms) MW" }
+            {
+              "name": "Firefury Missiles",
+              "range": "30cm",
+              "firepower": "AP3+/AT3+, MW"
+            },
+            {
+              "name": "Magna Melta",
+              "range": "15cm & (15cm)",
+              "firepower": "AP4+/AT4+, MW / (small arms) MW"
+            }
           ],
-          "notes": ["Planetfall.", "Reinforced armour.", "Skimmer.", "Transport (2 Breacher OR 2 Terminator)."]
+          "notes": [
+            "Planetfall.",
+            "Reinforced armour.",
+            "Skimmer.",
+            "Transport (2 Breacher OR 2 Terminator)."
+          ]
         },
         "castraferrum": {
           "name": "Castraferrum Dreadnought",
           "type": "AV",
-          "speed": "15cm", "armour": "3+", "cc": "5+", "ff": "4+",
+          "speed": "15cm",
+          "armour": "3+",
+          "cc": "5+",
+          "ff": "4+",
           "weapons": [
-            { "name": "TL Lascannon & TL Missile Launcher", "range": "45cm", "firepower": "AT4+" },
-            { "name": "Autocannon", "range": "45cm", "firepower": "AP4+/AT5+" },
-            { "name": "Powerfist", "range": "(base)", "firepower": "(assault) MW, EA (+1)" }
+            {
+              "name": "TL Lascannon & TL Missile Launcher",
+              "range": "45cm",
+              "firepower": "AT4+"
+            },
+            {
+              "name": "Autocannon",
+              "range": "45cm",
+              "firepower": "AP4+/AT5+"
+            },
+            {
+              "name": "Powerfist",
+              "range": "(base)",
+              "firepower": "(assault) MW, EA (+1)"
+            }
           ],
-          "notes": ["Walker.", "Invulnerable save."]
+          "notes": [
+            "Walker.",
+            "Invulnerable save."
+          ]
         },
         "contemptor": {
           "name": "Contemptor Dreadnought",
           "type": "AV",
-          "speed": "15cm", "armour": "3+", "cc": "5+", "ff": "3+",
+          "speed": "15cm",
+          "armour": "3+",
+          "cc": "5+",
+          "ff": "3+",
           "weapons": [
-            { "name": "Arm options (select 2)", "range": "—", "firepower": "TL Heavy Bolter 30cm AP4+ · Multimelta 15cm & (15cm) AP5+/AT5+ MW · Kheres Assault Cannon 15cm & (15cm) AP4+/AT5+ EA(+1) · Plasma Cannon 30cm AP5+/AT5+ Fleshbane · Powerfist (base) (assault) MW EA(+1)" }
+            {
+              "name": "Arm options (select 2)",
+              "range": "—",
+              "firepower": "TL Heavy Bolter 30cm AP4+ · Multimelta 15cm & (15cm) AP5+/AT5+ MW · Kheres Assault Cannon 15cm & (15cm) AP4+/AT5+ EA(+1) · Plasma Cannon 30cm AP5+/AT5+ Fleshbane · Powerfist (base) (assault) MW EA(+1)"
+            }
           ],
-          "notes": ["Invulnerable save.", "Walker.", "May replace 1 arm with Conversion Beamer (+20).", "May add carapace Havoc Launcher (+5).", "1–2 per formation may take Conversion Beamer."]
+          "notes": [
+            "Invulnerable save.",
+            "Walker.",
+            "May replace 1 arm with Conversion Beamer (+20).",
+            "May add carapace Havoc Launcher (+5).",
+            "1–2 per formation may take Conversion Beamer."
+          ]
         },
         "leviathan": {
           "name": "Leviathan Siege Dreadnought",
           "type": "AV",
-          "speed": "15cm", "armour": "4+", "cc": "4+", "ff": "4+",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "4+",
+          "ff": "4+",
           "weapons": [
-            { "name": "Arm options (select 2)", "range": "—", "firepower": "Siege Claw/Drill (base) (assault) MW EA(+1) Siege · Gravflux Bombard 15cm 2× AP4+/AT4+ Disrupt · Cyclonic Melta Lance 15cm & (15cm) AP5+/AT3+ MW · Stormcannon 15cm & (15cm) 2× AP4+/AT6+ EA(+1)" }
+            {
+              "name": "Arm options (select 2)",
+              "range": "—",
+              "firepower": "Siege Claw/Drill (base) (assault) MW EA(+1) Siege · Gravflux Bombard 15cm 2× AP4+/AT4+ Disrupt · Cyclonic Melta Lance 15cm & (15cm) AP5+/AT3+ MW · Stormcannon 15cm & (15cm) 2× AP4+/AT6+ EA(+1)"
+            }
           ],
-          "notes": ["Invulnerable save.", "Reinforced armour.", "Walker."]
+          "notes": [
+            "Invulnerable save.",
+            "Reinforced armour.",
+            "Walker."
+          ]
         },
         "deredeo": {
           "name": "Deredeo Dreadnought",
           "type": "AV",
-          "speed": "15cm", "armour": "3+", "cc": "5+", "ff": "3+",
+          "speed": "15cm",
+          "armour": "3+",
+          "cc": "5+",
+          "ff": "3+",
           "weapons": [
-            { "name": "TL Heavy Bolters", "range": "30cm", "firepower": "AP4+/AT4+, MW, Indirect, Ignore cover" },
-            { "name": "Anvillus Battery OR Helical Array", "range": "45cm", "firepower": "2× AP5+/AT5+" },
-            { "name": "Hellfire Plasma Cannon", "range": "30cm", "firepower": "AP4+/AT4+, Fleshbane" }
+            {
+              "name": "TL Heavy Bolters",
+              "range": "30cm",
+              "firepower": "AP4+/AT4+, MW, Indirect, Ignore cover"
+            },
+            {
+              "name": "Anvillus Battery OR Helical Array",
+              "range": "45cm",
+              "firepower": "2× AP5+/AT5+"
+            },
+            {
+              "name": "Hellfire Plasma Cannon",
+              "range": "30cm",
+              "firepower": "AP4+/AT4+, Fleshbane"
+            }
           ],
-          "notes": ["Invulnerable save.", "Walker."]
+          "notes": [
+            "Invulnerable save.",
+            "Walker."
+          ]
         },
         "predator": {
           "name": "Predator",
           "type": "AV",
-          "speed": "30cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "speed": "30cm",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "5+",
           "weapons": [
-            { "name": "Lascannon", "range": "45cm", "firepower": "AT5+" },
-            { "name": "2× Heavy Bolters", "range": "30cm", "firepower": "AP5+" }
+            {
+              "name": "Lascannon",
+              "range": "45cm",
+              "firepower": "AT5+"
+            },
+            {
+              "name": "2× Heavy Bolters",
+              "range": "30cm",
+              "firepower": "AP5+"
+            }
           ],
-          "notes": ["Reinforced armour."]
+          "notes": [
+            "Reinforced armour."
+          ]
         },
         "sicaran": {
           "name": "Sicaran",
           "type": "AV",
-          "speed": "35cm", "armour": "5+", "cc": "6+", "ff": "4+",
+          "speed": "35cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "4+",
           "weapons": [
-            { "name": "Accelerator OR Punisher Cannon", "range": "45cm", "firepower": "2× AP4+/AT5+" },
-            { "name": "Heavy Bolter", "range": "30cm", "firepower": "AP5+" }
+            {
+              "name": "Accelerator OR Punisher Cannon",
+              "range": "45cm",
+              "firepower": "2× AP4+/AT5+"
+            },
+            {
+              "name": "Heavy Bolter",
+              "range": "30cm",
+              "firepower": "AP5+"
+            }
           ],
-          "notes": ["Reinforced armour."]
+          "notes": [
+            "Reinforced armour."
+          ]
         },
         "vindicator": {
           "name": "Vindicator",
           "type": "AV",
-          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "speed": "25cm",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "5+",
           "weapons": [
-            { "name": "Demolisher Cannon", "range": "15cm & (15cm)", "firepower": "AP4+/AT4+, MW, Ignore cover / (small arms) MW, Ignore cover" },
-            { "name": "2× Heavy Bolters", "range": "30cm", "firepower": "AP4+" }
+            {
+              "name": "Demolisher Cannon",
+              "range": "15cm & (15cm)",
+              "firepower": "AP4+/AT4+, MW, Ignore cover / (small arms) MW, Ignore cover"
+            },
+            {
+              "name": "2× Heavy Bolters",
+              "range": "30cm",
+              "firepower": "AP4+"
+            }
           ],
-          "notes": ["Thick rear armour.", "Walker."]
+          "notes": [
+            "Thick rear armour.",
+            "Walker."
+          ]
         },
         "cerberus": {
           "name": "Cerberus Heavy Destroyer Tank",
           "type": "WE",
-          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "speed": "25cm",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "5+",
           "weapons": [
-            { "name": "Neutron Laser Battery", "range": "60cm", "firepower": "2× AT3+, Armourbane, Feedback, Disrupt, FxF" },
-            { "name": "2× Lascannon", "range": "45cm", "firepower": "AT5+" }
+            {
+              "name": "Neutron Laser Battery",
+              "range": "60cm",
+              "firepower": "2× AT3+, Armourbane, Feedback, Disrupt, FxF"
+            },
+            {
+              "name": "2× Lascannon",
+              "range": "45cm",
+              "firepower": "AT5+"
+            }
           ],
-          "notes": ["DC2.", "Reinforced armour.", "Invulnerable save."]
+          "notes": [
+            "DC2.",
+            "Reinforced armour.",
+            "Invulnerable save."
+          ]
         },
         "typhon": {
           "name": "Typhon Heavy Siege Tank",
           "type": "WE",
-          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "3+",
+          "speed": "25cm",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "3+",
           "weapons": [
-            { "name": "Dreadhammer Cannon", "range": "45cm & (15cm)", "firepower": "3 BP, Ignore cover, FxF" },
-            { "name": "2× Heavy Bolters", "range": "30cm", "firepower": "AP5+" }
+            {
+              "name": "Dreadhammer Cannon",
+              "range": "45cm & (15cm)",
+              "firepower": "3 BP, Ignore cover, FxF"
+            },
+            {
+              "name": "2× Heavy Bolters",
+              "range": "30cm",
+              "firepower": "AP5+"
+            }
           ],
-          "notes": ["DC2.", "Reinforced armour.", "Thick rear armour."]
+          "notes": [
+            "DC2.",
+            "Reinforced armour.",
+            "Thick rear armour."
+          ]
         },
         "kratos": {
           "name": "Kratos Heavy Assault Tank",
           "type": "WE",
-          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "speed": "25cm",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "5+",
           "weapons": [
-            { "name": "Kratos Battlecannon", "range": "30cm", "firepower": "AP4+/AT3+, Armourbane" },
-            { "name": "Autocannon", "range": "45cm", "firepower": "AP5+/AT6+" },
-            { "name": "Sponson 2× TL Lascannon OR (4+) 2× TL Heavy Bolters", "range": "45cm", "firepower": "AT4+ Fwd / AP4+" },
-            { "name": "Hull 2× Lascannon OR (3+) 2× Heavy Bolters", "range": "45cm", "firepower": "AT5+ / AP5+" }
+            {
+              "name": "Kratos Battlecannon",
+              "range": "30cm",
+              "firepower": "AP4+/AT3+, Armourbane"
+            },
+            {
+              "name": "Autocannon",
+              "range": "45cm",
+              "firepower": "AP5+/AT6+"
+            },
+            {
+              "name": "Sponson 2× TL Lascannon OR (4+) 2× TL Heavy Bolters",
+              "range": "45cm",
+              "firepower": "AT4+ Fwd / AP4+"
+            },
+            {
+              "name": "Hull 2× Lascannon OR (3+) 2× Heavy Bolters",
+              "range": "45cm",
+              "firepower": "AT5+ / AP5+"
+            }
           ],
-          "notes": ["DC2.", "Reinforced armour."]
+          "notes": [
+            "DC2.",
+            "Reinforced armour."
+          ]
         },
         "hyperios": {
           "name": "Whirlwind Hyperios",
           "type": "AV",
-          "speed": "30cm", "armour": "5+", "cc": "6+", "ff": "5+",
+          "speed": "30cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "5+",
           "weapons": [
-            { "name": "Multi-launch Rockets", "range": "45cm", "firepower": "1 BP, Ignore cover, Indirect fire" },
-            { "name": "Hyperios SAM Launcher", "range": "45cm & 60cm", "firepower": "AT4+ / AA4+" }
+            {
+              "name": "Multi-launch Rockets",
+              "range": "45cm",
+              "firepower": "1 BP, Ignore cover, Indirect fire"
+            },
+            {
+              "name": "Hyperios SAM Launcher",
+              "range": "45cm & 60cm",
+              "firepower": "AT4+ / AA4+"
+            }
           ],
           "notes": []
         },
         "rapier": {
           "name": "Rapier Weapons Platform",
           "type": "AV",
-          "speed": "30cm", "armour": "5+", "cc": "6+", "ff": "6+",
+          "speed": "30cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "6+",
           "weapons": [
-            { "name": "Rapier Battery", "range": "45cm", "firepower": "2× AP5+/AT5+, Indirect fire" }
+            {
+              "name": "Rapier Battery",
+              "range": "45cm",
+              "firepower": "2× AP5+/AT5+, Indirect fire"
+            }
           ],
           "notes": []
         },
         "tactical-support": {
           "name": "Tactical Support Squad",
           "type": "INF",
-          "speed": "15cm", "armour": "4+", "cc": "4+", "ff": "4+",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "4+",
+          "ff": "4+",
           "weapons": [
-            { "name": "Support Weapons", "range": "15cm & (15cm)", "firepower": "2× AP4+, Ignore cover / (assault) Ignore cover, EA (+1)" }
+            {
+              "name": "Support Weapons",
+              "range": "15cm & (15cm)",
+              "firepower": "2× AP4+, Ignore cover / (assault) Ignore cover, EA (+1)"
+            }
           ],
-          "notes": ["Counts as Tactical for transport."]
+          "notes": [
+            "Counts as Tactical for transport."
+          ]
         },
         "heavy-support": {
           "name": "Heavy Support Squad",
           "type": "INF",
-          "speed": "15cm", "armour": "4+", "cc": "5+", "ff": "3+",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "5+",
+          "ff": "3+",
           "weapons": [
-            { "name": "Heavy Weapons", "range": "45cm & 30cm", "firepower": "2× AP5+/AT6+ / AA6+" }
+            {
+              "name": "Heavy Weapons",
+              "range": "45cm & 30cm",
+              "firepower": "2× AP5+/AT6+ / AA6+"
+            }
           ],
-          "notes": ["Counts as Tactical for transport."]
+          "notes": [
+            "Counts as Tactical for transport."
+          ]
         },
         "infernus": {
           "name": "Infernus Predator",
           "type": "AV",
-          "speed": "30cm", "armour": "4+", "cc": "6+", "ff": "3+",
+          "speed": "30cm",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "3+",
           "weapons": [
-            { "name": "Magma Melta", "range": "15cm & (15cm)", "firepower": "AP3+/AT3+, MW / (small arms)" },
-            { "name": "2× Heavy Bolters", "range": "30cm", "firepower": "AP5+" }
+            {
+              "name": "Magma Melta",
+              "range": "15cm & (15cm)",
+              "firepower": "AP3+/AT3+, MW / (small arms)"
+            },
+            {
+              "name": "2× Heavy Bolters",
+              "range": "30cm",
+              "firepower": "AP5+"
+            }
           ],
-          "notes": ["Reinforced armour.", "Thick rear armour."]
+          "notes": [
+            "Reinforced armour.",
+            "Thick rear armour."
+          ]
         },
         "executioner": {
           "name": "Executioner Predator",
           "type": "AV",
-          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "speed": "25cm",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "5+",
           "weapons": [
-            { "name": "Plasma Cannon", "range": "45cm", "firepower": "AP4+/AT4+, MW" },
-            { "name": "Lascannon", "range": "45cm", "firepower": "AT5+" }
+            {
+              "name": "Plasma Cannon",
+              "range": "45cm",
+              "firepower": "AP4+/AT4+, MW"
+            },
+            {
+              "name": "Lascannon",
+              "range": "45cm",
+              "firepower": "AT5+"
+            }
           ],
-          "notes": ["Reinforced armour.", "Thick rear armour."]
+          "notes": [
+            "Reinforced armour.",
+            "Thick rear armour."
+          ]
         },
         "scorpius": {
           "name": "Scorpius Predator",
           "type": "AV",
-          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "4+",
+          "speed": "25cm",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "4+",
           "weapons": [
-            { "name": "TL Volkite Demiculverin", "range": "45cm", "firepower": "2× AP3+/AT5+, Disrupt" },
-            { "name": "Lascannon", "range": "45cm", "firepower": "AT5+" }
+            {
+              "name": "TL Volkite Demiculverin",
+              "range": "45cm",
+              "firepower": "2× AP3+/AT5+, Disrupt"
+            },
+            {
+              "name": "Lascannon",
+              "range": "45cm",
+              "firepower": "AT5+"
+            }
           ],
-          "notes": ["Reinforced armour.", "Thick rear armour."]
+          "notes": [
+            "Reinforced armour.",
+            "Thick rear armour."
+          ]
         },
         "omega": {
           "name": "Sicaran Omega",
           "type": "AV",
-          "speed": "35cm", "armour": "5+", "cc": "6+", "ff": "5+",
+          "speed": "35cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "5+",
           "weapons": [
-            { "name": "Omega Plasma Array", "range": "30cm", "firepower": "2× AP5+/AT4+, Fleshbane" },
-            { "name": "Heavy Bolter", "range": "30cm", "firepower": "AP5+" },
-            { "name": "2× Lascannon OR (3+) 2× Heavy Bolters", "range": "45cm / 30cm", "firepower": "AT5+ / AP5+" }
+            {
+              "name": "Omega Plasma Array",
+              "range": "30cm",
+              "firepower": "2× AP5+/AT4+, Fleshbane"
+            },
+            {
+              "name": "Heavy Bolter",
+              "range": "30cm",
+              "firepower": "AP5+"
+            },
+            {
+              "name": "2× Lascannon OR (3+) 2× Heavy Bolters",
+              "range": "45cm / 30cm",
+              "firepower": "AT5+ / AP5+"
+            }
           ],
-          "notes": ["Reinforced armour."]
+          "notes": [
+            "Reinforced armour."
+          ]
         },
         "venator": {
           "name": "Sicaran Venator",
           "type": "AV",
-          "speed": "35cm", "armour": "5+", "cc": "6+", "ff": "5+",
+          "speed": "35cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "5+",
           "weapons": [
-            { "name": "Neutron Beamer", "range": "30cm", "firepower": "2× AT3+, Armourbane, Disrupt, Feedback, FxF" },
-            { "name": "Sponson Lascannons", "range": "45cm", "firepower": "2× AT5+" }
+            {
+              "name": "Neutron Beamer",
+              "range": "30cm",
+              "firepower": "2× AT3+, Armourbane, Disrupt, Feedback, FxF"
+            },
+            {
+              "name": "Sponson Lascannons",
+              "range": "45cm",
+              "firepower": "2× AT5+"
+            }
           ],
-          "notes": ["Reinforced armour."]
+          "notes": [
+            "Reinforced armour."
+          ]
         },
         "achilles": {
           "name": "Achilles Land Raider",
           "type": "AV",
-          "speed": "25cm", "armour": "3+", "cc": "6+", "ff": "4+",
+          "speed": "25cm",
+          "armour": "3+",
+          "cc": "6+",
+          "ff": "4+",
           "weapons": [
-            { "name": "Achilles Dreadspear", "range": "(base)", "firepower": "(assault) MW, EA (+2)" },
-            { "name": "2× TL Lascannon OR 2× TL Heavy Bolters", "range": "45cm / 30cm", "firepower": "AT4+ / AP4+" }
+            {
+              "name": "Achilles Dreadspear",
+              "range": "(base)",
+              "firepower": "(assault) MW, EA (+2)"
+            },
+            {
+              "name": "2× TL Lascannon OR 2× TL Heavy Bolters",
+              "range": "45cm / 30cm",
+              "firepower": "AT4+ / AP4+"
+            }
           ],
-          "notes": ["Invulnerable save.", "Walker."]
+          "notes": [
+            "Invulnerable save.",
+            "Walker."
+          ]
         },
         "vindicator-destroyer": {
           "name": "Vindicator Destroyer",
           "type": "AV",
-          "speed": "25cm", "armour": "4+", "cc": "6+", "ff": "5+",
+          "speed": "25cm",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "5+",
           "weapons": [
-            { "name": "Laser Destroyer Array", "range": "60cm", "firepower": "AT4+, Armourbane" }
+            {
+              "name": "Laser Destroyer Array",
+              "range": "60cm",
+              "firepower": "AT4+, Armourbane"
+            }
           ],
-          "notes": ["Thick rear armour.", "Walker."]
+          "notes": [
+            "Thick rear armour.",
+            "Walker."
+          ]
+        },
+        "destroyer": {
+          "name": "Destroyer Squad",
+          "type": "INF",
+          "speed": "30cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
+          "weapons": [
+            {
+              "name": "Rad Missile Launcher",
+              "range": "15cm & (15cm)",
+              "firepower": "AP4+, Fleshbane, Ignore cover / (small arms) Fleshbane, Ignore cover"
+            }
+          ],
+          "notes": [
+            "Jump packs.",
+            "Counts as Assault for transport."
+          ]
+        },
+        "inductii": {
+          "name": "Inductii Squad",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "5+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Bolters OR Chainswords",
+              "range": "(15cm) / (base)",
+              "firepower": "small arms / (assault)"
+            }
+          ],
+          "notes": [
+            "Fresh recruits (–1 to Action and Rally tests).",
+            "Counts as Tactical for transport."
+          ]
+        },
+        "recon": {
+          "name": "Reconnaissance Squad",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "4+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Sniper Rifles",
+              "range": "30cm",
+              "firepower": "2× AP5+, Sniper, Fleshbane"
+            }
+          ],
+          "notes": [
+            "Scout.",
+            "Infiltrate.",
+            "Counts as Tactical for transport."
+          ]
+        },
+        "scout": {
+          "name": "Scout Squad",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "4+",
+          "ff": "4+",
+          "weapons": [
+            {
+              "name": "Bolters OR Chainswords",
+              "range": "(15cm) / (base)",
+              "firepower": "small arms / (assault)"
+            }
+          ],
+          "notes": [
+            "Scout.",
+            "Infiltrate.",
+            "Camouflage (+1 to Cover saves)."
+          ]
+        },
+        "veteran": {
+          "name": "Veteran Squad",
+          "type": "INF",
+          "speed": "15cm",
+          "armour": "4+",
+          "cc": "4+",
+          "ff": "3+",
+          "weapons": [
+            {
+              "name": "Combi-weapons & Power Weapons",
+              "range": "15cm & (base)",
+              "firepower": "AP5+/AT6+ / (assault) Fleshbane"
+            }
+          ],
+          "notes": [
+            "Counts as Tactical for transport."
+          ]
+        },
+        "outrider": {
+          "name": "Outrider Squad",
+          "type": "LV",
+          "speed": "30cm",
+          "armour": "4+",
+          "cc": "3+",
+          "ff": "4+",
+          "weapons": [
+            {
+              "name": "Chainswords & Bolters",
+              "range": "(base) & (15cm)",
+              "firepower": "(assault) / small arms"
+            }
+          ],
+          "notes": [
+            "Mounted.",
+            "Scout."
+          ]
+        },
+        "attack-bike": {
+          "name": "Attack Bike",
+          "type": "LV",
+          "speed": "30cm",
+          "armour": "5+",
+          "cc": "5+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Multi-melta OR Heavy Bolter",
+              "range": "30cm / 30cm",
+              "firepower": "AP5+/AT5+, MW / AP5+"
+            }
+          ],
+          "notes": [
+            "Mounted."
+          ]
+        },
+        "scimitar": {
+          "name": "Scimitar Jetbike",
+          "type": "LV",
+          "speed": "35cm",
+          "armour": "5+",
+          "cc": "4+",
+          "ff": "4+",
+          "weapons": [
+            {
+              "name": "Plasma Cannon",
+              "range": "30cm",
+              "firepower": "AP5+/AT5+, Fleshbane"
+            }
+          ],
+          "notes": [
+            "Scout.",
+            "Skimmer."
+          ]
+        },
+        "land-speeder": {
+          "name": "Land Speeder",
+          "type": "LV",
+          "speed": "35cm",
+          "armour": "5+",
+          "cc": "5+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "TL Multi-melta OR Heavy Bolter",
+              "range": "15cm & (15cm) / 30cm",
+              "firepower": "AP4+/AT4+, MW / (small arms) MW / AP5+, Fleshbane"
+            }
+          ],
+          "notes": [
+            "Scout.",
+            "Skimmer."
+          ]
+        },
+        "javelin": {
+          "name": "Javelin Attack Speeder",
+          "type": "LV",
+          "speed": "35cm",
+          "armour": "4+",
+          "cc": "5+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "TL Lascannon OR TL Missile Launcher & Heavy Bolter",
+              "range": "45cm & 30cm",
+              "firepower": "AT4+ / AP5+"
+            }
+          ],
+          "notes": [
+            "Scout.",
+            "Skimmer."
+          ]
+        },
+        "skyreaper": {
+          "name": "Skyreaper Defender",
+          "type": "AV",
+          "speed": "30cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Skyreaper Battery",
+              "range": "30cm",
+              "firepower": "2× AP4+/AT6+/AA5+"
+            }
+          ],
+          "notes": []
+        },
+        "arquitor": {
+          "name": "Arquitor Bombard",
+          "type": "AV",
+          "speed": "20cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Spicula Rockets OR Graviton Chargecannon & Heavy Bolter",
+              "range": "30cm",
+              "firepower": "D3× BP, Indirect fire, Slow to fire / 2× AP4+/AT4+, Disrupt, Indirect fire / AP5+"
+            }
+          ],
+          "notes": [
+            "Reinforced armour."
+          ]
+        },
+        "basilisk": {
+          "name": "Basilisk",
+          "type": "AV",
+          "speed": "25cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Earthshaker Cannon & Heavy Bolter",
+              "range": "120cm & 30cm",
+              "firepower": "AP4+/AT4+, MW, Indirect fire, Ignore cover / AP5+"
+            }
+          ],
+          "notes": []
+        },
+        "medusa": {
+          "name": "Medusa",
+          "type": "AV",
+          "speed": "25cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Medusa Siege Cannon & Heavy Bolter",
+              "range": "30cm",
+              "firepower": "AP3+/AT3+, MW, Ignore cover / AP5+"
+            }
+          ],
+          "notes": [
+            "Reinforced armour."
+          ]
+        },
+        "whirlwind": {
+          "name": "Whirlwind",
+          "type": "AV",
+          "speed": "30cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Multi-launch Rockets",
+              "range": "45cm",
+              "firepower": "1 BP, Ignore cover, Indirect fire"
+            }
+          ],
+          "notes": []
+        },
+        "sabre": {
+          "name": "Sabre Strike Tank",
+          "type": "AV",
+          "speed": "35cm",
+          "armour": "5+",
+          "cc": "6+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Snub Autocannon (or +15 Volkite Saker / +15 Neutron Cannon) & Sabre Missiles",
+              "range": "15cm & 30cm",
+              "firepower": "AP4+/AT5+, FxF / Disrupt"
+            }
+          ],
+          "notes": [
+            "May replace Snub Autocannon for Volkite Saker (+15) or Neutron Cannon (+15)."
+          ]
+        },
+        "storm-eagle": {
+          "name": "Storm Eagle Gunship",
+          "type": "AC/WE",
+          "speed": "Fast",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Hellstrike Missiles & Vengeance Launcher & TL Heavy Bolter",
+              "range": "45cm",
+              "firepower": "2× AT4+, Fwd / 1 BP, FxF / AP4+/AA5+, Fwd"
+            }
+          ],
+          "notes": [
+            "DC1.",
+            "Planetfall.",
+            "Reinforced armour.",
+            "Transport (4 Assault/Breacher/Tactical OR 2 Terminator)."
+          ]
+        },
+        "thunderhawk": {
+          "name": "Thunderhawk Gunship",
+          "type": "AC/WE",
+          "speed": "Fast",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "4+",
+          "weapons": [
+            {
+              "name": "Battlecannon OR Laser Destroyer & TL Lascannon & TL Heavy Bolter",
+              "range": "60cm / 45cm / 30cm",
+              "firepower": "AP3+/AT3+, FxF / 2× AP6+/AT3+, Armourbane, FxF / AT4+, FxF / AP4+/AA6+, (1L,1R)"
+            }
+          ],
+          "notes": [
+            "DC2.",
+            "Planetfall.",
+            "Reinforced armour.",
+            "Transport (8 Assault/Breacher/Tactical OR 5 Outrider OR 4 Terminator)."
+          ]
+        },
+        "thunderhawk-transporter": {
+          "name": "Thunderhawk Transporter",
+          "type": "AC/WE",
+          "speed": "Fast",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "4+",
+          "weapons": [
+            {
+              "name": "2× TL Heavy Bolter",
+              "range": "30cm",
+              "firepower": "AP4+/AA5+"
+            }
+          ],
+          "notes": [
+            "DC2.",
+            "Planetfall.",
+            "Reinforced armour.",
+            "Transport (2 armoured vehicles OR 1 Land Raider/Spartan AND up to 4 INF in same formation)."
+          ]
+        },
+        "plutona": {
+          "name": "Plutona Assault Drill",
+          "type": "WE",
+          "speed": "10cm",
+          "armour": "4+",
+          "cc": "5+",
+          "ff": "4+",
+          "weapons": [
+            {
+              "name": "Siege Melta Array & 2× TL Heavy Flamer",
+              "range": "(base) & 15cm & (15cm)",
+              "firepower": "(assault) MW, Siege, EA (+2) / AP4+, Ignore cover / (small arms) Ignore cover"
+            }
+          ],
+          "notes": [
+            "DC4.",
+            "Self Planetfall.",
+            "Reinforced armour.",
+            "Thick rear armour.",
+            "Walker.",
+            "Slow and steady (no first-turn move).",
+            "Transport (10 Breacher/Dreadnought/Tactical/Terminator; Terminators & Dreads count as 2)."
+          ]
+        },
+        "falchion": {
+          "name": "Falchion",
+          "type": "WE",
+          "speed": "20cm",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "6+",
+          "weapons": [
+            {
+              "name": "TL Volcano Cannon & 2× Quad Lascannon",
+              "range": "90cm & 45cm",
+              "firepower": "FxF AT2+, TK (D3) / AT3+"
+            }
+          ],
+          "notes": [
+            "DC3.",
+            "Reinforced armour.",
+            "Critical Hit: Destroyed; all units within 5cm suffer a standard hit on 6+."
+          ]
+        },
+        "fellblade": {
+          "name": "Fellblade Super Heavy Tank",
+          "type": "WE",
+          "speed": "20cm",
+          "armour": "4+",
+          "cc": "5+",
+          "ff": "5+",
+          "weapons": [
+            {
+              "name": "Fellblade Cannon & 2× Quad Lascannon & TL Heavy Bolter & Demolisher Cannon",
+              "range": "75cm / 45cm / 30cm / 15cm & (15cm)",
+              "firepower": "AP2+/AT2+, TK (1) / AT3+ / AP4+ / AP4+/AT4+, MW, Ignore cover / (small arms) MW, EA (+1)"
+            }
+          ],
+          "notes": [
+            "DC4.",
+            "Reinforced armour."
+          ]
+        },
+        "glaive": {
+          "name": "Glaive Super Heavy Tank",
+          "type": "WE",
+          "speed": "20cm",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "4+",
+          "weapons": [
+            {
+              "name": "Volkite Carronade & 2× Quad Lascannon & TL Heavy Bolter",
+              "range": "45cm / 45cm / 30cm",
+              "firepower": "5× AP3+/AT5+, Disrupt, Ignore cover / AT3+ / AP3+"
+            }
+          ],
+          "notes": [
+            "DC4.",
+            "Reinforced armour.",
+            "Thick rear armour."
+          ]
+        },
+        "fire-raptor": {
+          "name": "Fire Raptor Gunship",
+          "type": "AC",
+          "speed": "Fighter-Bomber",
+          "armour": "5+",
+          "cc": "—",
+          "ff": "—",
+          "weapons": [
+            {
+              "name": "TL Avenger Cannon & Hellstrike Missiles & 2× Quad Heavy Bolter OR 2× Reaper Cannons",
+              "range": "30cm / 45cm / 30cm",
+              "firepower": "2× AP2+/AT5+, FxF / 2× AT4+, Fwd / 2× AP4+ and AA6+, (1L,1R) / 2× AP4+/AT6+, (1L,1R)"
+            }
+          ],
+          "notes": [
+            "Reinforced armour."
+          ]
+        },
+        "xiphon": {
+          "name": "Xiphon Interceptor",
+          "type": "AC",
+          "speed": "Fighter",
+          "armour": "5+",
+          "cc": "—",
+          "ff": "—",
+          "weapons": [
+            {
+              "name": "2× TL Lascannon & Rotary Missiles",
+              "range": "30cm",
+              "firepower": "AT4+/AA5+, FxF / AT5+/AA6+, Ignore cover, FxF"
+            }
+          ],
+          "notes": [
+            "Reinforced armour."
+          ]
+        },
+        "stormbird": {
+          "name": "Stormbird Assault Dropship",
+          "type": "AC/WE",
+          "speed": "Fast",
+          "armour": "4+",
+          "cc": "6+",
+          "ff": "4+",
+          "weapons": [
+            {
+              "name": "Dreadstrike Missiles & 4× TL Lascannon & 3× TL Heavy Bolter",
+              "range": "45cm & 45cm & 30cm",
+              "firepower": "4× AT4+, Fwd / AT4+/AA5+, (2L,2R) / AP4+, FxF"
+            }
+          ],
+          "notes": [
+            "DC4.",
+            "Planetfall.",
+            "Reinforced armour.",
+            "1 Void shield.",
+            "Transport (12 Assault/Breacher/Dread/Tactical/Terminator OR 8 Outrider/Attack Bike OR 5 Scimitar Jetbikes; may also transport non-WE transports of the formation; Terminators & Dreads count as 2)."
+          ]
+        },
+        "strike-cruiser": {
+          "name": "Strike Cruiser",
+          "type": "SC",
+          "speed": "—",
+          "armour": "—",
+          "cc": "—",
+          "ff": "—",
+          "weapons": [
+            {
+              "name": "Orbital Bombardment",
+              "range": "—",
+              "firepower": "5 BP, MW"
+            }
+          ],
+          "notes": [
+            "Spacecraft.",
+            "Transport (20 INF/Scimitar + 20 AV/Land Raider/Spartan + 6 Thunderhawks + 2 Stormbirds + drop assets)."
+          ]
+        },
+        "battleship": {
+          "name": "Battle Barge",
+          "type": "SC",
+          "speed": "—",
+          "armour": "—",
+          "cc": "—",
+          "ff": "—",
+          "weapons": [
+            {
+              "name": "Orbital Bombardment & Lance Battery",
+              "range": "—",
+              "firepower": "14 BP, MW / AP2+/AT2+, TK (D3)"
+            }
+          ],
+          "notes": [
+            "Spacecraft.",
+            "Transport (60 INF/Scimitar + 60 AV/Land Raider/Spartan + 9 Thunderhawks + 4 Stormbirds + drop assets)."
+          ]
         }
       }
     }

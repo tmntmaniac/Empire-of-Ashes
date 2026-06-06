@@ -195,7 +195,7 @@ function AddFormationDialog({ faction, hasHorus, onClose, onAdd }) {
                     </div>
                     <button onClick={onClose} className="btn-ghost" data-testid="close-add-formation">Close</button>
                 </div>
-                {["Line", "Support", "Primarch"].map((cat) =>
+                {["Line", "Support", "Lords of War", "Primarch"].map((cat) =>
                     groups[cat] ? (
                         <div key={cat} className="mb-6">
                             <div className="font-mono text-[10px] tracking-[0.3em] text-[#888] uppercase mb-2">// {cat}</div>

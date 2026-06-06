@@ -1,0 +1,32 @@
+{
+  "summary": "Tested Sons of Horus codex expansion (46 formations / 71 units / 7 Lords of War / reaver reclassified to Line). Backend pytest 50/50 passing (6 base + 44 expansion). Frontend E2E confirms all 4 categories ('Line','Support','Lords of War','Primarch') render in correct order; all 7 LoW formation buttons present; Reaver Detachment now under LINE; Plutona Assault Drill adds as LoW formation with full unit stat table; Predator Squadron extra-unit +/- increments points by +60 (540->600); 3-formation army persists to localStorage and reloads correctly; no console errors.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_factions.py",
+    "/app/backend/tests/test_expansion.py",
+    "/app/test_reports/pytest/pytest_results.xml",
+    "/app/test_reports/pytest/pytest_expansion.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "server.py now correctly reads factions.json per-request (load_faction_data) — the stale-cache bug from iteration_3 is fixed. Negligible perf cost given the small JSON.",
+    "Builder.jsx line 198 correctly maps ['Line','Support','Lords of War','Primarch'] in that order; AddFormationDialog renders each category section only if formations exist for it, so future empty categories degrade gracefully.",
+    "test_credentials.md is absent at /app/memory/test_credentials.md — acceptable for this no-auth localStorage MVP.",
+    "The Builder save button testid is 'builder-save-btn' and the print button is 'builder-print-btn' (not 'save-army-btn'/'print-army-btn' as listed in the review request). PrintView's actual print trigger is 'print-trigger'. Recommend updating any external docs referencing the old names to avoid confusion for future testing.",
+    "FormationEditor properly handles new unit types: Plutona renders WE type with full weapons line (Siege Melta Array & 2x TL Heavy Flamer / AP4+ / Ignore cover); Predator Squadron shows AV type rows correctly with Lascannon 45cm AT5+ etc. No data-driven rendering issues found across new units."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_expansion.py (NEW — 44 assertions for the expansion)"
+  ],
+  "success_rate": { "backend": "100% (50/50)", "frontend": "100% on all critical flows tested" },
+  "test_credentials": "None required (no auth).",
+  "seed_data_creation": "Created TEST_LoWExpansion / TEST_Final / TEST_CatCheck armies in browser localStorage (key: eoa.armies.v1) during E2E. Will be cleared on next testing agent's localStorage.clear().",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend: GET /api/factions/sons-of-horus returns 46 formations + 71 units; category breakdown is Line=5, Support=33, Lords of War=7, Primarch=1. Run `pytest /app/backend/tests/ -v` for full regression. Frontend testids that differ from the review request: actual Builder Save button = data-testid='builder-save-btn' (NOT 'save-army-btn'); Builder Print button = data-testid='builder-print-btn' (NOT 'print-army-btn'); inside PrintView the window.print trigger = data-testid='print-trigger'. Category section headers in AddFormationDialog render as '// LINE', '// SUPPORT', '// LORDS OF WAR', '// PRIMARCH' (uppercase with '// ' prefix) — when DOM-scraping for them use innerText not getAttribute. Extra-unit increment buttons follow pattern data-testid='extra-plus-{index}' (e.g., 'extra-plus-1' for predator-squadron). Reaver Detachment appears as the 5th Line entry (after Tactical/Assault/Breacher/Terminator) and visually sits above the '// SUPPORT' divider."
+}
