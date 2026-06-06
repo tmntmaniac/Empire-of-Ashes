@@ -7,6 +7,9 @@
 //   R4 — Each Line detachment may take up to M upgrades.
 //        (Astartes: 4. Solar Auxilia / Imperialis Militia: 3.)
 //   R5 — Only 1 Primarch may be taken.
+//   R6 — Per-formation count caps. A formation may carry `maxPer: {points: N}`
+//        which means "1 instance allowed per N points of the army's pointsCap"
+//        (e.g. Cerastus Lance: 1 per 2,000 pts → 1 at 2000pts, 2 at 4000pts).
 //
 // Limits are read from `faction.compositionLimits` when present, with
 // Astartes defaults as a fallback so existing legion data keeps working.
@@ -106,6 +109,28 @@ export function validateArmy(army, faction) {
             code: "primarch-over-limit",
             severity: "error",
             message: `Only ${MAX_PRIMARCHS} Primarch allowed — ${primarchCount} taken.`,
+        });
+    }
+
+    // R6 — Per-formation count caps (formation.maxPer: { points: N })
+    //   "1 per N points" → allowed = floor(cap / N)
+    if (cap > 0) {
+        const formationCounts = new Map();
+        formations.forEach((f) => {
+            formationCounts.set(f.formationId, (formationCounts.get(f.formationId) || 0) + 1);
+        });
+        formationCounts.forEach((count, formationId) => {
+            const def = formDefMap[formationId];
+            const perPoints = def?.maxPer?.points;
+            if (!perPoints) return;
+            const allowed = Math.floor(cap / perPoints);
+            if (count > allowed) {
+                issues.push({
+                    code: "formation-over-cap",
+                    severity: "error",
+                    message: `${def.name}: ${count} taken — max ${allowed} allowed (1 per ${perPoints} pts).`,
+                });
+            }
         });
     }
 

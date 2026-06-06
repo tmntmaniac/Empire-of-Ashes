@@ -8,7 +8,7 @@
       "lore": "Generic Legiones Astartes baseline rules. This template provides every Legion's shared formations, units, transports and rolling stock. Each specific Legion override applies its own identity, trait and any unique formations layered on top.",
       "legionTrait": {
         "name": "Legiones Astartes",
-        "description": "Baseline template — see your specific Legion's trait card."
+        "description": "Baseline template \u2014 see your specific Legion's trait card."
       },
       "compositionRules": [
         "Max 3 Support detachments per Line detachment in the army.",
@@ -580,7 +580,7 @@
         },
         {
           "id": "artillery-battery-arquitor",
-          "name": "Artillery Battery — Arquitor",
+          "name": "Artillery Battery \u2014 Arquitor",
           "category": "Support",
           "baseCost": 300,
           "composition": "4 Arquitor Bombards",
@@ -601,7 +601,7 @@
         },
         {
           "id": "artillery-battery-basilisk",
-          "name": "Artillery Battery — Basilisk",
+          "name": "Artillery Battery \u2014 Basilisk",
           "category": "Support",
           "baseCost": 325,
           "composition": "4 Basilisks",
@@ -622,7 +622,7 @@
         },
         {
           "id": "artillery-battery-medusa",
-          "name": "Artillery Battery — Medusa",
+          "name": "Artillery Battery \u2014 Medusa",
           "category": "Support",
           "baseCost": 250,
           "composition": "4 Medusas",
@@ -643,7 +643,7 @@
         },
         {
           "id": "artillery-battery-whirlwind",
-          "name": "Artillery Battery — Whirlwind",
+          "name": "Artillery Battery \u2014 Whirlwind",
           "category": "Support",
           "baseCost": 300,
           "composition": "4 Whirlwinds",
@@ -906,7 +906,7 @@
         },
         {
           "id": "legion-spacecraft-strike-cruiser",
-          "name": "Legion Spacecraft — Strike Cruiser",
+          "name": "Legion Spacecraft \u2014 Strike Cruiser",
           "category": "Support",
           "baseCost": 200,
           "composition": "1 Strike Cruiser",
@@ -925,7 +925,7 @@
         },
         {
           "id": "legion-spacecraft-battleship",
-          "name": "Legion Spacecraft — Battle Barge",
+          "name": "Legion Spacecraft \u2014 Battle Barge",
           "category": "Support",
           "baseCost": 300,
           "composition": "1 Battle Barge",
@@ -1345,42 +1345,42 @@
           "variants": [
             {
               "id": "infernus",
-              "name": "Predator → Infernus",
+              "name": "Predator \u2192 Infernus",
               "cost": 20
             },
             {
               "id": "executioner",
-              "name": "Predator → Executioner",
+              "name": "Predator \u2192 Executioner",
               "cost": 20
             },
             {
               "id": "scorpius",
-              "name": "Predator → Scorpius",
+              "name": "Predator \u2192 Scorpius",
               "cost": 20
             },
             {
               "id": "omega",
-              "name": "Sicaran → Omega",
+              "name": "Sicaran \u2192 Omega",
               "cost": 20
             },
             {
               "id": "venator",
-              "name": "Sicaran → Venator",
+              "name": "Sicaran \u2192 Venator",
               "cost": 20
             },
             {
               "id": "achilles",
-              "name": "Land Raider Phobos → Achilles",
+              "name": "Land Raider Phobos \u2192 Achilles",
               "cost": 20
             },
             {
               "id": "deredeo",
-              "name": "Contemptor → Deredeo",
+              "name": "Contemptor \u2192 Deredeo",
               "cost": 40
             },
             {
               "id": "vindicator-destroyer",
-              "name": "Vindicator → Destroyer",
+              "name": "Vindicator \u2192 Destroyer",
               "cost": 20
             }
           ]
@@ -1594,7 +1594,7 @@
           "ff": "4+",
           "weapons": [
             {
-              "name": "2× TL Lascannon",
+              "name": "2\u00d7 TL Lascannon",
               "range": "45cm",
               "firepower": "AT4+"
             },
@@ -1621,7 +1621,7 @@
           "ff": "5+",
           "weapons": [
             {
-              "name": "2× TL Lascannon",
+              "name": "2\u00d7 TL Lascannon",
               "range": "45cm",
               "firepower": "AT4+"
             },
@@ -1648,7 +1648,7 @@
           "ff": "5+",
           "weapons": [
             {
-              "name": "2× Quad Lascannons",
+              "name": "2\u00d7 Quad Lascannons",
               "range": "45cm",
               "firepower": "AT3+"
             },
@@ -1706,7 +1706,7 @@
               "firepower": "(assault) MW, Siege, EA (+2)"
             },
             {
-              "name": "2× Heavy Flamer",
+              "name": "2\u00d7 Heavy Flamer",
               "range": "15cm & (15cm)",
               "firepower": "AP4+, Ignore cover / (small arms) Ignore cover"
             }
@@ -1729,7 +1729,7 @@
             {
               "name": "Storm Launcher",
               "range": "30cm",
-              "firepower": "3× AP5+/AT6+, Single shot"
+              "firepower": "3\u00d7 AP5+/AT6+, Single shot"
             },
             {
               "name": "Melta Ram",
@@ -1739,7 +1739,7 @@
             {
               "name": "Heat Blast",
               "range": "15cm & (15cm)",
-              "firepower": "2× AP4+/AT4+, Disrupt / (small arms) MW, EA (+1)"
+              "firepower": "2\u00d7 AP4+/AT4+, Disrupt / (small arms) MW, EA (+1)"
             }
           ],
           "notes": [
@@ -1813,8 +1813,8 @@
           "weapons": [
             {
               "name": "Arm options (select 2)",
-              "range": "—",
-              "firepower": "TL Heavy Bolter 30cm AP4+ · Multimelta 15cm & (15cm) AP5+/AT5+ MW · Kheres Assault Cannon 15cm & (15cm) AP4+/AT5+ EA(+1) · Plasma Cannon 30cm AP5+/AT5+ Fleshbane · Powerfist (base) (assault) MW EA(+1)"
+              "range": "\u2014",
+              "firepower": "TL Heavy Bolter 30cm AP4+ \u00b7 Multimelta 15cm & (15cm) AP5+/AT5+ MW \u00b7 Kheres Assault Cannon 15cm & (15cm) AP4+/AT5+ EA(+1) \u00b7 Plasma Cannon 30cm AP5+/AT5+ Fleshbane \u00b7 Powerfist (base) (assault) MW EA(+1)"
             }
           ],
           "notes": [
@@ -1822,7 +1822,7 @@
             "Walker.",
             "May replace 1 arm with Conversion Beamer (+20).",
             "May add carapace Havoc Launcher (+5).",
-            "1–2 per formation may take Conversion Beamer."
+            "1\u20132 per formation may take Conversion Beamer."
           ]
         },
         "leviathan": {
@@ -1835,8 +1835,8 @@
           "weapons": [
             {
               "name": "Arm options (select 2)",
-              "range": "—",
-              "firepower": "Siege Claw/Drill (base) (assault) MW EA(+1) Siege · Gravflux Bombard 15cm 2× AP4+/AT4+ Disrupt · Cyclonic Melta Lance 15cm & (15cm) AP5+/AT3+ MW · Stormcannon 15cm & (15cm) 2× AP4+/AT6+ EA(+1)"
+              "range": "\u2014",
+              "firepower": "Siege Claw/Drill (base) (assault) MW EA(+1) Siege \u00b7 Gravflux Bombard 15cm 2\u00d7 AP4+/AT4+ Disrupt \u00b7 Cyclonic Melta Lance 15cm & (15cm) AP5+/AT3+ MW \u00b7 Stormcannon 15cm & (15cm) 2\u00d7 AP4+/AT6+ EA(+1)"
             }
           ],
           "notes": [
@@ -1861,7 +1861,7 @@
             {
               "name": "Anvillus Battery OR Helical Array",
               "range": "45cm",
-              "firepower": "2× AP5+/AT5+"
+              "firepower": "2\u00d7 AP5+/AT5+"
             },
             {
               "name": "Hellfire Plasma Cannon",
@@ -1888,7 +1888,7 @@
               "firepower": "AT5+"
             },
             {
-              "name": "2× Heavy Bolters",
+              "name": "2\u00d7 Heavy Bolters",
               "range": "30cm",
               "firepower": "AP5+"
             }
@@ -1908,7 +1908,7 @@
             {
               "name": "Accelerator OR Punisher Cannon",
               "range": "45cm",
-              "firepower": "2× AP4+/AT5+"
+              "firepower": "2\u00d7 AP4+/AT5+"
             },
             {
               "name": "Heavy Bolter",
@@ -1934,7 +1934,7 @@
               "firepower": "AP4+/AT4+, MW, Ignore cover / (small arms) MW, Ignore cover"
             },
             {
-              "name": "2× Heavy Bolters",
+              "name": "2\u00d7 Heavy Bolters",
               "range": "30cm",
               "firepower": "AP4+"
             }
@@ -1955,10 +1955,10 @@
             {
               "name": "Neutron Laser Battery",
               "range": "60cm",
-              "firepower": "2× AT3+, Armourbane, Feedback, Disrupt, FxF"
+              "firepower": "2\u00d7 AT3+, Armourbane, Feedback, Disrupt, FxF"
             },
             {
-              "name": "2× Lascannon",
+              "name": "2\u00d7 Lascannon",
               "range": "45cm",
               "firepower": "AT5+"
             }
@@ -1983,7 +1983,7 @@
               "firepower": "3 BP, Ignore cover, FxF"
             },
             {
-              "name": "2× Heavy Bolters",
+              "name": "2\u00d7 Heavy Bolters",
               "range": "30cm",
               "firepower": "AP5+"
             }
@@ -2013,12 +2013,12 @@
               "firepower": "AP5+/AT6+"
             },
             {
-              "name": "Sponson 2× TL Lascannon OR (4+) 2× TL Heavy Bolters",
+              "name": "Sponson 2\u00d7 TL Lascannon OR (4+) 2\u00d7 TL Heavy Bolters",
               "range": "45cm",
               "firepower": "AT4+ Fwd / AP4+"
             },
             {
-              "name": "Hull 2× Lascannon OR (3+) 2× Heavy Bolters",
+              "name": "Hull 2\u00d7 Lascannon OR (3+) 2\u00d7 Heavy Bolters",
               "range": "45cm",
               "firepower": "AT5+ / AP5+"
             }
@@ -2060,7 +2060,7 @@
             {
               "name": "Rapier Battery",
               "range": "45cm",
-              "firepower": "2× AP5+/AT5+, Indirect fire"
+              "firepower": "2\u00d7 AP5+/AT5+, Indirect fire"
             }
           ],
           "notes": []
@@ -2076,7 +2076,7 @@
             {
               "name": "Support Weapons",
               "range": "15cm & (15cm)",
-              "firepower": "2× AP4+, Ignore cover / (assault) Ignore cover, EA (+1)"
+              "firepower": "2\u00d7 AP4+, Ignore cover / (assault) Ignore cover, EA (+1)"
             }
           ],
           "notes": [
@@ -2094,7 +2094,7 @@
             {
               "name": "Heavy Weapons",
               "range": "45cm & 30cm",
-              "firepower": "2× AP5+/AT6+ / AA6+"
+              "firepower": "2\u00d7 AP5+/AT6+ / AA6+"
             }
           ],
           "notes": [
@@ -2115,7 +2115,7 @@
               "firepower": "AP3+/AT3+, MW / (small arms)"
             },
             {
-              "name": "2× Heavy Bolters",
+              "name": "2\u00d7 Heavy Bolters",
               "range": "30cm",
               "firepower": "AP5+"
             }
@@ -2160,7 +2160,7 @@
             {
               "name": "TL Volkite Demiculverin",
               "range": "45cm",
-              "firepower": "2× AP3+/AT5+, Disrupt"
+              "firepower": "2\u00d7 AP3+/AT5+, Disrupt"
             },
             {
               "name": "Lascannon",
@@ -2184,7 +2184,7 @@
             {
               "name": "Omega Plasma Array",
               "range": "30cm",
-              "firepower": "2× AP5+/AT4+, Fleshbane"
+              "firepower": "2\u00d7 AP5+/AT4+, Fleshbane"
             },
             {
               "name": "Heavy Bolter",
@@ -2192,7 +2192,7 @@
               "firepower": "AP5+"
             },
             {
-              "name": "2× Lascannon OR (3+) 2× Heavy Bolters",
+              "name": "2\u00d7 Lascannon OR (3+) 2\u00d7 Heavy Bolters",
               "range": "45cm / 30cm",
               "firepower": "AT5+ / AP5+"
             }
@@ -2212,12 +2212,12 @@
             {
               "name": "Neutron Beamer",
               "range": "30cm",
-              "firepower": "2× AT3+, Armourbane, Disrupt, Feedback, FxF"
+              "firepower": "2\u00d7 AT3+, Armourbane, Disrupt, Feedback, FxF"
             },
             {
               "name": "Sponson Lascannons",
               "range": "45cm",
-              "firepower": "2× AT5+"
+              "firepower": "2\u00d7 AT5+"
             }
           ],
           "notes": [
@@ -2238,7 +2238,7 @@
               "firepower": "(assault) MW, EA (+2)"
             },
             {
-              "name": "2× TL Lascannon OR 2× TL Heavy Bolters",
+              "name": "2\u00d7 TL Lascannon OR 2\u00d7 TL Heavy Bolters",
               "range": "45cm / 30cm",
               "firepower": "AT4+ / AP4+"
             }
@@ -2301,7 +2301,7 @@
             }
           ],
           "notes": [
-            "Fresh recruits (–1 to Action and Rally tests).",
+            "Fresh recruits (\u20131 to Action and Rally tests).",
             "Counts as Tactical for transport."
           ]
         },
@@ -2316,7 +2316,7 @@
             {
               "name": "Sniper Rifles",
               "range": "30cm",
-              "firepower": "2× AP5+, Sniper, Fleshbane"
+              "firepower": "2\u00d7 AP5+, Sniper, Fleshbane"
             }
           ],
           "notes": [
@@ -2468,7 +2468,7 @@
             {
               "name": "Skyreaper Battery",
               "range": "30cm",
-              "firepower": "2× AP4+/AT6+/AA5+"
+              "firepower": "2\u00d7 AP4+/AT6+/AA5+"
             }
           ],
           "notes": []
@@ -2484,7 +2484,7 @@
             {
               "name": "Spicula Rockets OR Graviton Chargecannon & Heavy Bolter",
               "range": "30cm",
-              "firepower": "D3× BP, Indirect fire, Slow to fire / 2× AP4+/AT4+, Disrupt, Indirect fire / AP5+"
+              "firepower": "D3\u00d7 BP, Indirect fire, Slow to fire / 2\u00d7 AP4+/AT4+, Disrupt, Indirect fire / AP5+"
             }
           ],
           "notes": [
@@ -2570,7 +2570,7 @@
             {
               "name": "Hellstrike Missiles & Vengeance Launcher & TL Heavy Bolter",
               "range": "45cm",
-              "firepower": "2× AT4+, Fwd / 1 BP, FxF / AP4+/AA5+, Fwd"
+              "firepower": "2\u00d7 AT4+, Fwd / 1 BP, FxF / AP4+/AA5+, Fwd"
             }
           ],
           "notes": [
@@ -2591,7 +2591,7 @@
             {
               "name": "Battlecannon OR Laser Destroyer & TL Lascannon & TL Heavy Bolter",
               "range": "60cm / 45cm / 30cm",
-              "firepower": "AP3+/AT3+, FxF / 2× AP6+/AT3+, Armourbane, FxF / AT4+, FxF / AP4+/AA6+, (1L,1R)"
+              "firepower": "AP3+/AT3+, FxF / 2\u00d7 AP6+/AT3+, Armourbane, FxF / AT4+, FxF / AP4+/AA6+, (1L,1R)"
             }
           ],
           "notes": [
@@ -2610,7 +2610,7 @@
           "ff": "4+",
           "weapons": [
             {
-              "name": "2× TL Heavy Bolter",
+              "name": "2\u00d7 TL Heavy Bolter",
               "range": "30cm",
               "firepower": "AP4+/AA5+"
             }
@@ -2631,7 +2631,7 @@
           "ff": "4+",
           "weapons": [
             {
-              "name": "Siege Melta Array & 2× TL Heavy Flamer",
+              "name": "Siege Melta Array & 2\u00d7 TL Heavy Flamer",
               "range": "(base) & 15cm & (15cm)",
               "firepower": "(assault) MW, Siege, EA (+2) / AP4+, Ignore cover / (small arms) Ignore cover"
             }
@@ -2655,7 +2655,7 @@
           "ff": "6+",
           "weapons": [
             {
-              "name": "TL Volcano Cannon & 2× Quad Lascannon",
+              "name": "TL Volcano Cannon & 2\u00d7 Quad Lascannon",
               "range": "90cm & 45cm",
               "firepower": "FxF AT2+, TK (D3) / AT3+"
             }
@@ -2675,7 +2675,7 @@
           "ff": "5+",
           "weapons": [
             {
-              "name": "Fellblade Cannon & 2× Quad Lascannon & TL Heavy Bolter & Demolisher Cannon",
+              "name": "Fellblade Cannon & 2\u00d7 Quad Lascannon & TL Heavy Bolter & Demolisher Cannon",
               "range": "75cm / 45cm / 30cm / 15cm & (15cm)",
               "firepower": "AP2+/AT2+, TK (1) / AT3+ / AP4+ / AP4+/AT4+, MW, Ignore cover / (small arms) MW, EA (+1)"
             }
@@ -2694,9 +2694,9 @@
           "ff": "4+",
           "weapons": [
             {
-              "name": "Volkite Carronade & 2× Quad Lascannon & TL Heavy Bolter",
+              "name": "Volkite Carronade & 2\u00d7 Quad Lascannon & TL Heavy Bolter",
               "range": "45cm / 45cm / 30cm",
-              "firepower": "5× AP3+/AT5+, Disrupt, Ignore cover / AT3+ / AP3+"
+              "firepower": "5\u00d7 AP3+/AT5+, Disrupt, Ignore cover / AT3+ / AP3+"
             }
           ],
           "notes": [
@@ -2710,13 +2710,13 @@
           "type": "AC",
           "speed": "Fighter-Bomber",
           "armour": "5+",
-          "cc": "—",
-          "ff": "—",
+          "cc": "\u2014",
+          "ff": "\u2014",
           "weapons": [
             {
-              "name": "TL Avenger Cannon & Hellstrike Missiles & 2× Quad Heavy Bolter OR 2× Reaper Cannons",
+              "name": "TL Avenger Cannon & Hellstrike Missiles & 2\u00d7 Quad Heavy Bolter OR 2\u00d7 Reaper Cannons",
               "range": "30cm / 45cm / 30cm",
-              "firepower": "2× AP2+/AT5+, FxF / 2× AT4+, Fwd / 2× AP4+ and AA6+, (1L,1R) / 2× AP4+/AT6+, (1L,1R)"
+              "firepower": "2\u00d7 AP2+/AT5+, FxF / 2\u00d7 AT4+, Fwd / 2\u00d7 AP4+ and AA6+, (1L,1R) / 2\u00d7 AP4+/AT6+, (1L,1R)"
             }
           ],
           "notes": [
@@ -2728,11 +2728,11 @@
           "type": "AC",
           "speed": "Fighter",
           "armour": "5+",
-          "cc": "—",
-          "ff": "—",
+          "cc": "\u2014",
+          "ff": "\u2014",
           "weapons": [
             {
-              "name": "2× TL Lascannon & Rotary Missiles",
+              "name": "2\u00d7 TL Lascannon & Rotary Missiles",
               "range": "30cm",
               "firepower": "AT4+/AA5+, FxF / AT5+/AA6+, Ignore cover, FxF"
             }
@@ -2750,9 +2750,9 @@
           "ff": "4+",
           "weapons": [
             {
-              "name": "Dreadstrike Missiles & 4× TL Lascannon & 3× TL Heavy Bolter",
+              "name": "Dreadstrike Missiles & 4\u00d7 TL Lascannon & 3\u00d7 TL Heavy Bolter",
               "range": "45cm & 45cm & 30cm",
-              "firepower": "4× AT4+, Fwd / AT4+/AA5+, (2L,2R) / AP4+, FxF"
+              "firepower": "4\u00d7 AT4+, Fwd / AT4+/AA5+, (2L,2R) / AP4+, FxF"
             }
           ],
           "notes": [
@@ -2766,14 +2766,14 @@
         "strike-cruiser": {
           "name": "Strike Cruiser",
           "type": "SC",
-          "speed": "—",
-          "armour": "—",
-          "cc": "—",
-          "ff": "—",
+          "speed": "\u2014",
+          "armour": "\u2014",
+          "cc": "\u2014",
+          "ff": "\u2014",
           "weapons": [
             {
               "name": "Orbital Bombardment",
-              "range": "—",
+              "range": "\u2014",
               "firepower": "5 BP, MW"
             }
           ],
@@ -2785,14 +2785,14 @@
         "battleship": {
           "name": "Battle Barge",
           "type": "SC",
-          "speed": "—",
-          "armour": "—",
-          "cc": "—",
-          "ff": "—",
+          "speed": "\u2014",
+          "armour": "\u2014",
+          "cc": "\u2014",
+          "ff": "\u2014",
           "weapons": [
             {
               "name": "Orbital Bombardment & Lance Battery",
-              "range": "—",
+              "range": "\u2014",
               "firepower": "14 BP, MW / AP2+/AT2+, TK (D3)"
             }
           ],
@@ -2806,12 +2806,12 @@
     {
       "id": "solar-auxilia",
       "name": "Solar Auxilia",
-      "subtitle": "Excertus Imperialis · Cohorts of the Hundred Worlds",
+      "subtitle": "Excertus Imperialis \u00b7 Cohorts of the Hundred Worlds",
       "color": "#8A6E2F",
-      "lore": "The elite of the mortal Excertus Imperialis. Drawn from Terra's solar domains and moulded by the Principia Belicosa, the Solar Auxilia Cohorts march in serried ranks behind armoured spearheads of Leman Russ, Malcadors and ancient war engines. Less numerous than the Imperial Army but disciplined, professional and exquisitely equipped — the backstop of the Legiones Astartes.",
+      "lore": "The elite of the mortal Excertus Imperialis. Drawn from Terra's solar domains and moulded by the Principia Belicosa, the Solar Auxilia Cohorts march in serried ranks behind armoured spearheads of Leman Russ, Malcadors and ancient war engines. Less numerous than the Imperial Army but disciplined, professional and exquisitely equipped \u2014 the backstop of the Legiones Astartes.",
       "legionTrait": {
         "name": "Cohorts of the Solar Auxilia",
-        "description": "Strategy Rating 3 · Initiative 2+. May field 2 Support per Line, with up to 3 Upgrades per formation. One free Legate Commander per full 750 points (does not cost points)."
+        "description": "Strategy Rating 3 \u00b7 Initiative 2+. May field 2 Support per Line, with up to 3 Upgrades per formation. One free Legate Commander per full 750 points (does not cost points)."
       },
       "compositionLimits": {
         "maxSupportPerLine": 2,
@@ -3585,7 +3585,7 @@
             {
               "name": "Quad Heavy Bolter",
               "range": "30cm",
-              "firepower": "2× AP4+"
+              "firepower": "2\u00d7 AP4+"
             }
           ],
           "notes": [
@@ -3742,7 +3742,7 @@
             {
               "name": "Missile Pods",
               "range": "45cm",
-              "firepower": "2× AP5+"
+              "firepower": "2\u00d7 AP5+"
             },
             {
               "name": "Multilaser",
@@ -3853,12 +3853,12 @@
               "firepower": "AP4+/AT6+ Disrupt"
             },
             {
-              "name": "2× Lascannon OR",
+              "name": "2\u00d7 Lascannon OR",
               "range": "45cm",
               "firepower": "AT5+"
             },
             {
-              "name": "2× Heavy Bolters",
+              "name": "2\u00d7 Heavy Bolters",
               "range": "30cm",
               "firepower": "AP5+"
             }
@@ -3899,7 +3899,7 @@
             {
               "name": "Exterminator Cannon",
               "range": "45cm",
-              "firepower": "2× AP4+/AT6+"
+              "firepower": "2\u00d7 AP4+/AT6+"
             },
             {
               "name": "Heavy Bolter",
@@ -3946,7 +3946,7 @@
             {
               "name": "TL Volkite Demiculverin",
               "range": "45cm",
-              "firepower": "2× AP3+/AT5+, Disrupt"
+              "firepower": "2\u00d7 AP3+/AT5+, Disrupt"
             },
             {
               "name": "Lascannon",
@@ -4020,7 +4020,7 @@
               "firepower": "AP4+/AT4+"
             },
             {
-              "name": "2× Autocannons",
+              "name": "2\u00d7 Autocannons",
               "range": "45cm",
               "firepower": "AP5+/AT6+"
             },
@@ -4046,10 +4046,10 @@
             {
               "name": "Infernus Cannon",
               "range": "30cm",
-              "firepower": "2× AP3+, Ignore cover"
+              "firepower": "2\u00d7 AP3+, Ignore cover"
             },
             {
-              "name": "2× Autocannons",
+              "name": "2\u00d7 Autocannons",
               "range": "45cm",
               "firepower": "AP5+/AT6+"
             }
@@ -4118,7 +4118,7 @@
             {
               "name": "Neutron Beamer",
               "range": "30cm",
-              "firepower": "2× AT3+, Armourbane, Disrupt, Feedback, FxF"
+              "firepower": "2\u00d7 AT3+, Armourbane, Disrupt, Feedback, FxF"
             },
             {
               "name": "Lascannon",
@@ -4154,12 +4154,12 @@
               "firepower": "AP4+/AT4+, MW, Ignore cover / (small arms) MW, EA (+1)"
             },
             {
-              "name": "2× Lascannon",
+              "name": "2\u00d7 Lascannon",
               "range": "45cm",
               "firepower": "AT5+"
             },
             {
-              "name": "3× TL Heavy Bolters",
+              "name": "3\u00d7 TL Heavy Bolters",
               "range": "30cm",
               "firepower": "AP4+"
             }
@@ -4209,7 +4209,7 @@
               "firepower": "AP2+/AT2+, TK (D3), FxF"
             },
             {
-              "name": "2× TL Heavy Bolters",
+              "name": "2\u00d7 TL Heavy Bolters",
               "range": "30cm",
               "firepower": "AP4+"
             }
@@ -4231,15 +4231,15 @@
             {
               "name": "Plasma Blastgun",
               "range": "45cm",
-              "firepower": "2× AP2+/AT2+, MW, FxF, Slow firing"
+              "firepower": "2\u00d7 AP2+/AT2+, MW, FxF, Slow firing"
             },
             {
-              "name": "2× Lascannon",
+              "name": "2\u00d7 Lascannon",
               "range": "45cm",
               "firepower": "AT5+"
             },
             {
-              "name": "2× TL Heavy Bolter",
+              "name": "2\u00d7 TL Heavy Bolter",
               "range": "30cm",
               "firepower": "AP4+"
             },
@@ -4279,7 +4279,7 @@
               "firepower": "AT5+, FxF"
             },
             {
-              "name": "6× Heavy Bolters",
+              "name": "6\u00d7 Heavy Bolters",
               "range": "30cm",
               "firepower": "AP5+, (3L, 3R)"
             }
@@ -4301,15 +4301,15 @@
             {
               "name": "Vulcan Megabolter",
               "range": "45cm",
-              "firepower": "4× AP3+/AT5+, FxF"
+              "firepower": "4\u00d7 AP3+/AT5+, FxF"
             },
             {
-              "name": "2× Heavy Flamers",
+              "name": "2\u00d7 Heavy Flamers",
               "range": "15cm & (15cm)",
               "firepower": "AP5+, Ignore cover / (small arms) Ignore cover"
             },
             {
-              "name": "3× TL Heavy Bolters",
+              "name": "3\u00d7 TL Heavy Bolters",
               "range": "30cm",
               "firepower": "AP4+"
             }
@@ -4335,12 +4335,12 @@
               "firepower": "3 BP, Disrupt, Ignore cover / (small arms) Ignore cover"
             },
             {
-              "name": "2× TL Heavy Bolter",
+              "name": "2\u00d7 TL Heavy Bolter",
               "range": "30cm",
               "firepower": "AP4+"
             },
             {
-              "name": "2× Lascannon",
+              "name": "2\u00d7 Lascannon",
               "range": "45cm",
               "firepower": "AT5+"
             }
@@ -4362,7 +4362,7 @@
             {
               "name": "Avenger Cannon",
               "range": "30cm",
-              "firepower": "2× AP3+/AT5+, FxF"
+              "firepower": "2\u00d7 AP3+/AT5+, FxF"
             },
             {
               "name": "TL Lascannon",
@@ -4437,7 +4437,7 @@
               "firepower": "AT4+/AA5+, FxF"
             },
             {
-              "name": "2× Defence Turrets",
+              "name": "2\u00d7 Defence Turrets",
               "range": "30cm",
               "firepower": "AA5+, (1 Rwd)"
             },
@@ -4494,7 +4494,7 @@
             }
           ],
           "notes": [
-            "Slow and steady — not on turn 1.",
+            "Slow and steady \u2014 not on turn 1.",
             "Transport (up to 60 INF + Arvus carriers)."
           ]
         }
@@ -4503,12 +4503,12 @@
     {
       "id": "imperialis-militia",
       "name": "Imperialis Militia",
-      "subtitle": "Imperial Army · The Teeming Masses",
+      "subtitle": "Imperial Army \u00b7 The Teeming Masses",
       "color": "#5C6F3C",
-      "lore": "The numerical backbone of the Imperium. Where the Astartes break the enemy line the Imperial Army holds it — billions of soldiers drawn from a thousand worlds, led by hetmen and watched over by discipline masters. They lack the lustre of the Legions but in their hordes of machines, infantry and provincial provenances they prove that Mankind's greatest weapon is sheer mortal will.",
+      "lore": "The numerical backbone of the Imperium. Where the Astartes break the enemy line the Imperial Army holds it \u2014 billions of soldiers drawn from a thousand worlds, led by hetmen and watched over by discipline masters. They lack the lustre of the Legions but in their hordes of machines, infantry and provincial provenances they prove that Mankind's greatest weapon is sheer mortal will.",
       "legionTrait": {
         "name": "Provenances of the Imperial Army",
-        "description": "Strategy Rating 2 · Initiative 2+. May field 2 Support per Line, with up to 3 Upgrades per formation. Select up to two Provenances; each formation chooses one to modify INF stats (Determined, Feral Warriors, Survivors, Traitors, Void Fighters, Warrior Elite)."
+        "description": "Strategy Rating 2 \u00b7 Initiative 2+. May field 2 Support per Line, with up to 3 Upgrades per formation. Select up to two Provenances; each formation chooses one to modify INF stats (Determined, Feral Warriors, Survivors, Traitors, Void Fighters, Warrior Elite)."
       },
       "compositionLimits": {
         "maxSupportPerLine": 2,
@@ -5267,7 +5267,7 @@
             {
               "name": "Support Weapons",
               "range": "15cm",
-              "firepower": "2× AP5+/AT5+"
+              "firepower": "2\u00d7 AP5+/AT5+"
             }
           ],
           "notes": [
@@ -5287,7 +5287,7 @@
             {
               "name": "Heavy Stubber OR",
               "range": "30cm",
-              "firepower": "2× AP5+"
+              "firepower": "2\u00d7 AP5+"
             },
             {
               "name": "Missile Launcher",
@@ -5426,7 +5426,7 @@
             {
               "name": "Heavy Stubber",
               "range": "30cm",
-              "firepower": "2× AP5+"
+              "firepower": "2\u00d7 AP5+"
             }
           ],
           "notes": [
@@ -5455,7 +5455,7 @@
             {
               "name": "Quad Heavy Bolter",
               "range": "30cm",
-              "firepower": "2× AP4+"
+              "firepower": "2\u00d7 AP4+"
             }
           ],
           "notes": [
@@ -5622,7 +5622,7 @@
             {
               "name": "Hydra Autocannons",
               "range": "45cm",
-              "firepower": "2× AP4+/AT5+/AA5+"
+              "firepower": "2\u00d7 AP4+/AT5+/AA5+"
             },
             {
               "name": "Heavy Bolter",
@@ -5641,7 +5641,7 @@
           "ff": "5+",
           "weapons": [
             {
-              "name": "2× TL Lascannons",
+              "name": "2\u00d7 TL Lascannons",
               "range": "45cm",
               "firepower": "AT4+"
             }
@@ -5672,7 +5672,7 @@
               "firepower": "AT5+"
             },
             {
-              "name": "2× Heavy Bolters",
+              "name": "2\u00d7 Heavy Bolters",
               "range": "30cm",
               "firepower": "AP5+"
             }
@@ -5700,7 +5700,7 @@
               "firepower": "AP5+"
             },
             {
-              "name": "2× Heavy Bolters",
+              "name": "2\u00d7 Heavy Bolters",
               "range": "30cm",
               "firepower": "AP4+"
             }
@@ -5721,7 +5721,7 @@
             {
               "name": "Exterminator Cannon",
               "range": "45cm",
-              "firepower": "2× AP4+/AT6+"
+              "firepower": "2\u00d7 AP4+/AT6+"
             },
             {
               "name": "Lascannon",
@@ -5729,7 +5729,7 @@
               "firepower": "AT5+"
             },
             {
-              "name": "2× Heavy Bolters",
+              "name": "2\u00d7 Heavy Bolters",
               "range": "30cm",
               "firepower": "AP5+"
             }
@@ -5757,7 +5757,7 @@
               "firepower": "AT5+"
             },
             {
-              "name": "2× Heavy Bolters",
+              "name": "2\u00d7 Heavy Bolters",
               "range": "30cm",
               "firepower": "AP5+"
             }
@@ -5780,7 +5780,7 @@
               "firepower": "AP4+/AT4+"
             },
             {
-              "name": "2× Lascannons",
+              "name": "2\u00d7 Lascannons",
               "range": "45cm",
               "firepower": "AT5+"
             },
@@ -5808,7 +5808,7 @@
               "firepower": "AT4+"
             },
             {
-              "name": "2× Lascannon",
+              "name": "2\u00d7 Lascannon",
               "range": "45cm",
               "firepower": "AT5+"
             },
@@ -5846,12 +5846,12 @@
               "firepower": "AP4+/AT4+, MW, Ignore cover / (small arms) MW, EA (+1)"
             },
             {
-              "name": "2× Lascannon",
+              "name": "2\u00d7 Lascannon",
               "range": "45cm",
               "firepower": "AT5+"
             },
             {
-              "name": "3× TL Heavy Bolter",
+              "name": "3\u00d7 TL Heavy Bolter",
               "range": "30cm",
               "firepower": "AP4+"
             }
@@ -5871,7 +5871,7 @@
           "ff": "5+",
           "weapons": [
             {
-              "name": "2× TL Autocannons",
+              "name": "2\u00d7 TL Autocannons",
               "range": "45cm",
               "firepower": "AP4+/AT5+"
             },
@@ -5881,7 +5881,7 @@
               "firepower": "2 BP, Indirect fire, Single shot, Fwd"
             },
             {
-              "name": "2× TL Heavy Bolters",
+              "name": "2\u00d7 TL Heavy Bolters",
               "range": "30cm",
               "firepower": "AP4+"
             }
@@ -5907,7 +5907,7 @@
               "firepower": "AP2+/AT2+, TK(D3), FxF"
             },
             {
-              "name": "2× TL Heavy Bolters",
+              "name": "2\u00d7 TL Heavy Bolters",
               "range": "30cm",
               "firepower": "AP4+"
             }
@@ -5942,7 +5942,7 @@
               "firepower": "AT5+"
             },
             {
-              "name": "6× Heavy Bolters",
+              "name": "6\u00d7 Heavy Bolters",
               "range": "30cm",
               "firepower": "AP5+"
             }
@@ -5964,15 +5964,15 @@
             {
               "name": "Vulcan Megabolter",
               "range": "45cm",
-              "firepower": "4× AP3+/AT5+, FxF"
+              "firepower": "4\u00d7 AP3+/AT5+, FxF"
             },
             {
-              "name": "2× Heavy Flamers",
+              "name": "2\u00d7 Heavy Flamers",
               "range": "15cm & (15cm)",
               "firepower": "AP5+, Ignore cover / (small arms) Ignore cover"
             },
             {
-              "name": "3× TL Heavy Bolters",
+              "name": "3\u00d7 TL Heavy Bolters",
               "range": "30cm",
               "firepower": "AP4+"
             }
@@ -5994,7 +5994,7 @@
             {
               "name": "Avenger Cannon",
               "range": "30cm",
-              "firepower": "2× AP3+/AT5+, FxF"
+              "firepower": "2\u00d7 AP3+/AT5+, FxF"
             },
             {
               "name": "TL Lascannon",
@@ -6069,7 +6069,7 @@
               "firepower": "AT4+/AA5+, FxF"
             },
             {
-              "name": "2× Defence Turrets",
+              "name": "2\u00d7 Defence Turrets",
               "range": "30cm",
               "firepower": "AA5+, (1 Rwd)"
             },
@@ -6126,7 +6126,7 @@
             }
           ],
           "notes": [
-            "Slow and steady — not on turn 1.",
+            "Slow and steady \u2014 not on turn 1.",
             "Transport (up to 60 INF + Arvus carriers)."
           ]
         }
@@ -6135,12 +6135,12 @@
     {
       "id": "knight-household",
       "name": "Knight Households",
-      "subtitle": "Noble Lances · Houses of Adamantium",
+      "subtitle": "Noble Lances \u00b7 Houses of Adamantium",
       "color": "#7A2E2E",
-      "lore": "Hereditary noble lineages whose pilots bond with towering Knight engines forged in the Martian temples. Lesser than Titans but far more responsive, the Knights of House Devine, House Vyronii and a hundred others ride to war in resplendent heraldry — and the fires of the Heresy will see those ancient names raised in glory or ground to dust.",
+      "lore": "Hereditary noble lineages whose pilots bond with towering Knight engines forged in the Martian temples. Lesser than Titans but far more responsive, the Knights of House Devine, House Vyronii and a hundred others ride to war in resplendent heraldry \u2014 and the fires of the Heresy will see those ancient names raised in glory or ground to dust.",
       "legionTrait": {
         "name": "Noble Lances",
-        "description": "Strategy Rating 3 · Initiative 2+. Formations gain +1 to Engage Action tests and +1 to Rally tests. 2 Support per Line, max 3 Upgrades per formation. Optional Household Trait: Second Greatest Predator — +1 to hit in assault vs AV character units; force enemy critical-hit rerolls."
+        "description": "Strategy Rating 3 \u00b7 Initiative 2+. Formations gain +1 to Engage Action tests and +1 to Rally tests. 2 Support per Line, max 3 Upgrades per formation. Optional Household Trait: Second Greatest Predator \u2014 +1 to hit in assault vs AV character units; force enemy critical-hit rerolls."
       },
       "compositionLimits": {
         "maxSupportPerLine": 2,
@@ -6301,7 +6301,10 @@
             "noble",
             "noble-senechal",
             "enhanced-forges"
-          ]
+          ],
+          "maxPer": {
+            "points": 2000
+          }
         },
         {
           "id": "dominus-lance",
@@ -6354,7 +6357,10 @@
             "noble-senechal",
             "enhanced-forges",
             "exalted-armoury"
-          ]
+          ],
+          "maxPer": {
+            "points": 2000
+          }
         },
         {
           "id": "acastus-porphyrion",
@@ -6522,7 +6528,7 @@
             {
               "name": "Armiger Autocannons",
               "range": "45cm",
-              "firepower": "2× AP3+/AT5+"
+              "firepower": "2\u00d7 AP3+/AT5+"
             }
           ],
           "notes": [
@@ -6547,7 +6553,7 @@
             {
               "name": "Volkite Veuglaire",
               "range": "15cm",
-              "firepower": "2× AP4+/AT6+, Disrupt, Ignore cover"
+              "firepower": "2\u00d7 AP4+/AT6+, Disrupt, Ignore cover"
             }
           ],
           "notes": [
@@ -6596,7 +6602,7 @@
             {
               "name": "Avenger Gatling Cannon",
               "range": "30cm & (15cm)",
-              "firepower": "2× AP3+/AT5+ / (small arms) EA (+1)"
+              "firepower": "2\u00d7 AP3+/AT5+ / (small arms) EA (+1)"
             },
             {
               "name": "Thermal Cannon",
@@ -6633,7 +6639,7 @@
             {
               "name": "Avenger Cannon",
               "range": "30cm & (15cm)",
-              "firepower": "2× AP3+/AT5+ / (small arms) EA (+1)"
+              "firepower": "2\u00d7 AP3+/AT5+ / (small arms) EA (+1)"
             },
             {
               "name": "Knight Battlecannon",
@@ -6668,7 +6674,7 @@
             {
               "name": "Stormspear Missile Pod (+free)",
               "range": "45cm",
-              "firepower": "2× AT5+"
+              "firepower": "2\u00d7 AT5+"
             }
           ],
           "notes": [
@@ -6690,7 +6696,7 @@
             {
               "name": "Volkite Chieorovile OR",
               "range": "45cm",
-              "firepower": "2× AP3+/AT6+, Disrupt"
+              "firepower": "2\u00d7 AP3+/AT6+, Disrupt"
             },
             {
               "name": "Lightning Cannon",
@@ -6727,7 +6733,7 @@
             {
               "name": "Flame Cannon",
               "range": "30cm & (15cm)",
-              "firepower": "2× AP3+/AT6+, Ignore cover / (small arms) EA (+1), Ignore cover"
+              "firepower": "2\u00d7 AP3+/AT6+, Ignore cover / (small arms) EA (+1), Ignore cover"
             },
             {
               "name": "TL Heavy Bolter",
@@ -6763,7 +6769,7 @@
             {
               "name": "Graviton Singularity Cannon",
               "range": "30cm",
-              "firepower": "2× AP5+/AT4+, Lance, Singularity"
+              "firepower": "2\u00d7 AP5+/AT4+, Lance, Singularity"
             }
           ],
           "notes": [
@@ -6784,7 +6790,7 @@
             {
               "name": "Castigator Bolt Cannon",
               "range": "45cm & (15cm)",
-              "firepower": "2× AP3+/AT5+ / (small arms) EA (+1)"
+              "firepower": "2\u00d7 AP3+/AT5+ / (small arms) EA (+1)"
             },
             {
               "name": "Tempest Warblade",
@@ -6836,7 +6842,7 @@
             {
               "name": "Magna Lascannons",
               "range": "60cm",
-              "firepower": "3× AT3+, Lance"
+              "firepower": "3\u00d7 AT3+, Lance"
             },
             {
               "name": "Lascannon",
@@ -6904,12 +6910,12 @@
     {
       "id": "legio-titanicus",
       "name": "Legio Titanicus",
-      "subtitle": "Colleagia Titanica · The God-Machines",
+      "subtitle": "Colleagia Titanica \u00b7 The God-Machines",
       "color": "#4A6F8E",
-      "lore": "The towering colossi of Mars — Warhounds, Reavers, Warlords and their immortal cousins. Pilots called Princeps meld their minds with the machine spirits of their Titans, walking fortresses whose tread shakes continents. The Heresy will see Legio set against Legio and the gods of battle pitted against one another.",
+      "lore": "The towering colossi of Mars \u2014 Warhounds, Reavers, Warlords and their immortal cousins. Pilots called Princeps meld their minds with the machine spirits of their Titans, walking fortresses whose tread shakes continents. The Heresy will see Legio set against Legio and the gods of battle pitted against one another.",
       "legionTrait": {
         "name": "Engines of the Omnissiah",
-        "description": "Strategy Rating 3 · Initiative 1+. 2 Support per Line; max 3 Upgrades per formation. Special rules: Void Shields. Optional Legio Trait: Heart of Steel (reroll critical-hit damage results) OR Warhorn (15cm AOE Blast markers on a 5+)."
+        "description": "Strategy Rating 3 \u00b7 Initiative 1+. 2 Support per Line; max 3 Upgrades per formation. Special rules: Void Shields. Optional Legio Trait: Heart of Steel (reroll critical-hit damage results) OR Warhorn (15cm AOE Blast markers on a 5+)."
       },
       "compositionLimits": {
         "maxSupportPerLine": 2,
@@ -7035,7 +7041,10 @@
             "veteran-princepts",
             "vp-legate",
             "titan-weapons-scout-2"
-          ]
+          ],
+          "maxPer": {
+            "points": 2000
+          }
         },
         {
           "id": "direwolf-heavy-scout",
@@ -7059,7 +7068,10 @@
             "vp-legate",
             "titan-weapons-mixed-1",
             "sacred-icon"
-          ]
+          ],
+          "maxPer": {
+            "points": 2000
+          }
         },
         {
           "id": "warbringer-titan",
@@ -7083,7 +7095,10 @@
             "vp-legate",
             "titan-weapons-mixed-2",
             "sacred-icon"
-          ]
+          ],
+          "maxPer": {
+            "points": 2000
+          }
         },
         {
           "id": "emperor-titan",
@@ -7108,7 +7123,10 @@
             "titan-weapons-mixed-2",
             "air-defence",
             "sacred-icon"
-          ]
+          ],
+          "maxPer": {
+            "points": 7500
+          }
         },
         {
           "id": "psi-titan",
@@ -7794,7 +7812,7 @@
             {
               "name": "Carapace Multilaser",
               "range": "30cm",
-              "firepower": "2× AP5+/AT6+/AA5+"
+              "firepower": "2\u00d7 AP5+/AT6+/AA5+"
             }
           ],
           "notes": []
@@ -7808,7 +7826,7 @@
           "ff": "5+",
           "weapons": [
             {
-              "name": "2× Scout Titan Weapons",
+              "name": "2\u00d7 Scout Titan Weapons",
               "range": "varies",
               "firepower": "(2 Arm, Fwd)"
             }
@@ -7833,14 +7851,14 @@
           "ff": "4+",
           "weapons": [
             {
-              "name": "1× Scout or Battle Titan Weapon",
+              "name": "1\u00d7 Scout or Battle Titan Weapon",
               "range": "varies",
               "firepower": "(1 Carapace, FxF)"
             },
             {
               "name": "Ardax Defensor Megabolter",
               "range": "30cm",
-              "firepower": "2× AP3+/AT5+"
+              "firepower": "2\u00d7 AP3+/AT5+"
             }
           ],
           "notes": [
@@ -7850,7 +7868,7 @@
             "Reinforced armour.",
             "Walker.",
             "Cortex controller.",
-            "Grand Stalker — may deploy as a garrison unit.",
+            "Grand Stalker \u2014 may deploy as a garrison unit.",
             "Critical Hit: stagger D6 random direction, takes extra DC."
           ]
         },
@@ -7863,7 +7881,7 @@
           "ff": "3+",
           "weapons": [
             {
-              "name": "3× Scout or Battle Titan Weapons",
+              "name": "3\u00d7 Scout or Battle Titan Weapons",
               "range": "varies",
               "firepower": "(2 Arm, Fwd; 1 Carapace)"
             }
@@ -7875,7 +7893,7 @@
             "Reinforced armour.",
             "Walker.",
             "Cortex controller.",
-            "Critical Hit: reactor instability — D6 each end phase."
+            "Critical Hit: reactor instability \u2014 D6 each end phase."
           ]
         },
         "warbringer-nemesis-titan": {
@@ -7894,10 +7912,10 @@
             {
               "name": "Flak Battery",
               "range": "45cm",
-              "firepower": "2× AP4+/AT5+/AA5+"
+              "firepower": "2\u00d7 AP4+/AT5+/AA5+"
             },
             {
-              "name": "2× Battle Titan Weapons",
+              "name": "2\u00d7 Battle Titan Weapons",
               "range": "varies",
               "firepower": "(2 Carapace, FxF)"
             }
@@ -7909,7 +7927,7 @@
             "Reinforced armour.",
             "Walker.",
             "Cortex controller.",
-            "Critical Hit: reactor instability — D6 each end phase."
+            "Critical Hit: reactor instability \u2014 D6 each end phase."
           ]
         },
         "warlord-battle-titan": {
@@ -7921,7 +7939,7 @@
           "ff": "3+",
           "weapons": [
             {
-              "name": "4× Scout or Battle Titan Weapons",
+              "name": "4\u00d7 Scout or Battle Titan Weapons",
               "range": "varies",
               "firepower": "(2 Arm, Fwd; 2 Carapace, FxF)"
             }
@@ -7933,7 +7951,7 @@
             "Reinforced armour.",
             "Walker.",
             "Cortex controller.",
-            "Critical Hit: reactor instability — D6 each end phase."
+            "Critical Hit: reactor instability \u2014 D6 each end phase."
           ]
         },
         "warmaster-heavy-battle-titan": {
@@ -7945,24 +7963,24 @@
           "ff": "3+ (2+)",
           "weapons": [
             {
-              "name": "2× Scout or Battle Titan Weapons",
+              "name": "2\u00d7 Scout or Battle Titan Weapons",
               "range": "varies",
               "firepower": "(2 Carapace, FxF)"
             },
             {
-              "name": "2× Heavy Plasma Destructors OR",
+              "name": "2\u00d7 Heavy Plasma Destructors OR",
               "range": "90cm",
-              "firepower": "4× AP2+/AT2+, MW, Slow firing"
+              "firepower": "4\u00d7 AP2+/AT2+, MW, Slow firing"
             },
             {
-              "name": "2× Close Combat Weapons",
+              "name": "2\u00d7 Close Combat Weapons",
               "range": "(base)",
               "firepower": "(assault) TK (D3), EA (+3)"
             },
             {
               "name": "Revelator Missile Launcher",
               "range": "45cm",
-              "firepower": "2× Warhead Missile, 3 BP, MW, Ignore cover, Fwd, One shot"
+              "firepower": "2\u00d7 Warhead Missile, 3 BP, MW, Ignore cover, Fwd, One shot"
             }
           ],
           "notes": [
@@ -7973,7 +7991,7 @@
             "Thick rear armour.",
             "Walker.",
             "Cortex controller.",
-            "Critical Hit: reactor instability — D6 each end phase."
+            "Critical Hit: reactor instability \u2014 D6 each end phase."
           ]
         },
         "warlord-sinister": {
@@ -7990,7 +8008,7 @@
               "firepower": "AP2+/AT2+, TK (2), Singularity, Fwd"
             },
             {
-              "name": "3× Scout or Battle Titan Weapons",
+              "name": "3\u00d7 Scout or Battle Titan Weapons",
               "range": "varies",
               "firepower": "(1 Arm, Fwd; 2 Carapace, FxF)"
             }
@@ -8005,7 +8023,7 @@
             "Walker.",
             "Cortex controller.",
             "Sinistramanus Tenebrae ignores Void shields and Invulnerable saves.",
-            "Critical Hit: reactor instability — D6 each end phase."
+            "Critical Hit: reactor instability \u2014 D6 each end phase."
           ]
         },
         "emperor-titan": {
@@ -8019,7 +8037,7 @@
             {
               "name": "Plasma Annihilator",
               "range": "90cm",
-              "firepower": "4× AP2+/AT2+, TK (D3), Slow firing, Fwd"
+              "firepower": "4\u00d7 AP2+/AT2+, TK (D3), Slow firing, Fwd"
             },
             {
               "name": "Hellstorm Cannon",
@@ -8027,12 +8045,12 @@
               "firepower": "10 BP, Fwd"
             },
             {
-              "name": "2× Flak Towers",
+              "name": "2\u00d7 Flak Towers",
               "range": "60cm",
-              "firepower": "2× AP4+/AT6+/AA5+"
+              "firepower": "2\u00d7 AP4+/AT6+/AA5+"
             },
             {
-              "name": "4× Battlecannon",
+              "name": "4\u00d7 Battlecannon",
               "range": "75cm",
               "firepower": "AP4+/AT4+"
             },
@@ -8061,7 +8079,7 @@
             "Reinforced armour.",
             "Walker.",
             "Secondary firing protocols: may pick a 2nd target for Battlecannons and/or Flak Towers.",
-            "Critical Hit: reactor instability — apocalyptic explosion on 1 hits all in 15cm."
+            "Critical Hit: reactor instability \u2014 apocalyptic explosion on 1 hits all in 15cm."
           ]
         }
       }

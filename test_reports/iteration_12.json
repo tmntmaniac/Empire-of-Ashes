@@ -1,0 +1,52 @@
+{
+  "summary": "R6 (per-formation count caps) validation rule verified end-to-end. Backend pytest 9/9 PASS (test_max_per_caps.py, test_knight_titan.py, test_new_armies.py). Frontend Playwright run on 8 R6 + regression scenarios — all 8 PASS. R6 issues are surfaced inside [data-testid='validation-panel'] with code 'formation-over-cap' and the exact message format '<name>: <count> taken — max <allowed> allowed (1 per <N> pts).' Em-dash (U+2014) renders correctly. Regression rules R1 (no-line) and R4 (upgrades-over-limit, no crash) still work. Non-capped formations (mechanicum-lance) correctly do NOT trigger R6.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_scenarios": {
+    "1_knight_under_cap_1_cerastus_3000": "PASS — LIST LEGAL, no formation-over-cap",
+    "2_knight_over_cap_2_cerastus_3000": "PASS — ILLEGAL, message 'Cerastus Lance: 2 taken — max 1 allowed (1 per 2000 pts).'",
+    "3a_emperor_titan_2_at_7500": "PASS — ILLEGAL, message 'Emperor Titan: 2 taken — max 1 allowed (1 per 7500 pts).' (also flagged 33% LoW cap as expected — distinct rule)",
+    "3b_emperor_titan_2_at_15000": "PASS — LIST LEGAL after cap raised, no formation-over-cap",
+    "4_warhound_scout_2_at_2000": "PASS — ILLEGAL, message 'Warhound Scout: 2 taken — max 1 allowed (1 per 2000 pts).' (NOTE: review request used 'Warhound Scout Titan' name; actual API/UI name is 'Warhound Scout' — handled per review-request guidance 'Use the actual UI-rendered name')",
+    "5_R1_regression_no_line": "PASS — 'Army must include at least one Line detachment.' issue surfaced",
+    "6_R4_regression_sa_upgrades": "PASS — Infantry Tercio with 4 upgrades flags 'upgrades-over-limit', NO crash (iteration_9 fix intact)",
+    "7_non_capped_3_mechanicum_lance": "PASS — 3 Line mechanicum-lance, LIST LEGAL, no formation-over-cap"
+  },
+  "backend_verification": {
+    "pytest_results": "9/9 PASS",
+    "junitxml": "/app/test_reports/pytest/pytest_iter12.xml",
+    "knight_household_cerastus_maxPer": "{points: 2000} ✓",
+    "knight_household_grand_quesetorius_maxPer": "{points: 2000} ✓",
+    "legio_titanicus_warhound_scout_maxPer": "{points: 2000} ✓",
+    "legio_titanicus_direwolf_heavy_scout_maxPer": "{points: 2000} ✓",
+    "legio_titanicus_warbringer_maxPer": "{points: 2000} ✓",
+    "legio_titanicus_emperor_maxPer": "{points: 7500} ✓",
+    "sons_of_horus_no_maxPer_field": "verified — none of SoH's formations carry maxPer ✓"
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_max_per_caps.py",
+    "/app/backend/tests/test_knight_titan.py",
+    "/app/backend/tests/test_new_armies.py",
+    "/app/test_reports/pytest/pytest_iter12.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "validation.js R6 implementation is clean: groups by formationId via Map, looks up def.maxPer.points, computes allowed=floor(cap/points), guards on `if (!perPoints) return;` so any formation without maxPer is silently skipped — correctly verified by scenario #7 (mechanicum-lance × 3 stays legal).",
+    "R6 block is properly gated by `if (cap > 0)` — no-op for cap=0 as documented.",
+    "ArmyValidationPanel renders each issue with data-testid=`validation-issue-${iss.code}` so the new 'formation-over-cap' code gets a stable selector without any panel changes — good separation.",
+    "Message uses em-dash (U+2014) consistent with existing R4 message style; renders correctly in browser.",
+    "Minor doc note (carryover from iteration_11, not a code bug): review-request narrative for scenario #4 used the name 'Warhound Scout Titan' but backend/UI use 'Warhound Scout'. The R6 message uses def.name from API, so the actual message is 'Warhound Scout: ...'. Spec/changelog may want to be updated for naming consistency, but the implementation is correct."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (9/9)", "frontend": "100% (8/8)"},
+  "test_credentials": "N/A — no auth in this app.",
+  "seed_data_creation": "Eight TEST_-prefixed armies seeded into localStorage key 'eoa.armies.v1' for R6 scenarios; cleared on browser data wipe.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "R6 fully verified. Validation panel data-testid is 'validation-panel' (NOT 'army-validation-panel'). Per-issue selector pattern: [data-testid='validation-issue-<code>'] e.g. validation-issue-formation-over-cap. Issue message format matches spec exactly with em-dash (U+2014). When seeding test armies via localStorage, remember to include at least 1 Line formation in the army to keep R1 (no-line) noise out of R6-focused tests (or accept stacked violations).",
+  "rca_of_the_issue": "N/A — no bugs found. R6 feature works as specified across all 6 capped formations and integrates cleanly with existing R1-R5 rules."
+}
