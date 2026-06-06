@@ -1,0 +1,36 @@
+{
+  "summary": "Completed full end-to-end testing of Empire of Ashes Force Builder MVP. All 6 backend pytest tests pass against the public preview URL. All 15 frontend e2e flows pass: landing, CTA nav, empty state, NewArmy dialog (preset + custom), localStorage persistence under 'eoa.armies.v1', builder header (army name + 'XVI Legion · The Luperci' + 0/3000 pts + Death Dealers legion trait), Add Formation dialog with grouped formations, formation card render with UnitStatTable (Unit/Type/Speed/Armour/CC/FF/Weapons columns), variant +/- updates points correctly (rhino +10 pts), Primarch Horus uniqueness (button disabled after first add), Save toast + reload persistence (2 formations survive reload), army cards on /armies, Duplicate (with '(Copy)' suffix), Delete with confirm dialog, Print view with print-total and print-back navigation, remove-formation reverts to empty state. No console errors detected.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Builder header", "issues": ["Cosmetic only: the Legion Trait card text concatenates without a separator when extracted (e.g. '// Legion TraitDeath Dealers...'), but visually it is fine due to layout/spacing."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_factions.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Optional: the agent_to_agent_context_note listed shorter formation IDs ('tactical', 'assault-marines', 'terminators'); actual data uses kebab-case full names ('tactical-detachment', 'assault-detachment', 'breacher-detachment', 'terminator-detachment', 'reaver-detachment', 'luperci-pack', 'justaerian-detachment', 'horus'). Update docs/seed expectations to match real data. No code change required."
+  ],
+  "critical_code_review_comments": [
+    "Backend server.py uses os.environ['MONGO_URL'] but Mongo is unused for MVP — fine; if intentionally kept for future, consider lazy init to avoid coupling.",
+    "server.py loads factions.json at import time — fine for static data; reload requires server restart.",
+    "Frontend correctly uses process.env.REACT_APP_BACKEND_URL and prefixes /api routes.",
+    "Comprehensive data-testid coverage on all interactive elements — excellent for automation.",
+    "No console or page errors observed in any flow."
+  ],
+  "updated_files": [
+    "/app/backend/tests/__init__.py",
+    "/app/backend/tests/test_factions.py"
+  ],
+  "success_rate": {"backend": "100% (6/6)", "frontend": "100% (15/15 flows + extras)"},
+  "test_credentials": "None required (no auth)",
+  "seed_data_creation": "Used localStorage-only test armies prefixed TEST_; cleaned up via localStorage.removeItem('eoa.armies.v1') between runs.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend tests live in /app/backend/tests/test_factions.py. Sons of Horus formation IDs are kebab-case: tactical-detachment, assault-detachment, breacher-detachment, terminator-detachment, reaver-detachment, luperci-pack, justaerian-detachment, horus. The faction JSON has units and upgrades as DICTS keyed by id (not lists). Tactical Detachment has no extra-unit option; some formations may. Standard Transport upgrade is a multi-variant type — toggling it does not change points; variants (rhino) +/- do (+10 pts each). To run backend tests: `cd /app && python -m pytest backend/tests/ -v`.",
+  "rca of the issue": "N/A — no bugs found."
+}
