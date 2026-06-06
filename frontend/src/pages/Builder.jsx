@@ -53,8 +53,6 @@ export default function Builder() {
 
     const total = armyTotal(army, faction);
     const cap = army.pointsCap;
-    const pct = Math.min(100, Math.round((total / cap) * 100));
-    const over = total > cap;
 
     // Counts for composition rules
     const counts = (army.formations || []).reduce((acc, f) => {

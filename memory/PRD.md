@@ -62,6 +62,13 @@ Build a force builder web application (similar to legionbuilder.app) for the "Em
   - **New Lords of War (7)**: plutona-assault-drill, heavy-tank-battery (Falchion), superheavy-squadron (Fellblade), superheavy-tank-destroyer (Glaive), gunship-flight (Fire Raptor), interceptor-flight (Xiphon), stormbird-lander.
   - `Builder.jsx` AddFormationDialog now renders 4 ordered category sections: `Line | Support | Lords of War | Primarch`.
   - **Testing**: iteration_4 — Backend pytest **50/50** pass (6 base + 44 new expansion assertions in `test_expansion.py`); frontend E2E 100% (category order, LoW formations add, Reaver shows under LINE, extra-unit +60 increments, multi-formation localStorage persistence). No console errors.
+- **Feb 2026** — Points-Cap UI (editable cap + state-driven warnings).
+  - New component `/app/frontend/src/components/PointsCapBar.jsx` replaces the old static points bar in `Builder.jsx`.
+  - Inline edit-cap: pencil icon → preset chips (1000/1500/2000/3000/4000) + numeric input (100–20000) + Save / Cancel; commit instantly persists via auto-save effect.
+  - **State-driven colors**: green (#2D937D) under 90%, amber (#C2A165) at 90–100% with "// Approaching cap · X pts remaining", red (#C2392E) over cap with "// Over Cap by X pts" + AlertTriangle icon; progress bar matches state.
+  - Status line also shows "// Cap reached exactly" at 100% and "// X pts remaining" otherwise.
+  - testIds: `points-bar`, `points-total`, `points-bar-fill`, `edit-cap-btn`, `cap-editor`, `cap-preset-{1000..4000}`, `cap-input`, `cap-save`, `cap-cancel`, `cap-warning-over`, `cap-warning-approaching`, `cap-status-exact`, `cap-status-remaining`.
+  - **Testing**: iteration_5 — Frontend E2E **18/18 assertions pass** (all presets, save/cancel, 3 color states, localStorage persistence, full regression of add-formation / remove ConfirmDialog / print nav / save / browser back). No defects.
 
 ## Testid Reference (for future testing agents)
 - Builder Save button: `data-testid="builder-save-btn"` (NOT `save-army-btn`).
@@ -73,14 +80,12 @@ Build a force builder web application (similar to legionbuilder.app) for the "Em
 ## Roadmap
 
 ### P1 — Next
-- Implement legal list validation (max detachments per army, required core formations, faction-specific composition rules from PDF).
-- Replace `window.confirm()` (in `ArmyManager.handleDelete` & `Builder.removeFormation`) with Shadcn `AlertDialog` for visual consistency and cleaner e2e test wiring.
-- Point-cap warning UI when total > cap (color + message).
+- Implement legal list validation (max detachments per army, required core formations, faction-specific composition rules from PDF) — block invalid saves and surface inline warnings; should compose with the new PointsCapBar warning system.
 
 ### P2 — Future / Backlog
 - Add more factions from the PDF (Imperial Fists, Death Guard, etc.).
 - URL-based army sharing (encode army into shareable link, no backend persistence).
-- Export army list to PDF.
+- Export army list to PDF (proper print-styled download from PrintView).
 - Optional Mongo persistence (cloud sync) — opt-in.
 - Mobile-optimized builder layout.
 
