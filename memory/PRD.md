@@ -69,6 +69,18 @@ Build a force builder web application (similar to legionbuilder.app) for the "Em
   - Status line also shows "// Cap reached exactly" at 100% and "// X pts remaining" otherwise.
   - testIds: `points-bar`, `points-total`, `points-bar-fill`, `edit-cap-btn`, `cap-editor`, `cap-preset-{1000..4000}`, `cap-input`, `cap-save`, `cap-cancel`, `cap-warning-over`, `cap-warning-approaching`, `cap-status-exact`, `cap-status-remaining`.
   - **Testing**: iteration_5 — Frontend E2E **18/18 assertions pass** (all presets, save/cancel, 3 color states, localStorage persistence, full regression of add-formation / remove ConfirmDialog / print nav / save / browser back). No defects.
+- **Feb 2026** — Legal List Validation (force-composition rules from PDF pages 4–6).
+  - New `/app/frontend/src/lib/validation.js` (pure function `validateArmy(army, faction)` → `{valid, issues[], stats}`).
+  - New `/app/frontend/src/components/ArmyValidationPanel.jsx` — renders 4 composition counter cells (Line / Support / Lords of War / Primarch) plus an issue list; hides itself for empty armies.
+  - Rules enforced (all warn inline; save not blocked, per user direction):
+    - **R1**: At least 1 Line detachment required once any formation is added.
+    - **R2**: Support detachments ≤ Line × 3.
+    - **R3**: Lords of War total points ≤ floor(cap × 0.33) (33% cap).
+    - **R4**: Each Line detachment ≤ 4 upgrades (hard cap — 5th checkbox disabled at the input level; defense-in-depth also in `toggleUpgrade`).
+    - **R5**: Max 1 Primarch (was already UI-enforced; now also surfaced in panel).
+  - `FormationEditor.jsx` now accepts `upgradeMax` and renders an `upgrade-count-{idx}` counter ("N / 4 taken") with muted → amber → red coloring.
+  - testIds: `validation-panel`, `validation-legal`, `validation-illegal`, `validation-issue-{no-line|support-over-limit|low-over-limit|upgrades-over-limit|primarch-over-limit}`, `comp-{line|support|low|primarch}` (+ `-value`), `upgrade-count-{idx}`.
+  - **Testing**: iteration_6 — Frontend E2E **12/12 PASS**, zero action items, zero regressions in PointsCapBar / formation add-remove / save / print / armies list.
 
 ## Testid Reference (for future testing agents)
 - Builder Save button: `data-testid="builder-save-btn"` (NOT `save-army-btn`).
@@ -80,10 +92,10 @@ Build a force builder web application (similar to legionbuilder.app) for the "Em
 ## Roadmap
 
 ### P1 — Next
-- Implement legal list validation (max detachments per army, required core formations, faction-specific composition rules from PDF) — block invalid saves and surface inline warnings; should compose with the new PointsCapBar warning system.
+- Block (or soft-confirm) the **Save** action when the list is illegal — currently we only warn.
+- Faction expansion: Imperial Fists, Death Guard, etc. (next biggest unlock for user value).
 
 ### P2 — Future / Backlog
-- Add more factions from the PDF (Imperial Fists, Death Guard, etc.).
 - URL-based army sharing (encode army into shareable link, no backend persistence).
 - Export army list to PDF (proper print-styled download from PrintView).
 - Optional Mongo persistence (cloud sync) — opt-in.
