@@ -121,15 +121,31 @@ export default function PrintView() {
     const printableRef = useRef(null);
     const inIframe = useMemo(detectIframe, []);
 
+    // Pick up the action the user requested in the OTHER (iframe) tab. We do
+    // NOT auto-trigger it because browsers strip transient user activation
+    // across the tab boundary — instead we render a prominent prompt that the
+    // user clicks once. That single click carries a real user gesture, so
+    // window.print() / file downloads succeed reliably.
+    const [pendingAction, setPendingAction] = useState(() => {
+        try {
+            const a = new URLSearchParams(window.location.search).get("action");
+            return a === "print" || a === "pdf" ? a : null;
+        } catch {
+            return null;
+        }
+    });
+
     // Once the army has been hydrated from the URL, strip the long `?a=`
-    // payload so the address bar stays clean and the user can share or
-    // bookmark the page without a giant base64 blob in the URL.
+    // payload AND the `?action=` marker so the address bar stays clean and a
+    // refresh does not re-trigger the action prompt.
     useEffect(() => {
         if (!army) return;
         try {
             const params = new URLSearchParams(window.location.search);
-            if (!params.has("a")) return;
-            params.delete("a");
+            let mutated = false;
+            if (params.has("a")) { params.delete("a"); mutated = true; }
+            if (params.has("action")) { params.delete("action"); mutated = true; }
+            if (!mutated) return;
             const qs = params.toString();
             const newUrl = window.location.pathname + (qs ? `?${qs}` : "") + window.location.hash;
             window.history.replaceState(null, "", newUrl);
@@ -147,15 +163,18 @@ export default function PrintView() {
         return cleaned || "field-roster";
     }, [army?.name]);
 
-    const openInNewTab = () => {
+    const openInNewTab = (action) => {
         // localStorage is partitioned per top-level site in modern browsers,
         // so the new tab won't see armies saved while inside the preview
         // iframe. Serialize the army payload into the URL itself so the new
-        // tab can hydrate without depending on shared storage.
+        // tab can hydrate without depending on shared storage. An optional
+        // `action` triggers the same export (print/pdf) automatically in the
+        // new tab so the user only has to click once.
         const encoded = army ? encodeArmy(army) : "";
         const qs = new URLSearchParams();
         qs.set("fullscreen", "1");
         if (encoded) qs.set("a", encoded);
+        if (action) qs.set("action", action);
         const url = `${window.location.pathname}?${qs.toString()}`;
         const win = window.open(url, "_blank", "noopener");
         if (!win) {
@@ -168,24 +187,27 @@ export default function PrintView() {
     const handlePrint = () => {
         if (inIframe) {
             toast.message("Opening roster in a new tab…", {
-                description: "Print is blocked inside the Emergent preview frame. The new tab will give you the browser print dialog.",
+                description: "Print is blocked inside the Emergent preview frame. The print dialog will appear automatically in the new tab.",
             });
-            openInNewTab();
+            openInNewTab("print");
             return;
         }
         toast.message("Opening print dialog…", {
             description: "Choose 'Save as PDF' as the destination if you'd rather save a file.",
         });
-        // Defer to next tick so the toast paints before the modal print dialog steals focus.
-        setTimeout(() => window.print(), 60);
+        // Calling window.print() synchronously keeps the user-gesture token
+        // active across browsers (Safari in particular strips it after any
+        // setTimeout wrap). The toast paints fine before the modal because
+        // the browser yields to render before the print dialog appears.
+        window.print();
     };
 
     const handleSavePdf = async () => {
         if (inIframe) {
             toast.message("Opening roster in a new tab…", {
-                description: "PDF downloads are blocked inside the Emergent preview frame. Press Save as PDF again from the new tab.",
+                description: "PDF downloads are blocked inside the Emergent preview frame. The download will start automatically in the new tab.",
             });
-            openInNewTab();
+            openInNewTab("pdf");
             return;
         }
         if (!printableRef.current || savingPdf) return;
@@ -237,6 +259,18 @@ export default function PrintView() {
         return v?.name || varId;
     };
 
+    const runPendingAction = () => {
+        const action = pendingAction;
+        setPendingAction(null);
+        if (action === "print") {
+            // Synchronous window.print() inside this click handler keeps the
+            // user-gesture token alive across all major browsers.
+            window.print();
+        } else if (action === "pdf") {
+            handleSavePdf();
+        }
+    };
+
     return (
         <div className="min-h-screen bg-[#050505] text-[#E0E0E0]">
             <div className="no-print sticky top-0 bg-[#080A09] border-b border-[#222] z-10">
@@ -270,6 +304,46 @@ export default function PrintView() {
             </div>
 
             <div ref={printableRef} className="max-w-5xl mx-auto px-6 py-10 print-section" data-testid="print-view">
+                {!inIframe && pendingAction && (
+                    <div
+                        className="no-print fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm px-6"
+                        data-testid="action-prompt-overlay"
+                    >
+                        <div className="max-w-md w-full border-2 border-[#C2A165] bg-[#080A09] p-8 text-center">
+                            <div className="font-mono text-[10px] tracking-[0.4em] text-[#C2A165] uppercase mb-3">
+                                // {pendingAction === "print" ? "Ready to print" : "Ready to download"}
+                            </div>
+                            <h2 className="font-display text-3xl uppercase tracking-tight mb-3">
+                                {pendingAction === "print" ? "Press to open print dialog" : "Press to save PDF"}
+                            </h2>
+                            <p className="text-sm text-[#888] mb-6">
+                                Your browser requires a click in this tab before it will
+                                {pendingAction === "print" ? " show the print dialog." : " download the file."}
+                            </p>
+                            <button
+                                type="button"
+                                onClick={runPendingAction}
+                                autoFocus
+                                className="btn-primary inline-flex items-center gap-2 text-base px-6 py-3"
+                                data-testid="action-prompt-confirm"
+                            >
+                                {pendingAction === "print"
+                                    ? (<><Printer className="w-5 h-5" /> Start Print</>)
+                                    : (<><Download className="w-5 h-5" /> Download PDF</>)}
+                            </button>
+                            <div className="mt-4">
+                                <button
+                                    type="button"
+                                    onClick={() => setPendingAction(null)}
+                                    className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#666] hover:text-[#999]"
+                                    data-testid="action-prompt-cancel"
+                                >
+                                    Cancel — just show the roster
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
                 {inIframe && (
                     <div className="no-print mb-6 p-4 border border-[#7F1D1D] bg-[#7F1D1D]/10 flex items-start gap-3 flex-wrap" data-testid="iframe-banner">
                         <div className="flex-1 min-w-[280px]">
@@ -281,7 +355,7 @@ export default function PrintView() {
                         </div>
                         <button
                             type="button"
-                            onClick={openInNewTab}
+                            onClick={() => openInNewTab()}
                             className="btn-primary inline-flex items-center gap-2"
                             data-testid="open-fullscreen-btn"
                         >
