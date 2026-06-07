@@ -52,10 +52,10 @@ export function validateArmy(army, faction) {
         if (byCategory[def.category]) byCategory[def.category].push(entry);
     });
 
-    const lineCount = byCategory.Line.length;
-    const supportCount = byCategory.Support.length;
-    const lowCount = byCategory["Lords of War"].length;
-    const primarchCount = byCategory.Primarch.length;
+    const lineCount = (byCategory.Line || []).length;
+    const supportCount = (byCategory.Support || []).length;
+    const lowCount = (byCategory["Lords of War"] || []).length;
+    const primarchCount = (byCategory.Primarch || []).length;
 
     const lowPoints = byCategory["Lords of War"].reduce((s, e) => s + e.cost, 0);
     const lowLimit = Math.floor(cap * limits.lowPct);
