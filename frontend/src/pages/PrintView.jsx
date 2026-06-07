@@ -254,7 +254,57 @@ export default function PrintView() {
                     margin: 10,
                     filename: `${safeFilename}-roster.pdf`,
                     image: { type: "jpeg", quality: 0.95 },
-                    html2canvas: { scale: 2, backgroundColor: "#ffffff", useCORS: true },
+                    html2canvas: {
+                        scale: 3,
+                        backgroundColor: "#ffffff",
+                        useCORS: true,
+                        // html2canvas rasterizes the live DOM and does NOT
+                        // apply @media print styles — so the on-screen grey
+                        // palette would bleed into the PDF and become
+                        // illegible on paper. Walk EVERY element in the
+                        // cloned document (html2pdf wraps the source element
+                        // in extra containers before this hook runs, so we
+                        // can't reliably scope by data-testid) and force pure
+                        // black text on a pure white page. Inline styles win
+                        // the cascade against Tailwind utility classes.
+                        onclone: (clonedDoc) => {
+                            const win = clonedDoc.defaultView || window;
+                            clonedDoc.documentElement.style.background = "#ffffff";
+                            if (clonedDoc.body) clonedDoc.body.style.background = "#ffffff";
+                            const all = clonedDoc.querySelectorAll("body *");
+                            all.forEach((el) => {
+                                if (el.classList && el.classList.contains("no-print")) {
+                                    el.style.display = "none";
+                                    return;
+                                }
+                                el.style.color = "#000000";
+                                el.style.textShadow = "none";
+                                el.style.boxShadow = "none";
+                                el.style.opacity = "1";
+                                el.style.filter = "none";
+                                try {
+                                    const cs = win.getComputedStyle(el);
+                                    const bg = cs.backgroundColor;
+                                    if (bg && bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent") {
+                                        el.style.backgroundColor = "#ffffff";
+                                    }
+                                    const bw =
+                                        parseFloat(cs.borderTopWidth || "0") +
+                                        parseFloat(cs.borderBottomWidth || "0") +
+                                        parseFloat(cs.borderLeftWidth || "0") +
+                                        parseFloat(cs.borderRightWidth || "0");
+                                    if (bw > 0) el.style.borderColor = "#000000";
+                                    // Bump thin font weights to medium so the
+                                    // anti-aliased strokes don't look washed
+                                    // out at small sizes on paper.
+                                    const fw = parseInt(cs.fontWeight || "400", 10);
+                                    if (fw && fw < 500) el.style.fontWeight = "500";
+                                } catch {
+                                    // ignore — best-effort styling
+                                }
+                            });
+                        },
+                    },
                     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
                     pagebreak: { mode: ["css", "legacy"], avoid: ["[data-testid^='print-formation-']", ".print-keep"] },
                 })

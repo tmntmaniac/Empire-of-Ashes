@@ -234,11 +234,13 @@
     [data-testid^="print-formation-"] { page-break-inside: avoid; }
     /* Override the dark-theme palette so ink prints in black on every browser. */
     body, body * { color: black !important; background: white !important; }
-    .panel, [class*="border-"] { border-color: #333 !important; }
-    /* Keep semantic accent colours readable but ink-friendly. */
-    .text-\[\#C2A165\], .text-\[\#2D937D\] { color: #444 !important; font-weight: 700; }
-    .text-\[\#7F1D1D\] { color: #5b0d0d !important; font-weight: 700; }
-    .text-\[\#888\], .text-\[\#777\], .text-\[\#666\] { color: #555 !important; }
+    .panel, [class*="border-"] { border-color: #000 !important; }
+    /* Force every accent colour to pure black so nothing prints as light grey
+       (unreadable on paper). Keep weight bumps so headings still stand out. */
+    .text-\[\#C2A165\], .text-\[\#2D937D\] { color: #000 !important; font-weight: 700; }
+    .text-\[\#7F1D1D\] { color: #000 !important; font-weight: 700; }
+    .text-\[\#888\], .text-\[\#777\], .text-\[\#666\],
+    .text-\[\#555\], .text-\[\#E0E0E0\], .text-\[\#B8B8B8\] { color: #000 !important; }
     /* Hide trailing 'Made with Emergent' badge if present */
     .badge, [class*="emergent-badge"] { display: none !important; }
 }
