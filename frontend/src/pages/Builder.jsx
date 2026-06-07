@@ -23,7 +23,7 @@ export default function Builder() {
     useEffect(() => {
         if (!army) return;
         fetchFaction(army.factionId).then(setFaction).catch(() => setError("Failed to load faction codex."));
-    }, [army?.factionId]);
+    }, [army]);
 
     // Auto save on every change
     useEffect(() => {
