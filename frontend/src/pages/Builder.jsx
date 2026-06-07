@@ -19,7 +19,7 @@ export default function Builder() {
     const [error, setError] = useState(army ? null : "Army not found.");
     const [addOpen, setAddOpen] = useState(false);
     const [removeIdx, setRemoveIdx] = useState(null);
-if (!army) return null;
+// removed
 
     useEffect(() => {
         if (!army) return;
@@ -63,14 +63,16 @@ if (!army) return null;
     const validation = validateArmy(army, faction);
 
     const addFormation = (formDef) => {
-        const newForm = {
-            id: crypto.randomUUID(),
-            formationId: formDef.id,
-            optionIndex: 0,
-            extraUnits: 0,
-            upgrades: [],
-        };
-        setArmy({ ...army, formations: [...(army?.formations || []), newForm] });
+const newForm = {
+    id: crypto.randomUUID(),
+    formationId: formDef.id,
+    optionIndex: 0,
+    extraUnits: 0,
+    upgrades: [],
+};
+setArmy({ ...army, formations: [...(army?.formations || []), newForm] });
+setAddOpen(false);
+toast.success(`${formDef.name} added.`);
         setAddOpen(false);
         toast.success(`${formDef.name} added.`);
     };
