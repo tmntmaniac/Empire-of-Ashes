@@ -36,6 +36,10 @@ export default function Layout() {
                     </div>
                     <span>Lists saved locally to your device.</span>
                 </div>
+                <div className="max-w-7xl mx-auto px-6 pb-6 text-center text-[10px] text-[#555] leading-relaxed">
+                    This website is unofficial and in no way endorsed by Games Workshop.<br />
+                    Any use of terms from Games Workshop are used without permission. No challenge to their status intended. All rights reserved to their respective owners.
+                </div>
             </footer>
         </div>
     );
