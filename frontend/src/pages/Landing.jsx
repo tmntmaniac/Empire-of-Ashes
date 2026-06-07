@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchFactions } from "@/lib/api";
-import { ArrowRight, Lock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const LORE = "History records that it is the Sons of Horus Legion who lit the spark of rebellion and stood upon the ashes of the old Imperium. Ambition, ruthlessness, unbowed determination — Horus Lupercal's chosen carve their destiny across the stars.";
 
@@ -86,14 +86,6 @@ export default function Landing() {
                             </div>
                         </Link>
                     ))}
-                    {/* Future armies teaser — 18 Legions + Solar Aux + Imperialis Militia + Knights + Titans online */}
-                    <div className="panel p-6 opacity-50 cursor-not-allowed" data-testid="faction-card-coming-soon">
-                        <div className="font-mono text-[10px] tracking-[0.3em] text-[#666] uppercase mb-2 flex items-center gap-2">
-                            <Lock className="w-3 h-3" strokeWidth={2} /> Incoming
-                        </div>
-                        <h3 className="font-display text-3xl uppercase tracking-tight mb-3 text-[#555]">Mechanicum Taghmata</h3>
-                        <p className="text-xs text-[#666] font-sans leading-relaxed">The Cult of Mars awaits transmission — Thallax, Vorax, Castellax and Thanatar phalanxes incoming.</p>
-                    </div>
                 </div>
             </section>
 

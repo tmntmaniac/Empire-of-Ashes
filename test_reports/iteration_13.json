@@ -1,0 +1,50 @@
+{
+  "summary": "End-to-end verification of 3 new factions (Mechanicum Taghmata, Legio Custodes, Daemons of the Ruinstorm) + new R7 (formation-over-army-cap) rule. Backend pytest 14/14 PASS. Frontend: Landing renders exactly 25 faction cards (Coming-Soon teaser removed). All three new build flows work (Forge Army → builder → Add Formation → cost readout). R7 surfaces correctly for ordinatus-majoris (1/army), ark-mechanicus (1/army), and Solar Auxilia command-retinue (1/army). R1, R4, R6 regressions still pass. Custodes Composition Rules panel correctly states the 50% LoW cap ('up to 1/2 of points on Lords of War/Allies').",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "backend_verification": {
+    "pytest_results": "14/14 PASS",
+    "junitxml": "/app/test_reports/pytest/pytest_iter13.xml",
+    "factions_total_active": 25,
+    "mechanicum_taghmata": {"formations": 20, "units": 28, "upgrades": 8, "compositionLimits": null, "maxPerArmy_caps": {"ordinatus-majoris": 1, "ark-mechanicus": 1}},
+    "legio_custodes": {"formations": 14, "units": 22, "upgrades": 8, "compositionLimits": {"maxSupportPerLine": 3, "maxUpgradesPerLine": 4, "lowPct": 0.5}},
+    "daemons_ruinstorm": {"formations": 22, "units": 33, "upgrades": 18, "compositionLimits": {"maxSupportPerLine": 1, "maxUpgradesPerLine": 99, "lowPct": 0.33}, "chaos_god_line_ids_present": ["change-coven", "depraved-host", "murder-tide", "putrid-legion"]}
+  },
+  "frontend_scenarios": {
+    "landing_25_cards_no_coming_soon": "PASS (cards=25, teaser removed)",
+    "faction_card_testids": "PASS (mechanicum-taghmata, legio-custodes, daemons-ruinstorm all present & clickable)",
+    "mech_build_flow_thallax_300pts": "PASS (formation-cost-0 = '300 pts')",
+    "custodes_build_flow_custodian_350pts": "PASS (formation-cost-0 = '350 pts')",
+    "custodes_composition_rules_50pct_low": "PASS (panel text contains 'up to 1/2 of points on Lords of War/Allies')",
+    "daemons_build_flow_murder_tide_250pts": "PASS (formation-cost-0 = '250 pts')",
+    "R7_mech_2_ordinatus_majoris": "PASS — 'Ordinatus Majoris: 2 taken — max 1 per army.'",
+    "R7_mech_1_ordinatus_majoris_legal": "PASS — no R7 issue when count==1",
+    "R7_mech_2_ark_mechanicus": "PASS — 'Ark Mechanicus: 2 taken — max 1 per army.'",
+    "R7_solar_auxilia_2_command_retinue": "PASS — 'Command Retinue: 2 taken — max 1 per army.' (new enforcement for pre-existing maxPerArmy field)",
+    "R4_regression_sa_4_upgrades_no_crash": "PASS — 'Infantry Tercio has 4 upgrades — max 3 per Line detachment.' rendered, no React crash",
+    "R6_regression_knight_cerastus_over_cap": "PASS — 'Cerastus Lance: 2 taken — max 1 allowed (1 per 2000 pts).' at 3000pts cap"
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_mech_custodes_daemons.py",
+    "/app/backend/tests/test_max_per_caps.py",
+    "/app/backend/tests/test_knight_titan.py",
+    "/app/backend/tests/test_new_armies.py",
+    "/app/test_reports/pytest/pytest_iter13.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "R7 implementation in validation.js is clean and consistent with R6: Map-based counting per formationId, early-out if def.maxPerArmy unset, issue code 'formation-over-army-cap' with proper em-dash messaging. Correctly orthogonal to R6 (a Solar Auxilia command-retinue has only maxPerArmy and no maxPer, and now finally flags as over-cap when 2 are present — that was the missed enforcement called out in the review request).",
+    "Mechanicum correctly inherits Astartes defaults (no compositionLimits in payload), Custodes correctly carries lowPct:0.5, Daemons correctly carries maxSupportPerLine:1 and maxUpgradesPerLine:99 — all match the source-of-truth PDF interpretation.",
+    "Landing.jsx Coming-Soon teaser successfully removed and the Lock icon import is no longer present.",
+    "Add Formation dialog options do not carry an obvious 'formation-option-<id>' data-testid — only a per-row clickable card. Adding `data-testid=\"formation-option-${def.id}\"` to each AddFormation card would make programmatic selection trivial for future tests (testing agents currently must fall back to text-locator).",
+    "Composition Rules panel text uses '1/2' (Custodes) vs 'max 1 per <N> pts' (R6) and 'max <N> per army' (R7) — three slightly different phrasings for caps. Consider normalising spec language for player-facing consistency, though all are individually correct."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (14/14 pytest)", "frontend": "100% (12/12 scenarios)"},
+  "test_credentials": "N/A — no auth in this app",
+  "seed_data_creation": "Five TEST_-prefixed armies seeded into localStorage 'eoa.armies.v1' (a-mech2ord, a-mech1ord, a-mech2ark, a-sa2cmd, a-sa4up, a-kover); plus 3 real armies created through the build flow (TEST_Mech_Force, TEST_Custodes_Force, TEST_Daemons_Force) — all local to test browser state.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All 25 factions are live and validated end-to-end. R7 (formation-over-army-cap) is implemented at the tail of validateArmy() in /app/frontend/src/lib/validation.js and surfaces under [data-testid='validation-issue-formation-over-army-cap']. Message format: '<Name>: <count> taken — max <allowed> per army.' (em-dash U+2014). Knight Households faction id is 'knight-household' (singular) and the Cerastus formation id is 'cerastus-lance' (not 'cerastus-knight-lance' from review-request narrative). Add Formation dialog cards do NOT have 'formation-option-*' data-testids — use text-locator inside [data-testid='add-formation-dialog']. Forge Army dialog name input has no data-testid; use placeholder selector input[placeholder*='Reaver'].",
+  "rca_of_the_issue": "N/A — all R7 enforcement and new faction payloads verified."
+}

@@ -10,6 +10,8 @@
 //   R6 — Per-formation count caps. A formation may carry `maxPer: {points: N}`
 //        which means "1 instance allowed per N points of the army's pointsCap"
 //        (e.g. Cerastus Lance: 1 per 2,000 pts → 1 at 2000pts, 2 at 4000pts).
+//   R7 — Per-army count caps. A formation may carry `maxPerArmy: N`
+//        (e.g. Command Retinue: 1 per force, Ordinatus Majora: 1 per force).
 //
 // Limits are read from `faction.compositionLimits` when present, with
 // Astartes defaults as a fallback so existing legion data keeps working.
@@ -131,6 +133,24 @@ export function validateArmy(army, faction) {
                     message: `${def.name}: ${count} taken — max ${allowed} allowed (1 per ${perPoints} pts).`,
                 });
             }
+        });
+    }
+
+    // R7 — Per-army count caps (formation.maxPerArmy: N) — "max N per force"
+    {
+        const formationCounts = new Map();
+        formations.forEach((f) => {
+            formationCounts.set(f.formationId, (formationCounts.get(f.formationId) || 0) + 1);
+        });
+        formationCounts.forEach((count, formationId) => {
+            const def = formDefMap[formationId];
+            const allowed = def?.maxPerArmy;
+            if (!allowed || count <= allowed) return;
+            issues.push({
+                code: "formation-over-army-cap",
+                severity: "error",
+                message: `${def.name}: ${count} taken — max ${allowed} per army.`,
+            });
         });
     }
 
