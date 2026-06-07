@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { toast } from "sonner";
 import { getArmy } from "@/lib/storage";
 import { fetchFaction } from "@/lib/api";
 import { armyTotal, formationCost } from "@/lib/points";
@@ -98,11 +99,16 @@ export default function PrintView() {
     const safeFilename = (name) =>
         (name || "field-roster").trim().replace(/[^a-z0-9-_ ]/gi, "").replace(/\s+/g, "-").toLowerCase() || "field-roster";
 
-    const handlePrint = () => window.print();
+    const handlePrint = () => {
+        toast.message("Opening print dialog…", { description: "Choose 'Save as PDF' as the destination if you'd rather save a file." });
+        // Defer to next tick so the toast paints before the modal print dialog steals focus.
+        setTimeout(() => window.print(), 60);
+    };
 
     const handleSavePdf = async () => {
         if (!printableRef.current || savingPdf) return;
         setSavingPdf(true);
+        const t = toast.loading("Generating PDF…");
         try {
             // Dynamic import keeps the ~150KB pdf bundle out of the landing critical path.
             const html2pdf = (await import("html2pdf.js")).default;
@@ -117,10 +123,14 @@ export default function PrintView() {
                 })
                 .from(printableRef.current)
                 .save();
+            toast.success("PDF downloaded", { id: t });
         } catch (err) {
             // Surface the failure without crashing the page; user can retry or fall back to Print.
             console.error("PDF export failed", err);
-            alert("Could not generate PDF. Try the Print button and choose 'Save as PDF' as the destination.");
+            toast.error("Could not generate PDF", {
+                id: t,
+                description: "Try the Print button and choose 'Save as PDF' in the print dialog.",
+            });
         } finally {
             setSavingPdf(false);
         }
@@ -156,6 +166,7 @@ export default function PrintView() {
                     <div className="flex items-center gap-2 flex-wrap">
                         <span className="hidden sm:inline font-mono text-[10px] tracking-[0.3em] uppercase text-[#555]">// Output</span>
                         <button
+                            type="button"
                             onClick={handlePrint}
                             className="btn-primary inline-flex items-center gap-2"
                             data-testid="print-trigger"
@@ -164,6 +175,7 @@ export default function PrintView() {
                             <Printer className="w-4 h-4" /> Print
                         </button>
                         <button
+                            type="button"
                             onClick={handleSavePdf}
                             disabled={savingPdf}
                             className="btn-secondary inline-flex items-center gap-2 disabled:opacity-50"
