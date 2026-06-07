@@ -1,20 +1,97 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getArmy } from "@/lib/storage";
 import { fetchFaction } from "@/lib/api";
 import { armyTotal, formationCost } from "@/lib/points";
 import { Printer, ArrowLeft } from "lucide-react";
 
+// Resolve every unit (with summed counts) that appears in a fielded formation,
+// merging:  base option units  →  optional extraUnits  →  addedUnits from
+// selected flag upgrades  →  multi-variant upgrades whose variant id is also a
+// real unit id (e.g. Infantry Support Tank → Leman Russ Demolisher).
+function resolveFormationUnits(formation, def, faction) {
+    const counts = new Map();
+    const add = (unitId, count) => {
+        if (!unitId || !faction.units[unitId]) return;
+        counts.set(unitId, (counts.get(unitId) || 0) + count);
+    };
+
+    const option = def.unitOptions?.[formation.optionIndex || 0];
+    (option?.units || []).forEach((u) => add(u.unit, u.count));
+
+    if (def.extraUnit && formation.extraUnits > 0) {
+        add(def.extraUnit.unit, formation.extraUnits);
+    }
+
+    const upgradeMap = Object.fromEntries(faction.upgrades.map((u) => [u.id, u]));
+    (formation.upgrades || []).forEach((u) => {
+        const upg = upgradeMap[u.upgradeId];
+        if (!upg) return;
+        (upg.addedUnits || []).forEach((au) => add(au.unit, au.count));
+        if (upg.type === "multi" && !upg.conversion) {
+            (u.selections || []).forEach((sel) => {
+                if (faction.units[sel.variantId]) add(sel.variantId, sel.count || 0);
+            });
+        }
+    });
+
+    return Array.from(counts.entries()).map(([unitId, count]) => ({
+        unitId,
+        count,
+        unit: faction.units[unitId],
+    }));
+}
+
+function UnitStatBlock({ count, unit }) {
+    return (
+        <div className="border border-[#333] p-3 mb-2 print-keep" data-testid={`print-unit-${unit.name.replace(/\s+/g, "-").toLowerCase()}`}>
+            <div className="flex items-baseline justify-between gap-3 flex-wrap mb-1">
+                <h4 className="font-display text-base uppercase tracking-tight">
+                    <span className="text-[#C2A165]">{count}×</span> {unit.name}
+                </h4>
+                <div className="font-mono text-[10px] text-[#888] uppercase tracking-widest flex gap-3">
+                    <span>Type <span className="text-[#E0E0E0]">{unit.type || "—"}</span></span>
+                    <span>Speed <span className="text-[#E0E0E0]">{unit.speed || "—"}</span></span>
+                    <span>Armour <span className="text-[#E0E0E0]">{unit.armour || "—"}</span></span>
+                    <span>CC <span className="text-[#E0E0E0]">{unit.cc || "—"}</span></span>
+                    <span>FF <span className="text-[#E0E0E0]">{unit.ff || "—"}</span></span>
+                </div>
+            </div>
+            {Array.isArray(unit.weapons) && unit.weapons.length > 0 && (
+                <table className="w-full text-xs border-collapse mt-1">
+                    <thead>
+                        <tr className="text-left text-[#888] font-mono uppercase tracking-widest">
+                            <th className="font-normal py-0.5 w-1/3">Weapon</th>
+                            <th className="font-normal py-0.5 w-1/4">Range</th>
+                            <th className="font-normal py-0.5">Firepower</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {unit.weapons.map((w, i) => (
+                            <tr key={i} className="border-t border-[#222]">
+                                <td className="py-0.5 pr-2 text-[#E0E0E0]">{w.name}</td>
+                                <td className="py-0.5 pr-2 text-[#B8B8B8]">{w.range}</td>
+                                <td className="py-0.5 text-[#B8B8B8]">{w.firepower}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
+            {Array.isArray(unit.notes) && unit.notes.length > 0 && (
+                <div className="mt-1 text-[11px] text-[#888] italic">{unit.notes.join(" ")}</div>
+            )}
+        </div>
+    );
+}
+
 export default function PrintView() {
     const { id } = useParams();
-    const [army, setArmy] = useState(null);
+    const army = useMemo(() => getArmy(id), [id]);
     const [faction, setFaction] = useState(null);
 
     useEffect(() => {
-        const a = getArmy(id);
-        setArmy(a);
-        if (a) fetchFaction(a.factionId).then(setFaction);
-    }, [id]);
+        if (army) fetchFaction(army.factionId).then(setFaction);
+    }, [army]);
 
     if (!army) {
         return (
@@ -64,43 +141,60 @@ export default function PrintView() {
                     <div className="text-sm">{faction.legionTrait.description}</div>
                 </div>
 
+                {Array.isArray(faction.specialRules) && faction.specialRules.length > 0 && (
+                    <div className="mb-6 p-3 border border-[#7F1D1D]" data-testid="print-special-rules">
+                        <div className="font-mono text-[10px] tracking-[0.3em] text-[#7F1D1D] uppercase mb-2">// Special Rules</div>
+                        <div className="space-y-2">
+                            {faction.specialRules.map((rule, idx) => (
+                                <div key={idx}>
+                                    <div className="font-display text-sm uppercase tracking-tight text-[#E5E5E5]">{rule.name}</div>
+                                    <div className="text-xs text-[#B8B8B8] leading-relaxed whitespace-pre-line">{rule.description}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
                 {(army.formations || []).map((f, i) => {
                     const def = formDefMap[f.formationId];
                     if (!def) return null;
                     const cost = formationCost(f, def);
-                    const option = def.unitOptions[f.optionIndex || 0];
-                    const units = (option?.units || []).map((u) => ({ ...u }));
-                    if (def.extraUnit && f.extraUnits) {
-                        const idx = units.findIndex((x) => x.unit === def.extraUnit.unit);
-                        if (idx >= 0) units[idx] = { ...units[idx], count: units[idx].count + f.extraUnits };
-                    }
+                    const resolvedUnits = resolveFormationUnits(f, def, faction);
                     return (
-                        <div key={f.id} className="mb-6 print-section" data-testid={`print-formation-${i}`}>
-                            <div className="flex items-baseline justify-between border-b border-[#444] pb-1 mb-2">
+                        <div key={f.id} className="mb-8 print-section" data-testid={`print-formation-${i}`}>
+                            <div className="flex items-baseline justify-between border-b border-[#444] pb-1 mb-3">
                                 <h2 className="font-display text-2xl uppercase tracking-tight">{def.name} <span className="text-sm text-[#888]">({def.category})</span></h2>
                                 <span className="font-mono text-sm text-[#C2A165]">{cost} pts</span>
                             </div>
-                            <div className="font-mono text-xs text-[#888] mb-2">
-                                {units.map((u, j) => {
-                                    const unit = faction.units[u.unit];
-                                    return <span key={j}>{u.count}× {unit?.name || u.unit}{j < units.length - 1 ? " · " : ""}</span>;
-                                })}
-                            </div>
+
                             {(f.upgrades || []).length > 0 && (
-                                <ul className="text-sm pl-4 list-disc text-[#B8B8B8]">
-                                    {f.upgrades.map((u) => {
-                                        const upg = upgradeMap[u.upgradeId];
-                                        if (!upg) return null;
-                                        return (
-                                            <li key={u.upgradeId}>
-                                                <span className="text-[#E0E0E0] font-semibold">{upg.name}</span>
-                                                {u.selections.length > 0 && (
-                                                    <span> — {u.selections.map((s) => `${s.count}× ${variantName(u.upgradeId, s.variantId)}`).join(", ")}</span>
-                                                )}
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
+                                <div className="mb-3">
+                                    <div className="font-mono text-[10px] tracking-[0.3em] text-[#888] uppercase mb-1">Upgrades</div>
+                                    <ul className="text-xs pl-4 list-disc text-[#B8B8B8] space-y-0.5">
+                                        {f.upgrades.map((u) => {
+                                            const upg = upgradeMap[u.upgradeId];
+                                            if (!upg) return null;
+                                            return (
+                                                <li key={u.upgradeId}>
+                                                    <span className="text-[#E0E0E0] font-semibold">{upg.name}</span>
+                                                    {u.selections && u.selections.length > 0 && (
+                                                        <span> — {u.selections.map((s) => `${s.count}× ${variantName(u.upgradeId, s.variantId)}`).join(", ")}</span>
+                                                    )}
+                                                    {upg.description && <span className="text-[#777]"> · {upg.description}</span>}
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </div>
+                            )}
+
+                            {resolvedUnits.length > 0 && (
+                                <div data-testid={`print-formation-${i}-stats`}>
+                                    <div className="font-mono text-[10px] tracking-[0.3em] text-[#888] uppercase mb-1">Unit Stats</div>
+                                    {resolvedUnits.map(({ unitId, count, unit }) => (
+                                        <UnitStatBlock key={unitId} count={count} unit={unit} />
+                                    ))}
+                                </div>
                             )}
                         </div>
                     );
