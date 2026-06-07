@@ -7,7 +7,10 @@ export function useFactionAsync(factionId) {
     useEffect(() => {
         let cancelled = false;
 
-        if (!factionId) return;
+        if (!factionId) {
+            setFaction(null);
+            return;
+        }
 
         fetchFaction(factionId)
             .then((f) => {
