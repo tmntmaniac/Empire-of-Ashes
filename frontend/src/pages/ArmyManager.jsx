@@ -19,16 +19,23 @@ export default function ArmyManager() {
     const [presetFactionId, setPresetFactionId] = useState(null);
     const [pendingDelete, setPendingDelete] = useState(null);
 
-    const refresh = () => setArmies(listArmies());
+    const refresh = () => {
+        const list = listArmies();
+        setArmies(Array.isArray(list) ? list : []);
+    };
 
     useEffect(() => {
         refresh();
         fetchFactions().then((fs) => {
-            setFactions(fs);
+            const safeFs = Array.isArray(fs) ? fs : [];
+            setFactions(safeFs);
             // preload each faction so the army cards can compute points totals
-            Promise.all(fs.map((f) => fetchFaction(f.id))).then((details) => {
-                setFactionCache(Object.fromEntries(details.map((d) => [d.id, d])));
+            Promise.all(safeFs.map((f) => fetchFaction(f.id))).then((details) => {
+                const safeDetails = Array.isArray(details) ? details : [];
+                setFactionCache(Object.fromEntries(safeDetails.filter(Boolean).map((d) => [d.id, d])));
             });
+        }).catch(() => {
+            setFactions([]);
         });
     }, []);
 
@@ -90,7 +97,7 @@ export default function ArmyManager() {
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" data-testid="army-list">
-                    {armies.map((a) => {
+                    {(Array.isArray(armies) ? armies : []).map((a) => {
                         const faction = factionCache[a.factionId];
                         const total = faction ? armyTotal(a, faction) : 0;
                         const pct = a.pointsCap ? Math.min(100, Math.round((total / a.pointsCap) * 100)) : 0;
@@ -159,11 +166,12 @@ export default function ArmyManager() {
 }
 
 function NewArmyDialog({ factions, initialFactionId, onClose, onCreate }) {
+    const safeFactions = Array.isArray(factions) ? factions : [];
     const [name, setName] = useState("");
     const [factionId, setFactionId] = useState(
-        initialFactionId && factions.some((f) => f.id === initialFactionId)
+        initialFactionId && safeFactions.some((f) => f.id === initialFactionId)
             ? initialFactionId
-            : (factions[0]?.id || "sons-of-horus")
+            : (safeFactions[0]?.id || "sons-of-horus")
     );
     const [preset, setPreset] = useState(3000);
     const [custom, setCustom] = useState("");
@@ -200,7 +208,7 @@ function NewArmyDialog({ factions, initialFactionId, onClose, onCreate }) {
                     className="w-full bg-[#0E1411] border border-[#333] focus:border-[#2D937D] focus:outline-none px-3 py-2 mb-4 font-sans text-[#E0E0E0]"
                     data-testid="new-army-faction"
                 >
-                    {factions.map((f) => (
+                    {safeFactions.map((f) => (
                         <option key={f.id} value={f.id}>{f.name}</option>
                     ))}
                 </select>
