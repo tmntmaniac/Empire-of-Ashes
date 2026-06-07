@@ -48,7 +48,7 @@ if (!army) return null;
         return <div className="max-w-7xl mx-auto px-6 py-20 text-center font-mono text-[#666] uppercase tracking-widest" data-testid="builder-loading">Decrypting codex...</div>;
     }
 
-    const total = army const total = armyTotal(army, faction);const total = armyTotal(army, faction); faction ? armyTotal(army, faction) : 0;
+    const total = army ? armyTotal(army, faction) : 0;
     const cap = army?.pointsCap || 0;
 
     // Counts for composition rules
