@@ -3,3 +3,6 @@ frontend/.env
 .env
 node_modules
 yarn.lock
+__pycache__/
+*.pyc
+memory/
