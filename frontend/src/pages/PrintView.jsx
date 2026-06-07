@@ -2,9 +2,21 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { getArmy } from "@/lib/storage";
-import { fetchFaction } from "@/lib/api";
+import { useFactionAsync } from "@/lib/useFactionAsync";
 import { armyTotal, formationCost } from "@/lib/points";
-import { Printer, ArrowLeft, Download } from "lucide-react";
+import { Printer, ArrowLeft, Download, ExternalLink } from "lucide-react";
+
+// Detect whether we're loaded inside a cross-origin iframe (e.g. the Emergent
+// preview frame). In that context the browser silently blocks window.print(),
+// file-download triggers, and other top-level chrome APIs.
+function detectIframe() {
+    try {
+        return window.top !== window.self;
+    } catch {
+        // Cross-origin parent → accessing window.top throws → definitely in an iframe.
+        return true;
+    }
+}
 
 // Resolve every unit (with summed counts) that appears in a fielded formation,
 // merging:  base option units  →  optional extraUnits  →  addedUnits from
@@ -87,25 +99,55 @@ function UnitStatBlock({ count, unit }) {
 
 export default function PrintView() {
     const { id } = useParams();
-    const army = useMemo(() => getArmy(id), [id]);
-    const [faction, setFaction] = useState(null);
+    const [army] = useState(() => getArmy(id));
+    const faction = useFactionAsync(army?.factionId);
     const [savingPdf, setSavingPdf] = useState(false);
     const printableRef = useRef(null);
+    const inIframe = useMemo(detectIframe, []);
 
-    useEffect(() => {
-        if (army) fetchFaction(army.factionId).then(setFaction);
-    }, [army]);
+    const safeFilename = useMemo(() => {
+        const cleaned = (army?.name || "field-roster")
+            .trim()
+            .replace(/[^a-z0-9-_ ]/gi, "")
+            .replace(/\s+/g, "-")
+            .toLowerCase();
+        return cleaned || "field-roster";
+    }, [army?.name]);
 
-    const safeFilename = (name) =>
-        (name || "field-roster").trim().replace(/[^a-z0-9-_ ]/gi, "").replace(/\s+/g, "-").toLowerCase() || "field-roster";
+    const openInNewTab = () => {
+        // Pass a marker so the new tab knows it's "the real one" and skips the banner.
+        const url = `${window.location.pathname}?fullscreen=1`;
+        const win = window.open(url, "_blank", "noopener");
+        if (!win) {
+            toast.error("Pop-up blocked", {
+                description: "Allow pop-ups for this site, or copy the URL into a new tab manually.",
+            });
+        }
+    };
 
     const handlePrint = () => {
-        toast.message("Opening print dialog…", { description: "Choose 'Save as PDF' as the destination if you'd rather save a file." });
+        if (inIframe) {
+            toast.message("Opening roster in a new tab…", {
+                description: "Print is blocked inside the Emergent preview frame. The new tab will give you the browser print dialog.",
+            });
+            openInNewTab();
+            return;
+        }
+        toast.message("Opening print dialog…", {
+            description: "Choose 'Save as PDF' as the destination if you'd rather save a file.",
+        });
         // Defer to next tick so the toast paints before the modal print dialog steals focus.
         setTimeout(() => window.print(), 60);
     };
 
     const handleSavePdf = async () => {
+        if (inIframe) {
+            toast.message("Opening roster in a new tab…", {
+                description: "PDF downloads are blocked inside the Emergent preview frame. Press Save as PDF again from the new tab.",
+            });
+            openInNewTab();
+            return;
+        }
         if (!printableRef.current || savingPdf) return;
         setSavingPdf(true);
         const t = toast.loading("Generating PDF…");
@@ -115,7 +157,7 @@ export default function PrintView() {
             await html2pdf()
                 .set({
                     margin: 10,
-                    filename: `${safeFilename(army?.name)}-roster.pdf`,
+                    filename: `${safeFilename}-roster.pdf`,
                     image: { type: "jpeg", quality: 0.95 },
                     html2canvas: { scale: 2, backgroundColor: "#ffffff", useCORS: true },
                     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
@@ -125,7 +167,6 @@ export default function PrintView() {
                 .save();
             toast.success("PDF downloaded", { id: t });
         } catch (err) {
-            // Surface the failure without crashing the page; user can retry or fall back to Print.
             console.error("PDF export failed", err);
             toast.error("Could not generate PDF", {
                 id: t,
@@ -189,6 +230,25 @@ export default function PrintView() {
             </div>
 
             <div ref={printableRef} className="max-w-5xl mx-auto px-6 py-10 print-section" data-testid="print-view">
+                {inIframe && (
+                    <div className="no-print mb-6 p-4 border border-[#7F1D1D] bg-[#7F1D1D]/10 flex items-start gap-3 flex-wrap" data-testid="iframe-banner">
+                        <div className="flex-1 min-w-[280px]">
+                            <div className="font-mono text-[10px] tracking-[0.3em] text-[#7F1D1D] uppercase mb-1">// Preview frame detected</div>
+                            <p className="text-sm text-[#E0E0E0]">
+                                Print and PDF download are blocked inside the Emergent preview window for security reasons.
+                                Open the roster in a full browser tab to use them.
+                            </p>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={openInNewTab}
+                            className="btn-primary inline-flex items-center gap-2"
+                            data-testid="open-fullscreen-btn"
+                        >
+                            <ExternalLink className="w-4 h-4" /> Open in New Tab
+                        </button>
+                    </div>
+                )}
                 <div className="border-b-2 border-[#C2A165] pb-4 mb-6">
                     <div className="font-mono text-[10px] tracking-[0.4em] text-[#C2A165] uppercase mb-2">// Field Roster Manifest</div>
                     <h1 className="font-display text-5xl uppercase tracking-tight" data-testid="print-army-name">{army.name}</h1>
