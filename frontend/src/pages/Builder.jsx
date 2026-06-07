@@ -19,6 +19,7 @@ export default function Builder() {
     const [error, setError] = useState(army ? null : "Army not found.");
     const [addOpen, setAddOpen] = useState(false);
     const [removeIdx, setRemoveIdx] = useState(null);
+if (!army) return null;
 
     useEffect(() => {
         if (!army) return;
@@ -47,8 +48,8 @@ export default function Builder() {
         return <div className="max-w-7xl mx-auto px-6 py-20 text-center font-mono text-[#666] uppercase tracking-widest" data-testid="builder-loading">Decrypting codex...</div>;
     }
 
-    const total = armyTotal(army, faction);
-    const cap = army.pointsCap;
+    const total = army const total = armyTotal(army, faction);const total = armyTotal(army, faction); faction ? armyTotal(army, faction) : 0;
+    const cap = army?.pointsCap || 0;
 
     // Counts for composition rules
     const counts = (army?.formations || []).reduce((acc, f) => {
