@@ -19,6 +19,8 @@ export default function App() {
                     <Route path="/" element={<Landing />} />
                     <Route path="/armies" element={<ArmyManager />} />
                     <Route path="/builder/:id" element={<Builder />} />
+                    <Route path="/legal/impressum" element={<Impressum />} />
+                    <Route path="/legal/datenschutz" element={<Datenschutz />} />
                 </Route>
             </Routes>
         </BrowserRouter>
