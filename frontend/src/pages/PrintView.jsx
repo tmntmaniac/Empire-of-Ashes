@@ -192,14 +192,29 @@ export default function PrintView() {
             openInNewTab("print");
             return;
         }
+        // Detect a silently-blocked print() (sandboxed pop-up, mobile browser
+        // without print support, embedded webview, etc.) by listening for the
+        // `beforeprint` event. If it doesn't fire within 1.2s, the browser
+        // never actually opened the dialog and we tell the user how to recover.
+        let beforeFired = false;
+        const onBefore = () => { beforeFired = true; };
+        window.addEventListener("beforeprint", onBefore, { once: true });
+
         toast.message("Opening print dialog…", {
             description: "Choose 'Save as PDF' as the destination if you'd rather save a file.",
         });
-        // Calling window.print() synchronously keeps the user-gesture token
-        // active across browsers (Safari in particular strips it after any
-        // setTimeout wrap). The toast paints fine before the modal because
-        // the browser yields to render before the print dialog appears.
+        // Synchronous call keeps the user-gesture token alive across browsers.
         window.print();
+
+        window.setTimeout(() => {
+            window.removeEventListener("beforeprint", onBefore);
+            if (beforeFired) return;
+            toast.error("Browser blocked the print dialog", {
+                description:
+                    "This tab still has sandbox restrictions. Copy this page's URL, paste it into a brand-new browser tab (not via Emergent's pop-up), then press Ctrl/Cmd+P.",
+                duration: 12000,
+            });
+        }, 1200);
     };
 
     const handleSavePdf = async () => {
@@ -213,10 +228,28 @@ export default function PrintView() {
         if (!printableRef.current || savingPdf) return;
         setSavingPdf(true);
         const t = toast.loading("Generating PDF…");
+        // Pre-open a blank window synchronously while we still own the user
+        // gesture. We'll either close it (download path succeeded) or fill it
+        // with the rendered PDF blob (download path was suppressed by the
+        // browser sandbox). This guarantees the user gets the PDF one way or
+        // the other instead of seeing a fake "downloaded" toast with no file.
+        const fallbackWin = window.open("", "_blank");
+        if (fallbackWin) {
+            try {
+                fallbackWin.document.write(
+                    "<title>Generating PDF…</title><style>body{background:#080A09;color:#C2A165;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;letter-spacing:.3em;text-transform:uppercase;font-size:12px}</style><body>// Generating PDF…</body>"
+                );
+            } catch {
+                // ignore — sandbox may forbid document.write
+            }
+        }
         try {
             // Dynamic import keeps the ~150KB pdf bundle out of the landing critical path.
             const html2pdf = (await import("html2pdf.js")).default;
-            await html2pdf()
+            // We need the rendered jsPDF instance so we can both attempt the
+            // direct .save() (preferred — gives a clean Downloads-folder file)
+            // AND fall back to a blob URL if that download silently fails.
+            const worker = html2pdf()
                 .set({
                     margin: 10,
                     filename: `${safeFilename}-roster.pdf`,
@@ -225,11 +258,39 @@ export default function PrintView() {
                     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
                     pagebreak: { mode: ["css", "legacy"], avoid: ["[data-testid^='print-formation-']", ".print-keep"] },
                 })
-                .from(printableRef.current)
-                .save();
-            toast.success("PDF downloaded", { id: t });
+                .from(printableRef.current);
+
+            // Render once, then drive two outputs from the same jsPDF instance.
+            const pdf = await worker.toPdf().get("pdf");
+            const blobUrl = pdf.output("bloburl");
+
+            // Try the standard direct-download path first.
+            pdf.save(`${safeFilename}-roster.pdf`);
+
+            // If the browser actually started the download, close the fallback
+            // window. Otherwise (sandboxed), navigate it to the blob URL so the
+            // user gets the rendered PDF rendered inline (Ctrl/Cmd+S to save).
+            // We can't reliably detect download-success, so always offer the
+            // fallback link in the toast — the user can click it if no file
+            // appears in Downloads.
+            if (fallbackWin && !fallbackWin.closed) {
+                try {
+                    fallbackWin.location.href = blobUrl;
+                } catch {
+                    // ignore
+                }
+            }
+            toast.success("PDF ready", {
+                id: t,
+                description:
+                    "If no file appeared in your Downloads folder, use the PDF tab that just opened — press Ctrl/Cmd+S to save it locally.",
+                duration: 10000,
+            });
         } catch (err) {
             console.error("PDF export failed", err);
+            if (fallbackWin && !fallbackWin.closed) {
+                try { fallbackWin.close(); } catch { /* ignore */ }
+            }
             toast.error("Could not generate PDF", {
                 id: t,
                 description: "Try the Print button and choose 'Save as PDF' in the print dialog.",
@@ -263,9 +324,8 @@ export default function PrintView() {
         const action = pendingAction;
         setPendingAction(null);
         if (action === "print") {
-            // Synchronous window.print() inside this click handler keeps the
-            // user-gesture token alive across all major browsers.
-            window.print();
+            // Use handlePrint so the silent-block detection runs here too.
+            handlePrint();
         } else if (action === "pdf") {
             handleSavePdf();
         }
@@ -345,22 +405,48 @@ export default function PrintView() {
                     </div>
                 )}
                 {inIframe && (
-                    <div className="no-print mb-6 p-4 border border-[#7F1D1D] bg-[#7F1D1D]/10 flex items-start gap-3 flex-wrap" data-testid="iframe-banner">
-                        <div className="flex-1 min-w-[280px]">
-                            <div className="font-mono text-[10px] tracking-[0.3em] text-[#7F1D1D] uppercase mb-1">// Preview frame detected</div>
-                            <p className="text-sm text-[#E0E0E0]">
-                                Print and PDF download are blocked inside the Emergent preview window for security reasons.
-                                Open the roster in a full browser tab to use them.
-                            </p>
+                    <div className="no-print mb-6 p-4 border border-[#7F1D1D] bg-[#7F1D1D]/10" data-testid="iframe-banner">
+                        <div className="flex items-start gap-3 flex-wrap">
+                            <div className="flex-1 min-w-[280px]">
+                                <div className="font-mono text-[10px] tracking-[0.3em] text-[#7F1D1D] uppercase mb-1">// Preview frame detected</div>
+                                <p className="text-sm text-[#E0E0E0]">
+                                    Print and PDF download are blocked inside the Emergent preview window for security reasons.
+                                    Use one of the options below — the second one always works even when Emergent's pop-ups inherit the same restrictions.
+                                </p>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <button
+                                    type="button"
+                                    onClick={() => openInNewTab()}
+                                    className="btn-primary inline-flex items-center gap-2"
+                                    data-testid="open-fullscreen-btn"
+                                >
+                                    <ExternalLink className="w-4 h-4" /> Open in New Tab
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        const encoded = army ? encodeArmy(army) : "";
+                                        const u = `${window.location.origin}${window.location.pathname}?fullscreen=1${encoded ? `&a=${encoded}` : ""}`;
+                                        if (navigator.clipboard?.writeText) {
+                                            navigator.clipboard.writeText(u).then(
+                                                () => toast.success("Roster URL copied", {
+                                                    description: "Open a fresh browser tab (Ctrl/Cmd+T), paste (Ctrl/Cmd+V) and press Enter. Print + PDF will work from there.",
+                                                    duration: 10000,
+                                                }),
+                                                () => toast.error("Couldn't copy URL — select the address-bar URL and copy it manually."),
+                                            );
+                                        } else {
+                                            window.prompt("Copy this URL, then paste it into a fresh browser tab:", u);
+                                        }
+                                    }}
+                                    className="btn-secondary inline-flex items-center gap-2 text-sm"
+                                    data-testid="copy-roster-url-btn"
+                                >
+                                    📋 Copy URL (paste in a fresh tab)
+                                </button>
+                            </div>
                         </div>
-                        <button
-                            type="button"
-                            onClick={() => openInNewTab()}
-                            className="btn-primary inline-flex items-center gap-2"
-                            data-testid="open-fullscreen-btn"
-                        >
-                            <ExternalLink className="w-4 h-4" /> Open in New Tab
-                        </button>
                     </div>
                 )}
                 <div className="border-b-2 border-[#C2A165] pb-4 mb-6">
