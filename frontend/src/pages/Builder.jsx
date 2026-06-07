@@ -51,13 +51,13 @@ export default function Builder() {
     const cap = army.pointsCap;
 
     // Counts for composition rules
-    const counts = (army.formations || []).reduce((acc, f) => {
+    const counts = (army?.formations || []).reduce((acc, f) => {
         const def = formDefMap[f.formationId];
         if (!def) return acc;
         acc[def.category] = (acc[def.category] || 0) + 1;
         return acc;
     }, {});
-    const hasHorus = (army.formations || []).some((f) => f.formationId === "horus");
+    const hasHorus = (army?.formations || []).some((f) => f.formationId === "horus");
 
     const validation = validateArmy(army, faction);
 
@@ -69,13 +69,13 @@ export default function Builder() {
             extraUnits: 0,
             upgrades: [],
         };
-        setArmy({ ...army, formations: [...(army.formations || []), newForm] });
+        setArmy({ ...army, formations: [...(army?.formations || []), newForm] });
         setAddOpen(false);
         toast.success(`${formDef.name} added.`);
     };
 
     const updateFormation = (idx, updated) => {
-        const next = [...army.formations];
+        const next = [...army?.formations];
         next[idx] = updated;
         setArmy({ ...army, formations: next });
     };
@@ -84,8 +84,8 @@ export default function Builder() {
     };
     const confirmRemoveFormation = () => {
         if (removeIdx == null) return;
-        const def = formDefMap[army.formations[removeIdx]?.formationId];
-        setArmy({ ...army, formations: army.formations.filter((_, i) => i !== removeIdx) });
+        const def = formDefMap[army?.formations[removeIdx]?.formationId];
+        setArmy({ ...army, formations: army?.formations.filter((_, i) => i !== removeIdx) });
         setRemoveIdx(null);
         toast.success(`${def?.name || "Formation"} disbanded.`);
     };
@@ -121,7 +121,7 @@ export default function Builder() {
             />
 
             {/* Force composition validation */}
-            <ArmyValidationPanel result={validation} hasFormations={(army.formations || []).length > 0} />
+            <ArmyValidationPanel result={validation} hasFormations={(army?.formations || []).length > 0} />
 
             {/* Legion Trait */}
             <div className="panel panel-gold p-4 mb-6" data-testid="legion-trait">
@@ -133,11 +133,11 @@ export default function Builder() {
             </div>
 
             {/* Special Rules (faction-specific army rules from the source rulebook) */}
-            {Array.isArray(faction.specialRules) && faction.specialRules.length > 0 && (
+            {Array.isArray(faction?.specialRules) && faction?.specialRules.length > 0 && (
                 <div className="panel p-4 mb-6 border border-[#7F1D1D]" data-testid="special-rules">
                     <div className="font-mono text-[10px] tracking-[0.3em] text-[#7F1D1D] uppercase mb-3">// Special Rules</div>
                     <div className="space-y-3">
-                        {faction.specialRules.map((rule, idx) => (
+                        {faction?.specialRules.map((rule, idx) => (
                             <div key={idx} data-testid={`special-rule-${idx}`}>
                                 <h4 className="font-display text-lg uppercase tracking-tight text-[#E5E5E5] mb-1">{rule.name}</h4>
                                 <p className="text-sm text-[#B8B8B8] font-sans leading-relaxed whitespace-pre-line">{rule.description}</p>
@@ -149,14 +149,14 @@ export default function Builder() {
 
             {/* Formations */}
             <div className="space-y-4 mb-6" data-testid="formations-list">
-                {(army.formations || []).length === 0 && (
+                {(army?.formations || []).length === 0 && (
                     <div className="panel corner-frame p-10 text-center" data-testid="empty-formations">
                         <div className="font-mono text-[11px] tracking-[0.4em] text-[#C2A165] uppercase mb-2">// Awaiting Orders</div>
                         <h3 className="font-display text-2xl uppercase mb-3">No Formations Deployed</h3>
                         <p className="text-[#888] mb-4 text-sm">Add your first detachment to begin building this force.</p>
                     </div>
                 )}
-                {(army.formations || []).map((f, i) => {
+                {(army?.formations || []).map((f, i) => {
                     const def = formDefMap[f.formationId];
                     const isLine = def?.category === "Line";
                     const upgradeMax = isLine ? limitsFor(faction).maxUpgradesPerLine : null;
@@ -202,7 +202,7 @@ export default function Builder() {
                 title="Remove Formation?"
                 message={
                     removeIdx != null
-                        ? `${formDefMap[army.formations[removeIdx]?.formationId]?.name || "This formation"} will be removed from the roster. Upgrades and unit selections will be lost.`
+                        ? `${formDefMap[army?.formations[removeIdx]?.formationId]?.name || "This formation"} will be removed from the roster. Upgrades and unit selections will be lost.`
                         : ""
                 }
                 confirmLabel="Disband"
@@ -217,7 +217,7 @@ export default function Builder() {
 }
 
 function AddFormationDialog({ faction, hasHorus, onClose, onAdd }) {
-    const groups = (faction.formations || []).reduce((acc, f) => {
+    const groups = (faction?.formations || []).reduce((acc, f) => {
         (acc[f.category] = acc[f.category] || []).push(f);
         return acc;
     }, {});
