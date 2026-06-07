@@ -61,7 +61,7 @@ export default function Landing() {
                         <div className="font-mono text-[11px] tracking-[0.3em] text-[#888] uppercase mb-2">// Forces Available</div>
                         <h2 className="font-display text-3xl sm:text-4xl uppercase tracking-tight">Choose Your Allegiance</h2>
                     </div>
-                    <div className="font-mono text-xs text-[#666] uppercase tracking-widest hidden sm:block">{factions.length} force{factions.length === 1 ? "" : "s"} online</div>
+                    <div className="font-mono text-xs text-[#666] uppercase tracking-widest hidden sm:block">{{(factions || []).length}} force{factions.length === 1 ? "" : "s"} online</div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

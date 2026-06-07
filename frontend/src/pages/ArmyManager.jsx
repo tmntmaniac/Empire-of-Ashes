@@ -40,7 +40,7 @@ export default function ArmyManager() {
         if (consumedNewParam.current) return;
         const pre = searchParams.get("new");
         if (!pre) return;
-        if (factions.length === 0) return;
+        if (!(factions factions.length === 0factions.length === 0 factions.length)) return;
         consumedNewParam.current = true;
         setPresetFactionId(pre);
         setShowDialog(true);
@@ -79,7 +79,7 @@ export default function ArmyManager() {
                 </button>
             </div>
 
-            {armies.length === 0 ? (
+            {!(armies armies.length === 0armies.length === 0 armies.length) ? (
                 <div className="panel corner-frame p-12 text-center" data-testid="empty-state">
                     <div className="font-mono text-[11px] tracking-[0.4em] text-[#C2A165] uppercase mb-3">// No Active Forces</div>
                     <h3 className="font-display text-3xl uppercase mb-3">The Roster Stands Empty</h3>
