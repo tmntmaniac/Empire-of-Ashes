@@ -137,6 +137,20 @@
     }
     .btn-primary:hover { background: #3FB098; }
     .btn-primary:active { transform: translateY(1px); }
+    .btn-secondary {
+        background: transparent;
+        color: #C2A165;
+        border: 1px solid #C2A165;
+        font-family: 'Bebas Neue', sans-serif;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 400;
+        padding: 0.55rem 1.15rem;
+        border-radius: 2px;
+        transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+    }
+    .btn-secondary:hover { background: #C2A165; color: #050505; }
+    .btn-secondary:active { transform: translateY(1px); }
     .btn-ghost {
         background: transparent;
         color: #E0E0E0;
@@ -206,14 +220,27 @@
     }
 }
 
-/* Print styles */
+/* Print styles — black ink on white paper, no chrome */
 @media print {
-    body { background: white !important; color: black !important; }
+    @page { margin: 12mm; size: auto; }
+    html, body { background: white !important; color: black !important; }
     .no-print { display: none !important; }
-    .print-section { page-break-inside: avoid; }
-    .panel { border-color: #888 !important; background: white !important; }
-    .stat-table th { background: #eee !important; color: black !important; }
-    h1, h2, h3 { color: black !important; }
+    .print-section { page-break-inside: avoid; break-inside: avoid; }
+    .print-keep { page-break-inside: avoid; break-inside: avoid; }
+    /* Force a fresh page before each formation block so unit-stat tables are not split. */
+    [data-testid^="print-formation-"]:not([data-testid$="-stats"]) {
+        page-break-before: auto;
+    }
+    [data-testid^="print-formation-"] { page-break-inside: avoid; }
+    /* Override the dark-theme palette so ink prints in black on every browser. */
+    body, body * { color: black !important; background: white !important; }
+    .panel, [class*="border-"] { border-color: #333 !important; }
+    /* Keep semantic accent colours readable but ink-friendly. */
+    .text-\[\#C2A165\], .text-\[\#2D937D\] { color: #444 !important; font-weight: 700; }
+    .text-\[\#7F1D1D\] { color: #5b0d0d !important; font-weight: 700; }
+    .text-\[\#888\], .text-\[\#777\], .text-\[\#666\] { color: #555 !important; }
+    /* Hide trailing 'Made with Emergent' badge if present */
+    .badge, [class*="emergent-badge"] { display: none !important; }
 }
 
 @layer base {

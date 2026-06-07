@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getArmy } from "@/lib/storage";
 import { fetchFaction } from "@/lib/api";
 import { armyTotal, formationCost } from "@/lib/points";
-import { Printer, ArrowLeft } from "lucide-react";
+import { Printer, ArrowLeft, Download } from "lucide-react";
 
 // Resolve every unit (with summed counts) that appears in a fielded formation,
 // merging:  base option units  →  optional extraUnits  →  addedUnits from
@@ -88,10 +88,43 @@ export default function PrintView() {
     const { id } = useParams();
     const army = useMemo(() => getArmy(id), [id]);
     const [faction, setFaction] = useState(null);
+    const [savingPdf, setSavingPdf] = useState(false);
+    const printableRef = useRef(null);
 
     useEffect(() => {
         if (army) fetchFaction(army.factionId).then(setFaction);
     }, [army]);
+
+    const safeFilename = (name) =>
+        (name || "field-roster").trim().replace(/[^a-z0-9-_ ]/gi, "").replace(/\s+/g, "-").toLowerCase() || "field-roster";
+
+    const handlePrint = () => window.print();
+
+    const handleSavePdf = async () => {
+        if (!printableRef.current || savingPdf) return;
+        setSavingPdf(true);
+        try {
+            // Dynamic import keeps the ~150KB pdf bundle out of the landing critical path.
+            const html2pdf = (await import("html2pdf.js")).default;
+            await html2pdf()
+                .set({
+                    margin: 10,
+                    filename: `${safeFilename(army?.name)}-roster.pdf`,
+                    image: { type: "jpeg", quality: 0.95 },
+                    html2canvas: { scale: 2, backgroundColor: "#ffffff", useCORS: true },
+                    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+                    pagebreak: { mode: ["css", "legacy"], avoid: ["[data-testid^='print-formation-']", ".print-keep"] },
+                })
+                .from(printableRef.current)
+                .save();
+        } catch (err) {
+            // Surface the failure without crashing the page; user can retry or fall back to Print.
+            console.error("PDF export failed", err);
+            alert("Could not generate PDF. Try the Print button and choose 'Save as PDF' as the destination.");
+        } finally {
+            setSavingPdf(false);
+        }
+    };
 
     if (!army) {
         return (
@@ -116,17 +149,34 @@ export default function PrintView() {
     return (
         <div className="min-h-screen bg-[#050505] text-[#E0E0E0]">
             <div className="no-print sticky top-0 bg-[#080A09] border-b border-[#222] z-10">
-                <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
+                <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between gap-3 flex-wrap">
                     <Link to={`/builder/${army.id}`} className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#888] hover:text-[#2D937D] inline-flex items-center gap-1" data-testid="print-back">
                         <ArrowLeft className="w-3 h-3" /> Back to Builder
                     </Link>
-                    <button onClick={() => window.print()} className="btn-primary inline-flex items-center gap-2" data-testid="print-trigger">
-                        <Printer className="w-4 h-4" /> Print Document
-                    </button>
+                    <div className="flex items-center gap-2 flex-wrap">
+                        <span className="hidden sm:inline font-mono text-[10px] tracking-[0.3em] uppercase text-[#555]">// Output</span>
+                        <button
+                            onClick={handlePrint}
+                            className="btn-primary inline-flex items-center gap-2"
+                            data-testid="print-trigger"
+                            title="Open your browser's print dialog"
+                        >
+                            <Printer className="w-4 h-4" /> Print
+                        </button>
+                        <button
+                            onClick={handleSavePdf}
+                            disabled={savingPdf}
+                            className="btn-secondary inline-flex items-center gap-2 disabled:opacity-50"
+                            data-testid="save-pdf-trigger"
+                            title="Download a .pdf copy to your device"
+                        >
+                            <Download className="w-4 h-4" /> {savingPdf ? "Generating…" : "Save as PDF"}
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div className="max-w-5xl mx-auto px-6 py-10 print-section" data-testid="print-view">
+            <div ref={printableRef} className="max-w-5xl mx-auto px-6 py-10 print-section" data-testid="print-view">
                 <div className="border-b-2 border-[#C2A165] pb-4 mb-6">
                     <div className="font-mono text-[10px] tracking-[0.4em] text-[#C2A165] uppercase mb-2">// Field Roster Manifest</div>
                     <h1 className="font-display text-5xl uppercase tracking-tight" data-testid="print-army-name">{army.name}</h1>
