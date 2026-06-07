@@ -11,7 +11,7 @@ export default function Landing() {
 
     useEffect(() => {
         fetchFactions()
-            .then(setFactions)
+            .then((data) => setFactions(Array.isArray(data) ? data : []))
             .catch(() => setFactions([]))
             .finally(() => setLoading(false));
     }, []);
@@ -70,7 +70,7 @@ export default function Landing() {
                             Loading dossiers...
                         </div>
                     )}
-                    {!loading && factions.map((f) => (
+                    {!loading && (Array.isArray(factions) ? factions : []).map((f) => (
                         <Link
                             key={f.id}
                             to={`/armies?new=${f.id}`}

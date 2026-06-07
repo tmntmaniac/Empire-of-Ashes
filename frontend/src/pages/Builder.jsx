@@ -33,7 +33,7 @@ export default function Builder() {
         }
     }, [army, faction]);
 
-    const formDefMap = useMemo(() => Object.fromEntries((faction?.formations || []).map((f) => [f.id, f])), [faction]);
+    const formDefMap = useMemo(() => Object.fromEntries((Array.isArray(faction?.formations) ? faction.formations : []).map((f) => [f.id, f])), [faction]);
 
     if (error) {
         return (
@@ -78,7 +78,8 @@ toast.success(`${formDef.name} added.`);
     };
 
     const updateFormation = (idx, updated) => {
-        const next = [...army?.formations];
+        const current = Array.isArray(army?.formations) ? army.formations : [];
+        const next = [...current];
         next[idx] = updated;
         setArmy({ ...army, formations: next });
     };
@@ -87,8 +88,9 @@ toast.success(`${formDef.name} added.`);
     };
     const confirmRemoveFormation = () => {
         if (removeIdx == null) return;
-        const def = formDefMap[army?.formations[removeIdx]?.formationId];
-        setArmy({ ...army, formations: army?.formations.filter((_, i) => i !== removeIdx) });
+        const current = Array.isArray(army?.formations) ? army.formations : [];
+        const def = formDefMap[current[removeIdx]?.formationId];
+        setArmy({ ...army, formations: current.filter((_, i) => i !== removeIdx) });
         setRemoveIdx(null);
         toast.success(`${def?.name || "Formation"} disbanded.`);
     };
@@ -140,7 +142,7 @@ toast.success(`${formDef.name} added.`);
                 <div className="panel p-4 mb-6 border border-[#7F1D1D]" data-testid="special-rules">
                     <div className="font-mono text-[10px] tracking-[0.3em] text-[#7F1D1D] uppercase mb-3">// Special Rules</div>
                     <div className="space-y-3">
-                        {faction?.specialRules.map((rule, idx) => (
+                        {(Array.isArray(faction?.specialRules) ? faction.specialRules : []).map((rule, idx) => (
                             <div key={idx} data-testid={`special-rule-${idx}`}>
                                 <h4 className="font-display text-lg uppercase tracking-tight text-[#E5E5E5] mb-1">{rule.name}</h4>
                                 <p className="text-sm text-[#B8B8B8] font-sans leading-relaxed whitespace-pre-line">{rule.description}</p>
@@ -159,7 +161,7 @@ toast.success(`${formDef.name} added.`);
                         <p className="text-[#888] mb-4 text-sm">Add your first detachment to begin building this force.</p>
                     </div>
                 )}
-                {(army?.formations || []).map((f, i) => {
+                {(Array.isArray(army?.formations) ? army.formations : []).map((f, i) => {
                     const def = formDefMap[f.formationId];
                     const isLine = def?.category === "Line";
                     const upgradeMax = isLine ? limitsFor(faction).maxUpgradesPerLine : null;
@@ -186,7 +188,7 @@ toast.success(`${formDef.name} added.`);
             <details className="mt-10 panel p-4" data-testid="composition-rules">
                 <summary className="cursor-pointer font-display text-xl uppercase tracking-tight">Composition Rules</summary>
                 <ul className="mt-3 text-sm text-[#B8B8B8] list-disc pl-5 space-y-1 font-sans">
-                    {(faction.compositionRules || []).map((r, i) => <li key={i}>{r}</li>)}
+                    {(Array.isArray(faction?.compositionRules) ? faction.compositionRules : []).map((r, i) => <li key={i}>{r}</li>)}
                 </ul>
             </details>
 
@@ -205,7 +207,7 @@ toast.success(`${formDef.name} added.`);
                 title="Remove Formation?"
                 message={
                     removeIdx != null
-                        ? `${formDefMap[army?.formations[removeIdx]?.formationId]?.name || "This formation"} will be removed from the roster. Upgrades and unit selections will be lost.`
+                        ? `${formDefMap[(Array.isArray(army?.formations) ? army.formations : [])[removeIdx]?.formationId]?.name || "This formation"} will be removed from the roster. Upgrades and unit selections will be lost.`
                         : ""
                 }
                 confirmLabel="Disband"
@@ -220,7 +222,7 @@ toast.success(`${formDef.name} added.`);
 }
 
 function AddFormationDialog({ faction, hasHorus, onClose, onAdd }) {
-    const groups = (faction?.formations || []).reduce((acc, f) => {
+    const groups = (Array.isArray(faction?.formations) ? faction.formations : []).reduce((acc, f) => {
         (acc[f.category] = acc[f.category] || []).push(f);
         return acc;
     }, {});
@@ -240,7 +242,7 @@ function AddFormationDialog({ faction, hasHorus, onClose, onAdd }) {
                         <div key={cat} className="mb-6">
                             <div className="font-mono text-[10px] tracking-[0.3em] text-[#888] uppercase mb-2">// {cat}</div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                {groups[cat].map((f) => {
+                                {(Array.isArray(groups[cat]) ? groups[cat] : []).map((f) => {
                                     const disabled = f.id === "horus" && hasHorus;
                                     return (
                                         <button
