@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { getArmy } from "@/lib/storage";
 import { useFactionAsync } from "@/lib/useFactionAsync";
 import { armyTotal, formationCost } from "@/lib/points";
+import { encodeArmy, decodeArmy } from "@/lib/share";
 import { Printer, ArrowLeft, Download, ExternalLink } from "lucide-react";
 
 // Detect whether we're loaded inside a cross-origin iframe (e.g. the Emergent
@@ -99,11 +100,43 @@ function UnitStatBlock({ count, unit }) {
 
 export default function PrintView() {
     const { id } = useParams();
-    const [army] = useState(() => getArmy(id));
+    const [army] = useState(() => {
+        // Prefer URL-embedded payload (used when opening the roster in a new
+        // top-level tab from the Emergent preview iframe — its localStorage is
+        // partitioned away from the new tab).
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const encoded = params.get("a");
+            if (encoded) {
+                const decoded = decodeArmy(encoded);
+                if (decoded && (!id || decoded.id === id)) return decoded;
+            }
+        } catch {
+            // ignore — fall back to localStorage
+        }
+        return getArmy(id);
+    });
     const faction = useFactionAsync(army?.factionId);
     const [savingPdf, setSavingPdf] = useState(false);
     const printableRef = useRef(null);
     const inIframe = useMemo(detectIframe, []);
+
+    // Once the army has been hydrated from the URL, strip the long `?a=`
+    // payload so the address bar stays clean and the user can share or
+    // bookmark the page without a giant base64 blob in the URL.
+    useEffect(() => {
+        if (!army) return;
+        try {
+            const params = new URLSearchParams(window.location.search);
+            if (!params.has("a")) return;
+            params.delete("a");
+            const qs = params.toString();
+            const newUrl = window.location.pathname + (qs ? `?${qs}` : "") + window.location.hash;
+            window.history.replaceState(null, "", newUrl);
+        } catch {
+            // ignore — non-fatal cosmetic concern
+        }
+    }, [army]);
 
     const safeFilename = useMemo(() => {
         const cleaned = (army?.name || "field-roster")
@@ -115,8 +148,15 @@ export default function PrintView() {
     }, [army?.name]);
 
     const openInNewTab = () => {
-        // Pass a marker so the new tab knows it's "the real one" and skips the banner.
-        const url = `${window.location.pathname}?fullscreen=1`;
+        // localStorage is partitioned per top-level site in modern browsers,
+        // so the new tab won't see armies saved while inside the preview
+        // iframe. Serialize the army payload into the URL itself so the new
+        // tab can hydrate without depending on shared storage.
+        const encoded = army ? encodeArmy(army) : "";
+        const qs = new URLSearchParams();
+        qs.set("fullscreen", "1");
+        if (encoded) qs.set("a", encoded);
+        const url = `${window.location.pathname}?${qs.toString()}`;
         const win = window.open(url, "_blank", "noopener");
         if (!win) {
             toast.error("Pop-up blocked", {
