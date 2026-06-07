@@ -132,6 +132,21 @@ export default function Builder() {
                 </div>
             </div>
 
+            {/* Special Rules (faction-specific army rules from the source rulebook) */}
+            {Array.isArray(faction.specialRules) && faction.specialRules.length > 0 && (
+                <div className="panel p-4 mb-6 border border-[#7F1D1D]" data-testid="special-rules">
+                    <div className="font-mono text-[10px] tracking-[0.3em] text-[#7F1D1D] uppercase mb-3">// Special Rules</div>
+                    <div className="space-y-3">
+                        {faction.specialRules.map((rule, idx) => (
+                            <div key={idx} data-testid={`special-rule-${idx}`}>
+                                <h4 className="font-display text-lg uppercase tracking-tight text-[#E5E5E5] mb-1">{rule.name}</h4>
+                                <p className="text-sm text-[#B8B8B8] font-sans leading-relaxed whitespace-pre-line">{rule.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
             {/* Formations */}
             <div className="space-y-4 mb-6" data-testid="formations-list">
                 {(army.formations || []).length === 0 && (
