@@ -5,6 +5,8 @@ import Landing from "@/pages/Landing";
 import ArmyManager from "@/pages/ArmyManager";
 import Builder from "@/pages/Builder";
 import PrintView from "@/pages/PrintView";
+import Impressum from "@/pages/legal/Impressum";
+import Datenschutz from "@/pages/legal/Datenschutz";
 import { Toaster } from "sonner";
 
 export default function App() {

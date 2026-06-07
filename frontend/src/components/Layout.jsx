@@ -28,8 +28,12 @@ export default function Layout() {
                 <Outlet />
             </main>
             <footer className="border-t border-[#222] mt-16">
-                <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between text-xs font-mono text-[#666] uppercase tracking-widest">
+                <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-[#666] uppercase tracking-widest">
                     <span>// Fan-made tactical codex · Empire of Ashes</span>
+                    <div className="flex items-center gap-4">
+                        <Link to="/legal/impressum" className="hover:text-[#C2A165]">Impressum</Link>
+                        <Link to="/legal/datenschutz" className="hover:text-[#C2A165]">Datenschutz</Link>
+                    </div>
                     <span>Lists saved locally to your device.</span>
                 </div>
             </footer>
